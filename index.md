@@ -37,19 +37,31 @@ University of Science and Technology of China, School of the Gifted Young | 2017
 ---
 
 ## 💻 Technical Skills
-**Computational**  
-`CP2K` `Density Functional Theory` `CI-NEB` `Python` `C/C++` 
 
-**Experimental**  
+**AI & Agent Development**
+`Vibe Coding` (Codex, Claude Code, Gemini CLI) | `Google ADK` | `LangGraph` | LLM Agent Development
+
+**Full-Stack Development**
+`React` Frontend | `FastAPI` Backend | `MySQL` Database | End-to-End Web Applications
+
+**Computational**
+`CP2K` `Density Functional Theory` `CI-NEB` `Python` `C/C++`
+
+**Experimental**
 SEM | PL Mapping | EQE Testing | XRD Analysis
 
-**Tools**  
-Git | LaTeX | Mathematica | Python | C/C++
+**Tools**
+Git | LaTeX | Mathematica | Jupyter
 
 ---
 
-## 📚 Recent Publications
-1. Li L. **Yan H.** et al. Lateral Phase Heterojunction for Perovskite Microoptoelectronics. Advanced Materials (2024)
+## 📚 Selected Publications (* equal contribution)
+
+1. **Yan, H.** Chen, X. Wang, Y. Luo, Z. Huang, W. Wang, H. Chen, P. Zhang, Y. *et al.* Transfer learning discovery of molecular modulators for perovskite solar cells. **arXiv preprint** arXiv:2511.00204 (2024)
+
+2. Li, L. **Yan, H.** Li, S. Xu, H. Qu, D. Hu, A. Ma, L. Ji, Y. Zhong, Q. Zhao, L. Xu, F. *et al.* Lateral Phase Heterojunction for Perovskite Microoptoelectronics. **Advanced Materials** **36**(50), 2409201 (2024)
+
+**Google Scholar**: 619 citations, h-index 10
 
 ---
 
