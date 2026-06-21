@@ -389,6 +389,79 @@ permalink: /ai-tracker/
     margin-bottom: 22px;
   }
 
+  .ops-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    min-height: 42px;
+  }
+
+  .ops-ecosystem-card .ops-pagination {
+    margin-top: 0;
+  }
+
+  .ops-ecosystem-card .ops-page-button,
+  .ops-ecosystem-card .ops-page-status {
+    min-height: 34px;
+    font-size: 0.72rem;
+  }
+
+  .ops-page-button {
+    min-height: 38px;
+    border: 1px solid rgba(94, 255, 223, 0.28);
+    color: var(--ops-text);
+    background: rgba(8, 31, 31, 0.78);
+    padding: 0 12px;
+    font: 900 0.78rem/1 var(--ops-font-body);
+    cursor: pointer;
+  }
+
+  .ops-page-button:hover,
+  .ops-page-button:focus-visible {
+    color: var(--ops-ink);
+    background: var(--ops-cyan);
+    outline: none;
+  }
+
+  .ops-page-button:disabled {
+    cursor: not-allowed;
+    color: rgba(146, 185, 179, 0.58);
+    border-color: rgba(94, 255, 223, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .ops-page-status {
+    min-height: 38px;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 200, 87, 0.24);
+    color: var(--ops-amber);
+    background: rgba(255, 200, 87, 0.07);
+    padding: 0 12px;
+    font-size: 0.8rem;
+    font-weight: 900;
+  }
+
+  .ops-page-meter {
+    position: relative;
+    flex: 1 1 160px;
+    max-width: 280px;
+    height: 8px;
+    border: 1px solid rgba(94, 255, 223, 0.18);
+    background: rgba(4, 16, 15, 0.82);
+    overflow: hidden;
+  }
+
+  .ops-page-meter span {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--page-progress, 0%);
+    background: linear-gradient(90deg, var(--ops-cyan), var(--ops-amber));
+    box-shadow: 0 0 18px rgba(94, 255, 223, 0.35);
+  }
+
   .ops-filter {
     border: 1px solid rgba(94, 255, 223, 0.26);
     color: var(--ops-muted);
@@ -1463,6 +1536,7 @@ permalink: /ai-tracker/
     <div class="ops-controls" id="corpus-filters" aria-label="corpus filters"></div>
     <div class="ops-corpus-shell">
       <div class="ops-corpus-grid" id="corpus-grid"></div>
+      <div class="ops-pagination" id="corpus-pagination" aria-label="corpus pagination"></div>
     </div>
   </section>
 
@@ -1478,6 +1552,7 @@ permalink: /ai-tracker/
     </div>
     <div class="ops-controls" id="frontier-filters" aria-label="frontier filters"></div>
     <div class="ops-card-grid" id="frontier-grid"></div>
+    <div class="ops-pagination" id="frontier-pagination" aria-label="frontier model pagination"></div>
   </section>
 
   <section class="ops-section dark-band" id="benchmarks">
@@ -1498,6 +1573,7 @@ permalink: /ai-tracker/
           <tbody id="score-body"></tbody>
         </table>
       </div>
+      <div class="ops-pagination" id="score-pagination" aria-label="benchmark pagination"></div>
     </div>
   </section>
 
@@ -1512,6 +1588,7 @@ permalink: /ai-tracker/
       </p>
     </div>
     <div class="ops-method-grid" id="method-grid"></div>
+    <div class="ops-pagination" id="method-pagination" aria-label="method pagination"></div>
   </section>
 
   <section class="ops-section dark-band" id="figures">
@@ -1525,6 +1602,7 @@ permalink: /ai-tracker/
       </p>
     </div>
     <div class="ops-figure-grid" id="figure-grid"></div>
+    <div class="ops-pagination" id="figure-pagination" aria-label="figure pagination"></div>
   </section>
 
   <section class="ops-section" id="people">
@@ -1540,6 +1618,7 @@ permalink: /ai-tracker/
     <div class="ops-controls" id="people-filters" aria-label="people filters"></div>
     <div class="ops-people-shell">
       <div class="ops-people-grid" id="people-grid"></div>
+      <div class="ops-pagination" id="people-pagination" aria-label="people pagination"></div>
       <div class="ops-panel">
         <h3>Cross-report authorship map</h3>
         <div class="ops-people-matrix" id="people-matrix"></div>
@@ -1561,6 +1640,7 @@ permalink: /ai-tracker/
     <div class="ops-controls" id="ecosystem-filters" aria-label="ecosystem filters"></div>
     <div class="ops-ecosystem-shell">
       <div class="ops-ecosystem-grid" id="ecosystem-grid"></div>
+      <div class="ops-pagination" id="ecosystem-pagination" aria-label="ecosystem pagination"></div>
       <div class="ops-panel">
         <h3>Cross-report ecosystem map</h3>
         <p class="ops-ecosystem-note">
@@ -1587,6 +1667,7 @@ permalink: /ai-tracker/
       </p>
     </div>
     <div class="ops-card-grid" id="closed-grid"></div>
+    <div class="ops-pagination" id="closed-pagination" aria-label="closed model pagination"></div>
   </section>
 
   <section class="ops-section" id="agents">
@@ -1600,6 +1681,7 @@ permalink: /ai-tracker/
       </p>
     </div>
     <div class="ops-card-grid" id="agent-grid"></div>
+    <div class="ops-pagination" id="agent-pagination" aria-label="agent paper pagination"></div>
   </section>
 
   <section class="ops-section dark-band" id="companies">
@@ -1640,6 +1722,7 @@ permalink: /ai-tracker/
       </p>
     </div>
     <div class="ops-card-grid" id="roadmap-grid"></div>
+    <div class="ops-pagination" id="roadmap-pagination" aria-label="pipeline pagination"></div>
   </section>
 
   <section class="ops-section dark-band" id="sources">
@@ -1663,6 +1746,7 @@ permalink: /ai-tracker/
         </thead>
         <tbody id="source-ledger"></tbody>
       </table>
+      <div class="ops-pagination" id="source-pagination" aria-label="source pagination"></div>
     </div>
   </section>
 
@@ -2602,6 +2686,49 @@ permalink: /ai-tracker/
     ["SWE-agent", "paper + code", "https://arxiv.org/abs/2405.15793", "software-engineering agent baseline"]
   ];
 
+  const pagerState = {};
+
+  function resetPager(key) {
+    pagerState[key] = 1;
+  }
+
+  function getPageSlice(key, rows, pageSize) {
+    const total = rows.length;
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+    const page = Math.min(Math.max(pagerState[key] || 1, 1), totalPages);
+    pagerState[key] = page;
+    const start = (page - 1) * pageSize;
+    const end = Math.min(start + pageSize, total);
+    return {
+      rows: rows.slice(start, end),
+      page,
+      totalPages,
+      pageSize,
+      total,
+      start,
+      end
+    };
+  }
+
+  function renderPagination(target, key, meta, rerender) {
+    const wrap = document.querySelector(target);
+    if (!wrap) return;
+    const progress = meta.totalPages <= 1 ? 100 : (meta.page / meta.totalPages) * 100;
+    const visibleStart = meta.total === 0 ? 0 : meta.start + 1;
+    wrap.innerHTML = `
+      <button class="ops-page-button" type="button" data-page-step="-1" ${meta.page <= 1 ? "disabled" : ""}>Prev</button>
+      <span class="ops-page-status">Page ${meta.page}/${meta.totalPages} · ${visibleStart}-${meta.end} / ${meta.total}</span>
+      <div class="ops-page-meter" aria-hidden="true" style="--page-progress: ${progress}%"><span></span></div>
+      <button class="ops-page-button" type="button" data-page-step="1" ${meta.page >= meta.totalPages ? "disabled" : ""}>Next</button>
+    `;
+    wrap.onclick = (event) => {
+      const button = event.target.closest("button[data-page-step]");
+      if (!button || button.disabled) return;
+      pagerState[key] = (pagerState[key] || 1) + Number(button.dataset.pageStep);
+      rerender();
+    };
+  }
+
   function modelCard(item, className) {
     const tags = item.tags.map((tag, index) => `<span class="ops-pill ${index === 0 ? "hot" : ""}">${tag}</span>`).join("");
     const links = item.links.map(([label, url]) => `<a class="ops-source-link" href="${url}" target="_blank" rel="noopener">${label}</a>`).join("");
@@ -2622,25 +2749,31 @@ permalink: /ai-tracker/
     `;
   }
 
-  function renderCards(target, data, className) {
-    document.querySelector(target).innerHTML = data.map((item) => modelCard(item, className)).join("");
+  function renderCards(target, data, className, key, pageSize = 6) {
+    if (!key) {
+      document.querySelector(target).innerHTML = data.map((item) => modelCard(item, className)).join("");
+      return;
+    }
+    const meta = getPageSlice(key, data, pageSize);
+    document.querySelector(target).innerHTML = meta.rows.map((item) => modelCard(item, className)).join("");
+    renderPagination(`#${key}-pagination`, key, meta, () => renderCards(target, data, className, key, pageSize));
   }
 
-  function renderFilters() {
+  function renderFilters(filter = "all") {
     const filters = ["all", "coding", "agent", "long-context", "multimodal", "open", "API", "reasoning"];
     const wrap = document.querySelector("#frontier-filters");
-    wrap.innerHTML = filters.map((filter, index) => `<button class="ops-filter ${index === 0 ? "active" : ""}" data-filter="${filter}">${filter}</button>`).join("");
-    wrap.addEventListener("click", (event) => {
+    wrap.innerHTML = filters.map((item) => `<button class="ops-filter ${item === filter ? "active" : ""}" data-filter="${item}">${item}</button>`).join("");
+    const rows = frontierModels.filter((model) => {
+      const haystack = `${model.tags.join(" ")} ${model.openness || ""}`.toLowerCase();
+      return filter === "all" || haystack.includes(filter.toLowerCase());
+    });
+    renderCards("#frontier-grid", rows, "ops-model-card", "frontier", 6);
+    wrap.onclick = (event) => {
       const button = event.target.closest("button");
       if (!button) return;
-      wrap.querySelectorAll("button").forEach((el) => el.classList.remove("active"));
-      button.classList.add("active");
-      const filter = button.dataset.filter;
-      document.querySelectorAll("#frontier-grid .ops-model-card").forEach((card) => {
-        const tags = card.dataset.tags.toLowerCase();
-        card.style.display = filter === "all" || tags.includes(filter.toLowerCase()) ? "flex" : "none";
-      });
-    });
+      resetPager("frontier");
+      renderFilters(button.dataset.filter);
+    };
   }
 
   function renderFeed() {
@@ -2671,13 +2804,15 @@ permalink: /ai-tracker/
   }
 
   function renderSources() {
-    document.querySelector("#source-ledger").innerHTML = sourceLedger.map(([name, type, url, use]) => `
+    const meta = getPageSlice("source", sourceLedger, 8);
+    document.querySelector("#source-ledger").innerHTML = meta.rows.map(([name, type, url, use]) => `
       <tr>
         <td><a class="ops-source-link" href="${url}" target="_blank" rel="noopener">${name}</a></td>
         <td>${type}</td>
         <td>${use}</td>
       </tr>
     `).join("");
+    renderPagination("#source-pagination", "source", meta, renderSources);
   }
 
   function renderCorpus(filter = "all") {
@@ -2685,7 +2820,8 @@ permalink: /ai-tracker/
     const wrap = document.querySelector("#corpus-filters");
     wrap.innerHTML = filters.map((item) => `<button class="ops-filter ${item === filter ? "active" : ""}" data-corpus-filter="${item}">${item}</button>`).join("");
     const rows = corpusRecords.filter((row) => filter === "all" || row[4].includes(filter) || row[3].includes(filter));
-    document.querySelector("#corpus-grid").innerHTML = rows.map(([id, title, lab, date, type, note, url]) => `
+    const meta = getPageSlice("corpus", rows, 6);
+    document.querySelector("#corpus-grid").innerHTML = meta.rows.map(([id, title, lab, date, type, note, url]) => `
       <article class="ops-corpus-card">
         <div class="ops-source-type">${type}</div>
         <strong>${title}</strong>
@@ -2699,8 +2835,12 @@ permalink: /ai-tracker/
     `).join("");
     wrap.onclick = (event) => {
       const button = event.target.closest("button");
-      if (button) renderCorpus(button.dataset.corpusFilter);
+      if (button) {
+        resetPager("corpus");
+        renderCorpus(button.dataset.corpusFilter);
+      }
     };
+    renderPagination("#corpus-pagination", "corpus", meta, () => renderCorpus(filter));
   }
 
   function renderPeople(filter = "all") {
@@ -2716,7 +2856,8 @@ permalink: /ai-tracker/
       if (filter === "academic") return haystack.includes("academic");
       return haystack.includes(filter.toLowerCase());
     });
-    document.querySelector("#people-grid").innerHTML = rows.map((record) => `
+    const meta = getPageSlice("people", rows, 6);
+    document.querySelector("#people-grid").innerHTML = meta.rows.map((record) => `
       <article class="ops-people-card">
         <div class="ops-people-meta">
           <span class="ops-people-pill">${record.cluster}</span>
@@ -2734,8 +2875,12 @@ permalink: /ai-tracker/
     `).join("");
     wrap.onclick = (event) => {
       const button = event.target.closest("button");
-      if (button) renderPeople(button.dataset.peopleFilter);
+      if (button) {
+        resetPager("people");
+        renderPeople(button.dataset.peopleFilter);
+      }
     };
+    renderPagination("#people-pagination", "people", meta, () => renderPeople(filter));
   }
 
   function renderPeopleMatrix() {
@@ -2764,7 +2909,11 @@ permalink: /ai-tracker/
     wrap.innerHTML = filters.map((item) => `<button class="ops-filter ${item === filter ? "active" : ""}" data-ecosystem-filter="${item}">${item === "all" ? "all" : filterNames[item]}</button>`).join("");
 
     const rows = ecosystemCategories.filter((category) => filter === "all" || category.id === filter);
-    document.querySelector("#ecosystem-grid").innerHTML = rows.map((category) => `
+    const meta = getPageSlice("ecosystem", rows, 2);
+    document.querySelector("#ecosystem-grid").innerHTML = meta.rows.map((category) => {
+      const partnerKey = `ecosystem-partners-${category.id}`;
+      const partnerMeta = getPageSlice(partnerKey, category.partners, 8);
+      return `
       <article class="ops-ecosystem-card">
         <div class="ops-ecosystem-top">
           <div>
@@ -2774,18 +2923,28 @@ permalink: /ai-tracker/
           <div class="ops-ecosystem-count">${category.partners.length}</div>
         </div>
         <p>${category.evidence}</p>
-        <div class="ops-partner-cloud">${category.partners.map((partner) => `<button class="ops-partner-token" type="button" data-detail="ecosystem-partner" data-id="${makePartnerId(partner)}">${partner}</button>`).join("")}</div>
+        <div class="ops-partner-cloud">${partnerMeta.rows.map((partner) => `<button class="ops-partner-token" type="button" data-detail="ecosystem-partner" data-id="${makePartnerId(partner)}">${partner}</button>`).join("")}</div>
+        <div class="ops-pagination" id="${partnerKey}-pagination" aria-label="${category.name} partner pagination"></div>
         <div class="ops-link-row">
           <a class="ops-source-link" href="${category.source}" target="_blank" rel="noopener">Acknowledgement</a>
           <button class="ops-drill-button" type="button" data-detail="ecosystem" data-id="${category.id}">Open category</button>
         </div>
       </article>
-    `).join("");
+    `}).join("");
+    meta.rows.forEach((category) => {
+      const partnerKey = `ecosystem-partners-${category.id}`;
+      const partnerMeta = getPageSlice(partnerKey, category.partners, 8);
+      renderPagination(`#${partnerKey}-pagination`, partnerKey, partnerMeta, () => renderEcosystem(filter));
+    });
 
     wrap.onclick = (event) => {
       const button = event.target.closest("button");
-      if (button) renderEcosystem(button.dataset.ecosystemFilter);
+      if (button) {
+        resetPager("ecosystem");
+        renderEcosystem(button.dataset.ecosystemFilter);
+      }
     };
+    renderPagination("#ecosystem-pagination", "ecosystem", meta, () => renderEcosystem(filter));
   }
 
   function renderEcosystemMatrix() {
@@ -2803,7 +2962,8 @@ permalink: /ai-tracker/
   }
 
   function renderMethods() {
-    document.querySelector("#method-grid").innerHTML = methodRegistry.map(([id, label, fullName, stage, note, usedBy, url]) => `
+    const meta = getPageSlice("method", methodRegistry, 6);
+    document.querySelector("#method-grid").innerHTML = meta.rows.map(([id, label, fullName, stage, note, usedBy, url]) => `
       <article class="ops-method-card">
         <div class="ops-stage">${stage}</div>
         <strong>${label}: ${fullName}</strong>
@@ -2815,10 +2975,12 @@ permalink: /ai-tracker/
         </div>
       </article>
     `).join("");
+    renderPagination("#method-pagination", "method", meta, renderMethods);
   }
 
   function renderFigures() {
-    document.querySelector("#figure-grid").innerHTML = figureAtlas.map(([id, title, caption, img, source]) => `
+    const meta = getPageSlice("figure", figureAtlas, 4);
+    document.querySelector("#figure-grid").innerHTML = meta.rows.map(([id, title, caption, img, source]) => `
       <article class="ops-figure-card">
         <img src="${img}" alt="${title}" loading="lazy">
         <div>
@@ -2831,6 +2993,7 @@ permalink: /ai-tracker/
         </div>
       </article>
     `).join("");
+    renderPagination("#figure-pagination", "figure", meta, renderFigures);
   }
 
   function renderBenchmarkTable(category = "all") {
@@ -2839,7 +3002,8 @@ permalink: /ai-tracker/
     filterWrap.innerHTML = categories.map((item) => `<button class="ops-filter ${item === category ? "active" : ""}" data-score-filter="${item}">${item}</button>`).join("");
     document.querySelector("#score-head").innerHTML = `<tr><th>Benchmark</th><th>Category</th><th>Metric</th>${scoreModels.map((model) => `<th>${model}</th>`).join("")}<th>Source note</th></tr>`;
     const rows = benchmarkRows.filter((row) => category === "all" || row[0] === category);
-    document.querySelector("#score-body").innerHTML = rows.map(([cat, name, metric, scores, note]) => {
+    const meta = getPageSlice("score", rows, 8);
+    document.querySelector("#score-body").innerHTML = meta.rows.map(([cat, name, metric, scores, note]) => {
       const numericValues = Object.values(scores).filter((value) => typeof value === "number");
       const best = numericValues.length ? Math.max(...numericValues) : null;
       const cells = scoreModels.map((model) => {
@@ -2851,8 +3015,12 @@ permalink: /ai-tracker/
     }).join("");
     filterWrap.onclick = (event) => {
       const button = event.target.closest("button");
-      if (button) renderBenchmarkTable(button.dataset.scoreFilter);
+      if (button) {
+        resetPager("score");
+        renderBenchmarkTable(button.dataset.scoreFilter);
+      }
     };
+    renderPagination("#score-pagination", "score", meta, () => renderBenchmarkTable(category));
   }
 
   function renderSystemLayer(active = "models") {
@@ -3143,10 +3311,9 @@ permalink: /ai-tracker/
   renderFeed();
   renderSystemLayer();
   renderCorpus();
-  renderCards("#frontier-grid", frontierModels, "ops-model-card");
-  renderCards("#closed-grid", closedModels, "ops-model-card");
-  renderCards("#agent-grid", agentPapers, "ops-agent-card");
-  renderCards("#roadmap-grid", roadmap, "ops-road-card");
+  renderCards("#closed-grid", closedModels, "ops-model-card", "closed", 4);
+  renderCards("#agent-grid", agentPapers, "ops-agent-card", "agent", 4);
+  renderCards("#roadmap-grid", roadmap, "ops-road-card", "roadmap", 4);
   renderBenchmarkTable();
   renderMethods();
   renderFigures();
