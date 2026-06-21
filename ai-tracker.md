@@ -1815,6 +1815,44 @@ permalink: /ai-tracker/
         source: "https://arxiv.org/pdf/2602.15763"
       }
     ],
+    "minimax-m2": [
+      {
+        title: "Architecture",
+        stage: "architecture",
+        body: "MiniMax-M2 is a Mixture-of-Experts language model with 229.9B total parameters and only 9.8B activated per token. The design principle is 'mini activations can unleash maximum real-world intelligence' — achieving frontier-tier performance with a compact active footprint suitable for agentic deployment.",
+        source: "https://arxiv.org/abs/2605.26494"
+      },
+      {
+        title: "Agent-Driven Data Pipelines",
+        stage: "pre-training / data",
+        body: "The M2 series builds large-scale, verifiable trajectories across agentic coding and agentic cowork tasks. Each trajectory is grounded in an executable workspace with artifact-aligned reward, ensuring training signal comes from real agent execution rather than synthetic preference data.",
+        source: "https://arxiv.org/abs/2605.26494"
+      },
+      {
+        title: "Forge: Agent-Native RL System",
+        stage: "post-training / RL",
+        body: "Forge is a scalable agent-native reinforcement learning system designed for long-horizon agent trajectories. It uses windowed-FIFO scheduling to manage rollout lifetimes, prefix-tree merging to deduplicate shared trajectory prefixes, and inference optimization for efficient training-inference-agent decoupling. Forge supports both white-box and black-box agent configurations.",
+        source: "https://arxiv.org/abs/2605.26494"
+      },
+      {
+        title: "M2.7 Self-Evolution",
+        stage: "agentic training",
+        body: "The latest M2.7 checkpoint takes an early step toward self-evolution: it autonomously debugs training runs and modifies its own scaffold. This represents a shift from static post-training to adaptive agent systems that can improve their own infrastructure.",
+        source: "https://arxiv.org/abs/2605.26494"
+      },
+      {
+        title: "M3: 1M Context + MSA",
+        stage: "architecture / inference",
+        body: "MiniMax M3 extends the M2 lineage with 1M-token context support via MSA (Mini Sparse Attention), achieving 15.6x faster decoding at 1M tokens. M3 also adds native multimodality and is positioned as the open-weight frontier for coding and agentic work at $0.60/million tokens.",
+        source: "https://www.minimax.io/blog/minimax-m3"
+      },
+      {
+        title: "Benchmark Coverage",
+        stage: "evaluation",
+        body: "Across M2 through M2.7, the series demonstrates frontier-tier performance on agentic coding, deep search, office-task, and reasoning benchmarks. GLM-5.2 explicitly compares against MiniMax M3/M-series on Terminal-Bench 2.1, SWE-bench Pro, HLE, and MCPAtlas.",
+        source: "https://arxiv.org/abs/2605.26494"
+      }
+    ],
     "deepseek-v4-pro": [
       {
         title: "Architecture",
@@ -2059,17 +2097,61 @@ permalink: /ai-tracker/
       benchmarks: ["SWE", "reasoning"]
     },
     {
-      id: "minimax-m-series",
-      name: "MiniMax M1 / M2 / M3 watch",
+      id: "minimax-m3",
+      name: "MiniMax M3",
       org: "MiniMax",
-      date: "2025-2026 watch",
-      openness: "open/API mix",
-      type: "technical report + code",
-      tags: ["reasoning", "agent", "open"],
-      status: "watch",
-      note: "MiniMax M-series is included because GLM-5.2 and other reports compare against MiniMax M3/M-series. Source-backed entries should be upgraded as official 2026 reports appear.",
-      links: [["M1 arXiv", "https://arxiv.org/abs/2506.13585"], ["M1 weights", "https://huggingface.co/MiniMaxAI/MiniMax-M1-80k"], ["M2 GitHub", "https://github.com/MiniMax-AI/MiniMax-M2"]],
-      methods: ["long-context reasoning", "agent post-training"],
+      date: "2026-06-01",
+      openness: "open weights + API",
+      type: "official blog + model docs",
+      tags: ["coding", "agent", "1M context", "open", "multimodal"],
+      status: "latest",
+      note: "MiniMax M3 is the current flagship open-weight model with 1M-token context, MSA sparse attention delivering 15.6x faster decoding, native multimodality, and frontier-level coding/agentic benchmarks. GLM-5.2 and other reports compare against M3.",
+      links: [
+        ["Blog", "https://www.minimax.io/blog/minimax-m3"],
+        ["HF", "https://huggingface.co/MiniMaxAI"],
+        ["GitHub", "https://github.com/MiniMax-AI/MiniMax-M3"],
+        ["API", "https://platform.minimax.io/docs"]
+      ],
+      methods: ["MSA sparse attention", "agent coding post-training", "1M context engineering"],
+      benchmarks: ["coding", "agentic", "reasoning", "long-context"],
+      deepDive: "minimax-m2"
+    },
+    {
+      id: "minimax-m2",
+      name: "MiniMax-M2",
+      org: "MiniMax",
+      date: "2026-05-26",
+      openness: "open weights",
+      type: "paper",
+      tags: ["MoE", "agent", "9.8B active", "open", "self-evolution"],
+      status: "paper",
+      note: "MiniMax-M2 paper (arXiv 2605.26494) describes a 229.9B total / 9.8B activated MoE family. Three core components: agent-driven data pipelines with verifiable trajectories, Forge (agent-native RL with windowed-FIFO scheduling, prefix-tree merging), and M2.7 checkpoint demonstrating autonomous scaffold self-modification.",
+      links: [
+        ["arXiv", "https://arxiv.org/abs/2605.26494"],
+        ["PDF", "https://arxiv.org/pdf/2605.26494"],
+        ["HTML", "https://arxiv.org/html/2605.26494v1"],
+        ["GitHub", "https://github.com/MiniMax-AI/MiniMax-M2"]
+      ],
+      methods: ["Forge RL", "agent-driven data pipeline", "windowed-FIFO scheduling", "prefix-tree merging", "self-evolution scaffold"],
+      benchmarks: ["agentic coding", "deep search", "office-task", "reasoning"],
+      deepDive: "minimax-m2"
+    },
+    {
+      id: "minimax-m1",
+      name: "MiniMax-M1",
+      org: "MiniMax",
+      date: "2025",
+      openness: "open weights",
+      type: "paper + code",
+      tags: ["reasoning", "long-context", "baseline", "open"],
+      status: "baseline",
+      note: "MiniMax-M1 is the predecessor paper (arXiv 2506.13585) retained as a baseline for M2/M3 lineage comparison. GLM-5.2 cites M-series in benchmark comparisons.",
+      links: [
+        ["arXiv", "https://arxiv.org/abs/2506.13585"],
+        ["HF weights", "https://huggingface.co/MiniMaxAI/MiniMax-M1-80k"],
+        ["GitHub", "https://github.com/MiniMax-AI/MiniMax-M1"]
+      ],
+      methods: ["long-context reasoning", "MoE"],
       benchmarks: ["HLE", "SWE-bench Pro", "MCPAtlas"]
     },
     {
@@ -2176,6 +2258,34 @@ permalink: /ai-tracker/
       links: [
         ["Model card", "https://deepmind.google/models/model-cards/gemini-3-1-pro/"],
         ["Card index", "https://deepmind.google/models/model-cards/"]
+      ]
+    },
+    {
+      name: "Gemini 2.5 Pro",
+      org: "Google DeepMind",
+      date: "2025-03",
+      type: "model card",
+      tags: ["thinking", "reasoning", "coding", "multimodal"],
+      note: "Gemini 2.5 Pro 是 Google 首个 fully hybrid reasoning 模型，开发者可切换 thinking on/off。在 GPQA、AIME 2025 等数学/科学 benchmark 领先，coding 能力强。model card PDF 由 DeepMind 官方发布。",
+      links: [
+        ["Model card PDF", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf"],
+        ["Card index", "https://deepmind.google/models/model-cards/"],
+        ["API docs", "https://ai.google.dev/gemini-api/docs/models"],
+        ["Blog", "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/"]
+      ]
+    },
+    {
+      name: "Gemini 2.5 Flash",
+      org: "Google DeepMind",
+      date: "2025-04",
+      type: "model card",
+      tags: ["thinking", "efficient", "multimodal", "hybrid reasoning"],
+      note: "Gemini 2.5 Flash 是 2.5 系列的高效模型，支持 thinking on/off hybrid reasoning。定价 $0.30/1M tokens，定位为 cost-effective reasoning 选项。model card PDF 由 DeepMind 官方发布。",
+      links: [
+        ["Model card PDF", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf"],
+        ["Card index", "https://deepmind.google/models/model-cards/"],
+        ["API docs", "https://ai.google.dev/gemini-api/docs/models"],
+        ["Blog", "https://developers.googleblog.com/en/gemini-2-5-thinking-model-updates/"]
       ]
     },
     {
@@ -2338,6 +2448,8 @@ permalink: /ai-tracker/
     ["openai-gpt-5-5", "GPT-5.5", "OpenAI", "2026", "system card", "Closed model source is a system card, not a paper.", "https://openai.com/index/gpt-5-5-system-card/"],
     ["anthropic-claude", "Claude 2026 System Cards", "Anthropic", "2026", "system card index", "Closed Claude model facts should be pulled from the system-card index and API docs.", "https://www.anthropic.com/system-cards"],
     ["gemini-3-1", "Gemini 3.1 Pro", "Google DeepMind", "2026", "model card", "Closed multimodal reasoning model facts from DeepMind model-card index.", "https://deepmind.google/models/model-cards/gemini-3-1-pro/"],
+    ["gemini-2-5-pro", "Gemini 2.5 Pro", "Google DeepMind", "2025-03", "model card PDF", "Hybrid reasoning model with thinking on/off; leads GPQA, AIME 2025 math/science benchmarks.", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf"],
+    ["gemini-2-5-flash", "Gemini 2.5 Flash", "Google DeepMind", "2025-04", "model card PDF", "Efficient hybrid reasoning model at $0.30/1M tokens; supports thinking on/off.", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf"],
     ["xai-grok", "Grok 4.x", "xAI", "2026", "model card/API docs", "Closed model watch item; use model card/API docs, not a paper label.", "https://docs.x.ai/developers/models/grok-4.3"],
     ["apple-afm-3", "Apple Foundation Models 3", "Apple", "2026", "research page", "On-device/private foundation model line; source type remains research page until a full tech report is available.", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
     ["amazon-nova-2", "Amazon Nova 2", "Amazon / AWS", "2025-2026", "AI service card", "Enterprise model line tracked via AWS responsible AI service cards and model docs.", "https://aws.amazon.com/nova/models/"]
@@ -2487,6 +2599,22 @@ permalink: /ai-tracker/
       note: "Meta is split between named research papers such as Toolformer and team-level Llama release pages; the distinction is preserved in the source type."
     },
     {
+      id: "people-minimax",
+      lab: "MiniMax",
+      cluster: "Open-weight agentic frontier",
+      disclosure: "full arXiv author table (M2)",
+      count: 150,
+      sources: [
+        ["MiniMax-M2 arXiv", "https://arxiv.org/abs/2605.26494"],
+        ["MiniMax-M3 blog", "https://www.minimax.io/blog/minimax-m3"],
+        ["MiniMax-M1 arXiv", "https://arxiv.org/abs/2506.13585"]
+      ],
+      people: ["MiniMax", "Li Yuan", "Aili Chen", "Aonian Li", "Baichuan Zhou", "Bangwei Gong", "Binyang Jiang"],
+      reports: ["MiniMax-M1", "MiniMax-M2", "MiniMax-M3"],
+      methods: ["Forge RL", "MSA sparse attention", "self-evolution scaffold", "agent-driven data pipeline"],
+      note: "MiniMax-M2 provides a 150+ author arXiv table. M3 is tracked as official blog release. The team's Forge RL system and self-evolution M2.7 checkpoint are unique contributions to the agentic training landscape."
+    },
+    {
       id: "people-apple-amazon",
       lab: "Apple / Amazon",
       cluster: "Enterprise and on-device",
@@ -2627,6 +2755,9 @@ permalink: /ai-tracker/
     ["glm-data", "GLM data filters", "DCLM, World Knowledge, code and math classifiers", "pre-training data", "GLM-5 data pipeline adds sentence-embedding DCLM, World Knowledge, low-resource code classifiers, LLM educational scoring, and chunk-and-aggregate scoring.", ["glm-5"], "https://arxiv.org/pdf/2602.15763"],
     ["anti-hack", "Anti-hack", "Online rule + LLM judge guard", "agentic RL/eval", "GLM-5.2 blog describes a two-stage anti-hack module for coding agents that blocks exploitative tool calls while preserving rollouts.", ["glm-5-2"], "https://z.ai/blog/glm-5.2"],
     ["muonclip", "MuonClip", "Kimi optimizer lineage", "watchlist", "Kimi K2.6 footnotes reference the Kimi K2.5 report; keep MuonClip as Kimi lineage until directly verified in the report text.", ["kimi-k2-6", "kimi-k2-5"], "https://arxiv.org/pdf/2602.02276"],
+    ["forge-rl", "Forge RL", "Agent-native reinforcement learning", "post-training / RL", "MiniMax M2's Forge system adapts to long-horizon agent trajectories with windowed-FIFO scheduling, prefix-tree merging, and inference optimization. Supports both white-box and black-box agent decoupling.", ["minimax-m2", "minimax-m3"], "https://arxiv.org/abs/2605.26494"],
+    ["msa", "MSA", "Mini Sparse Attention", "inference / architecture", "MiniMax M3 uses MSA for 1M-token context with 15.6x faster decoding at 1M tokens compared to dense attention baselines.", ["minimax-m3"], "https://www.minimax.io/blog/minimax-m3"],
+    ["self-evolution", "Self-evolution scaffold", "Autonomous training-run debugging", "agentic training", "MiniMax M2.7 checkpoint autonomously debugs training runs and modifies its own scaffold — an early step toward self-improving agent infrastructure.", ["minimax-m2"], "https://arxiv.org/abs/2605.26494"],
     ["tool-harness", "Agent harnesses", "SWE/Terminal/browser/MCP tools", "evaluation", "DeepSeek, Kimi, and GLM all use long-step agent harnesses with shell/file/search/browser/tool constraints; details differ by report.", ["deepseek-v4-pro", "kimi-k2-6", "glm-5"], "https://arxiv.org/html/2606.19348"]
   ];
 
@@ -2643,7 +2774,7 @@ permalink: /ai-tracker/
     ["kimi-k26-3", "Kimi K2.6 original blog figure 3", "Official Kimi K2.6 report image from Moonshot blog", "https://kimi-file.moonshot.cn/prod-chat-kimi/kfs/4/2/2026-04-20/1d7j1727f2ena623likig?x-tos-process=image%2Fauto-orient%2C1%2Fstrip%2Fignore-error%2C1", "https://www.kimi.com/blog/kimi-k2-6"]
   ];
 
-  const scoreModels = ["GLM-5.2", "GLM-5", "DeepSeek V4 Pro Max", "Kimi K2.6", "Qwen3.7-Max", "GPT-5.x", "Claude Opus", "Gemini"];
+  const scoreModels = ["GLM-5.2", "GLM-5", "DeepSeek V4 Pro Max", "MiniMax M3", "Kimi K2.6", "Qwen3.7-Max", "GPT-5.x", "Claude Opus", "Gemini"];
   const benchmarkRows = [
     ["Reasoning", "HLE", "Pass@1", {"GLM-5.2": 40.5, "DeepSeek V4 Pro Max": 37.7, "Kimi K2.6": 36.4, "Qwen3.7-Max": 41.4, "GPT-5.x": 41.4, "Claude Opus": 49.8, "Gemini": 45.0}, "GLM-5.2 blog and DeepSeek-V4 Table 6"],
     ["Reasoning", "HLE with tools", "Pass@1", {"GLM-5.2": 54.7, "DeepSeek V4 Pro Max": 48.2, "Kimi K2.6": 54.0, "Qwen3.7-Max": 53.5, "GPT-5.x": 52.2, "Claude Opus": 57.9, "Gemini": 51.4}, "Tool-augmented HLE"],
@@ -2681,6 +2812,8 @@ permalink: /ai-tracker/
     ["OpenAI GPT-5.5", "system card", "https://openai.com/index/gpt-5-5-system-card/", "closed model system-card source"],
     ["Claude models", "system card index", "https://www.anthropic.com/system-cards", "Anthropic closed model source ledger"],
     ["Gemini 3.1 Pro", "model card", "https://deepmind.google/models/model-cards/gemini-3-1-pro/", "Google DeepMind closed model card"],
+    ["Gemini 2.5 Pro", "model card PDF", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf", "Google DeepMind hybrid reasoning model card"],
+    ["Gemini 2.5 Flash", "model card PDF", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf", "Google DeepMind efficient hybrid reasoning model card"],
     ["Grok 4.x", "API docs", "https://docs.x.ai/developers/models/grok-4.3", "xAI closed model watch source"],
     ["ReAct", "paper", "https://arxiv.org/abs/2210.03629", "agent reasoning/action foundation"],
     ["SWE-agent", "paper + code", "https://arxiv.org/abs/2405.15793", "software-engineering agent baseline"]
