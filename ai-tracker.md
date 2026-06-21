@@ -663,7 +663,8 @@ permalink: /ai-tracker/
   .ops-layer-detail,
   .ops-benchmark-shell,
   .ops-corpus-shell,
-  .ops-people-shell {
+  .ops-people-shell,
+  .ops-ecosystem-shell {
     border: 1px solid rgba(94, 255, 223, 0.18);
     background: linear-gradient(180deg, rgba(5, 24, 23, 0.92), rgba(4, 14, 13, 0.72));
     box-shadow: 0 22px 80px rgba(0, 0, 0, 0.28);
@@ -774,6 +775,7 @@ permalink: /ai-tracker/
   .ops-figure-grid,
   .ops-corpus-grid,
   .ops-people-grid,
+  .ops-ecosystem-grid,
   .ops-stage-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -785,6 +787,7 @@ permalink: /ai-tracker/
   .ops-figure-card,
   .ops-corpus-card,
   .ops-people-card,
+  .ops-ecosystem-card,
   .ops-benchmark-card,
   .ops-stage-card {
     border: 1px solid rgba(94, 255, 223, 0.16);
@@ -797,6 +800,7 @@ permalink: /ai-tracker/
   .ops-method-card strong,
   .ops-corpus-card strong,
   .ops-people-card strong,
+  .ops-ecosystem-card strong,
   .ops-benchmark-card strong,
   .ops-stage-card strong {
     display: block;
@@ -808,6 +812,7 @@ permalink: /ai-tracker/
   .ops-method-card span,
   .ops-corpus-card span,
   .ops-people-card span,
+  .ops-ecosystem-card span,
   .ops-benchmark-card span,
   .ops-stage-card span {
     display: block;
@@ -833,7 +838,8 @@ permalink: /ai-tracker/
 
   .ops-benchmark-shell,
   .ops-corpus-shell,
-  .ops-people-shell {
+  .ops-people-shell,
+  .ops-ecosystem-shell {
     padding: clamp(14px, 3vw, 22px);
   }
 
@@ -1025,6 +1031,166 @@ permalink: /ai-tracker/
     line-height: 1.45;
   }
 
+  .ops-ecosystem-summary {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .ops-ecosystem-stat {
+    border: 1px solid rgba(94, 255, 223, 0.2);
+    background:
+      linear-gradient(180deg, rgba(8, 31, 31, 0.82), rgba(3, 12, 12, 0.7)),
+      radial-gradient(circle at 82% 12%, rgba(255, 200, 87, 0.12), transparent 34%);
+    padding: 13px;
+    min-width: 0;
+  }
+
+  .ops-ecosystem-stat strong {
+    display: block;
+    color: var(--ops-cyan);
+    font-family: var(--ops-font-display);
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .ops-ecosystem-stat span {
+    display: block;
+    margin-top: 7px;
+    color: var(--ops-muted);
+    font-size: 0.76rem;
+    line-height: 1.35;
+  }
+
+  .ops-ecosystem-shell {
+    display: grid;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .ops-ecosystem-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ops-ecosystem-shell .ops-panel {
+    min-width: 0;
+  }
+
+  .ops-ecosystem-card {
+    position: relative;
+    display: grid;
+    gap: 12px;
+    min-height: 290px;
+    overflow: hidden;
+    background:
+      linear-gradient(135deg, rgba(9, 37, 36, 0.9), rgba(4, 12, 12, 0.88)),
+      repeating-linear-gradient(90deg, rgba(94, 255, 223, 0.04) 0 1px, transparent 1px 14px);
+    animation: opsCardIn 560ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  .ops-ecosystem-card::before {
+    content: "";
+    position: absolute;
+    inset: -40% auto auto -20%;
+    width: 62%;
+    aspect-ratio: 1;
+    border: 1px solid rgba(94, 255, 223, 0.12);
+    border-radius: 999px;
+    box-shadow: 0 0 54px rgba(94, 255, 223, 0.08);
+    pointer-events: none;
+  }
+
+  .ops-ecosystem-card > * {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+  }
+
+  .ops-ecosystem-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .ops-ecosystem-count {
+    flex: 0 0 auto;
+    color: var(--ops-ink);
+    background: var(--ops-amber);
+    padding: 6px 9px;
+    font: 900 0.84rem/1 var(--ops-font-body);
+  }
+
+  .ops-partner-cloud,
+  .ops-ecosystem-flags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .ops-partner-token {
+    border: 1px solid rgba(94, 255, 223, 0.2);
+    color: #dffdf7;
+    background: rgba(94, 255, 223, 0.07);
+    padding: 6px 8px;
+    font: 800 0.74rem/1.2 var(--ops-font-body);
+    cursor: pointer;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .ops-partner-token:hover,
+  .ops-partner-token:focus-visible {
+    color: var(--ops-ink);
+    background: var(--ops-cyan);
+    outline: none;
+  }
+
+  .ops-ecosystem-card p,
+  .ops-ecosystem-note {
+    margin: 0;
+    color: #c9ece7;
+    line-height: 1.58;
+    overflow-wrap: anywhere;
+  }
+
+  .ops-ecosystem-table {
+    width: 100%;
+    min-width: 860px;
+    border-collapse: collapse;
+  }
+
+  .ops-ecosystem-table th,
+  .ops-ecosystem-table td {
+    border-bottom: 1px solid rgba(94, 255, 223, 0.12);
+    padding: 11px;
+    color: #c7e9e3;
+    font-size: 0.86rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .ops-ecosystem-table th {
+    color: var(--ops-cyan);
+    background: rgba(94, 255, 223, 0.08);
+    text-transform: uppercase;
+  }
+
+  .ops-ecosystem-table .listed {
+    color: var(--ops-ink);
+    background: rgba(255, 200, 87, 0.86);
+    font-weight: 900;
+  }
+
+  .ops-ecosystem-table .partial {
+    color: var(--ops-amber);
+    background: rgba(255, 200, 87, 0.08);
+    font-weight: 900;
+  }
+
   .ops-drawer[hidden] {
     display: none;
   }
@@ -1166,7 +1332,9 @@ permalink: /ai-tracker/
     }
 
     .ops-stat-grid,
-    .ops-card-grid {
+    .ops-ecosystem-summary,
+    .ops-card-grid,
+    .ops-ecosystem-grid {
       grid-template-columns: 1fr;
     }
 
@@ -1256,6 +1424,7 @@ permalink: /ai-tracker/
     <a href="#methods">Methods</a>
     <a href="#figures">Figures</a>
     <a href="#people">People</a>
+    <a href="#ecosystem">Ecosystem</a>
     <a href="#closed">Closed Model Watch</a>
     <a href="#agents">Agent Papers</a>
     <a href="#companies">Company Radar</a>
@@ -1374,6 +1543,35 @@ permalink: /ai-tracker/
       <div class="ops-panel">
         <h3>Cross-report authorship map</h3>
         <div class="ops-people-matrix" id="people-matrix"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ops-section dark-band" id="ecosystem">
+    <div class="ops-section-head">
+      <div>
+        <div class="ops-section-eyebrow">Launch Ecosystem</div>
+        <h2>Co-launch partners</h2>
+      </div>
+      <p>
+        GLM-5 Acknowledgement 单独列出 52 个 co-launch partners 和 community developers。本区把 open-source communities、inference providers、applications、AI gateways 拆成可筛选网络，并和 GLM-5.2、DeepSeek V4、Kimi K2.6、Qwen3.7-Max 的公开来源做可比性标注。
+      </p>
+    </div>
+    <div class="ops-ecosystem-summary" id="ecosystem-summary" aria-label="ecosystem summary"></div>
+    <div class="ops-controls" id="ecosystem-filters" aria-label="ecosystem filters"></div>
+    <div class="ops-ecosystem-shell">
+      <div class="ops-ecosystem-grid" id="ecosystem-grid"></div>
+      <div class="ops-panel">
+        <h3>Cross-report ecosystem map</h3>
+        <p class="ops-ecosystem-note">
+          这里区分“正式 acknowledgement 伙伴表”和“只出现部署/框架/API 线索”的来源，避免把非伙伴列表误写成共启伙伴。
+        </p>
+        <div class="ops-table-wrap">
+          <table class="ops-ecosystem-table" id="ecosystem-matrix">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
@@ -2229,6 +2427,110 @@ permalink: /ai-tracker/
     ["Affiliation caution", "The tracker uses publication-time organization or official releasing entity. It does not infer a person's current employer from older papers or social profiles.", "All records"]
   ];
 
+  const ecosystemSource = "https://arxiv.org/html/2602.15763v2";
+
+  const ecosystemCategories = [
+    {
+      id: "open-source",
+      name: "Open-source Communities",
+      short: "OSS",
+      role: "Model hubs, local runtimes, inference engines, fine-tuning stacks, and community deployment paths.",
+      evidence: "GLM-5 Acknowledgement lists these as open-source community co-launch partners.",
+      partners: ["Hugging Face", "MLX", "ModelScope", "SGLang", "Unsloth", "vLLM", "xLLM"],
+      source: ecosystemSource
+    },
+    {
+      id: "inference",
+      name: "Inference Providers",
+      short: "Inference",
+      role: "Hosted inference, enterprise cloud deployment, serverless GPU, and managed model endpoints.",
+      evidence: "GLM-5 Acknowledgement lists these as inference-provider co-launch partners.",
+      partners: ["Amazon Bedrock", "Atlas Cloud", "Baidu AI Cloud", "Baseten", "Cerebras", "DeepInfra", "Fireworks", "FriendliAI", "GMI Cloud", "Google Cloud Vertex AI", "Infinigence AI", "Modal", "Novita AI", "Parasail", "Phala", "PPIO", "SiliconFlow", "StreamLake", "Together AI", "Venice", "Weights & Biases"],
+      source: ecosystemSource
+    },
+    {
+      id: "applications",
+      name: "Applications",
+      short: "Apps",
+      role: "Coding agents, office/document workflows, IDE copilots, and developer-facing agent products.",
+      evidence: "GLM-5 Acknowledgement lists these as application co-launch partners.",
+      partners: ["CatPaw", "Cline", "CodeBuddy", "CodeRider", "Coze", "Crush", "Factory AI", "Kilo Code", "MonkeyCode", "OpenClaw", "OpenCode", "Qoder", "Roo Code", "TRAE", "Verdent AI", "WPS", "YouWare"],
+      source: ecosystemSource
+    },
+    {
+      id: "gateways",
+      name: "AI Gateways",
+      short: "Gateways",
+      role: "Model routing, API gateways, model-selection surfaces, and multi-provider access layers.",
+      evidence: "GLM-5 Acknowledgement lists these as AI-gateway co-launch partners.",
+      partners: ["AI Ping", "EZmodel", "iFlow", "OpenRouter", "Vercel", "Yupp", "ZenMux"],
+      source: ecosystemSource
+    }
+  ];
+
+  function makePartnerId(name) {
+    return name.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+
+  const ecosystemPartners = ecosystemCategories.flatMap((category) => category.partners.map((name) => ({
+    id: makePartnerId(name),
+    name,
+    category: category.id,
+    categoryName: category.name,
+    role: category.role,
+    evidence: category.evidence,
+    source: category.source,
+    reports: ["GLM-5"]
+  })));
+
+  const ecosystemMatrixRows = [
+    {
+      report: "GLM-5",
+      modelId: "glm-5",
+      sourceType: "paper acknowledgement",
+      url: ecosystemSource,
+      cells: {"Open-source Communities": "7", "Inference Providers": "21", Applications: "17", "AI Gateways": "7"},
+      status: "listed",
+      note: "Formal acknowledgement table with 52 named partners in four categories."
+    },
+    {
+      report: "GLM-5.2",
+      modelId: "glm-5-2",
+      sourceType: "official blog + docs",
+      url: "https://z.ai/blog/glm-5.2",
+      cells: {"Open-source Communities": "tooling links", "Inference Providers": "-", Applications: "-", "AI Gateways": "-"},
+      status: "partial",
+      note: "Blog and docs expose model hubs and local deployment frameworks such as Hugging Face, ModelScope, transformers, vLLM, SGLang, xLLM, and ktransformers, but not a comparable co-launch partner list."
+    },
+    {
+      report: "DeepSeek-V4",
+      modelId: "deepseek-v4-pro",
+      sourceType: "technical report + official release",
+      url: "https://api-docs.deepseek.com/news/news260424",
+      cells: {"Open-source Communities": "HF collection", "Inference Providers": "API", Applications: "-", "AI Gateways": "API-compatible"},
+      status: "partial",
+      note: "Release confirms DeepSeek API access and OpenAI/Anthropic-compatible APIs; it is not a categorized partner acknowledgement."
+    },
+    {
+      report: "Kimi K2.6 / K2.7 Code",
+      modelId: "kimi-k2-6",
+      sourceType: "official blog + model docs",
+      url: "https://www.kimi.com/blog/kimi-k2-6",
+      cells: {"Open-source Communities": "-", "Inference Providers": "-", Applications: "Kimi Code / Claw", "AI Gateways": "-"},
+      status: "partial",
+      note: "Kimi sources describe product and coding-agent surfaces; no four-category co-launch partner table is confirmed in the tracked sources."
+    },
+    {
+      report: "Qwen3.7-Max",
+      modelId: "qwen-3-7-max",
+      sourceType: "official blog + docs",
+      url: "https://qwen.ai/blog?id=qwen3.7",
+      cells: {"Open-source Communities": "Qwen open line", "Inference Providers": "Alibaba Cloud", Applications: "-", "AI Gateways": "-"},
+      status: "partial",
+      note: "Qwen3.7-Max is tracked as an official Qwen/Alibaba release; no comparable acknowledgement partner table is confirmed."
+    }
+  ];
+
   const methodRegistry = [
     ["csa", "CSA", "Compressed Sparse Attention", "DeepSeek V4 architecture", "Compresses KV cache blocks, then uses sparse selection over compressed entries for long-context efficiency.", ["deepseek-v4-pro", "deepseek-v4-flash"], "https://arxiv.org/html/2606.19348"],
     ["hca", "HCA", "Heavily Compressed Attention", "DeepSeek V4 architecture", "Uses a heavier compression rate than CSA and keeps dense attention over compressed entries.", ["deepseek-v4-pro", "deepseek-v4-flash"], "https://arxiv.org/html/2606.19348"],
@@ -2288,6 +2590,7 @@ permalink: /ai-tracker/
     ["Kimi K2.5", "technical report", "https://arxiv.org/pdf/2602.02276", "Kimi baseline and evaluation setup referenced by K2.6"],
     ["Kimi K2.7 Code", "model docs", "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart", "latest Kimi coding-model API line"],
     ["GLM/DeepSeek/Kimi author tables", "arXiv metadata", "https://export.arxiv.org/api/query?id_list=2602.15763,2602.02276,2606.19348", "author counts and representative author lists for People Network"],
+    ["GLM-5 co-launch partners", "paper acknowledgement", "https://arxiv.org/html/2602.15763v2", "52 ecosystem partners across open-source communities, inference providers, applications, and AI gateways"],
     ["Agent paper authors", "paper set", "https://arxiv.org/abs/2308.08155", "AutoGen plus ReAct/Toolformer/SWE-agent author lineage"],
     ["Qwen3.7-Max", "official blog + docs", "https://qwen.ai/blog?id=qwen3.7", "latest Qwen API flagship source"],
     ["Qwen3-Coder", "code/research", "https://github.com/QwenLM/Qwen3-Coder", "open Qwen coding model line"],
@@ -2445,6 +2748,60 @@ permalink: /ai-tracker/
     `).join("");
   }
 
+  function renderEcosystem(filter = "all") {
+    const total = ecosystemPartners.length;
+    const summary = [
+      ["Total", total],
+      ...ecosystemCategories.map((category) => [category.short, category.partners.length])
+    ];
+    document.querySelector("#ecosystem-summary").innerHTML = summary.map(([label, count]) => `
+      <div class="ops-ecosystem-stat"><strong>${count}</strong><span>${label}</span></div>
+    `).join("");
+
+    const filters = ["all", ...ecosystemCategories.map((category) => category.id)];
+    const filterNames = Object.fromEntries(ecosystemCategories.map((category) => [category.id, category.name]));
+    const wrap = document.querySelector("#ecosystem-filters");
+    wrap.innerHTML = filters.map((item) => `<button class="ops-filter ${item === filter ? "active" : ""}" data-ecosystem-filter="${item}">${item === "all" ? "all" : filterNames[item]}</button>`).join("");
+
+    const rows = ecosystemCategories.filter((category) => filter === "all" || category.id === filter);
+    document.querySelector("#ecosystem-grid").innerHTML = rows.map((category) => `
+      <article class="ops-ecosystem-card">
+        <div class="ops-ecosystem-top">
+          <div>
+            <strong>${category.name}</strong>
+            <span>${category.role}</span>
+          </div>
+          <div class="ops-ecosystem-count">${category.partners.length}</div>
+        </div>
+        <p>${category.evidence}</p>
+        <div class="ops-partner-cloud">${category.partners.map((partner) => `<button class="ops-partner-token" type="button" data-detail="ecosystem-partner" data-id="${makePartnerId(partner)}">${partner}</button>`).join("")}</div>
+        <div class="ops-link-row">
+          <a class="ops-source-link" href="${category.source}" target="_blank" rel="noopener">Acknowledgement</a>
+          <button class="ops-drill-button" type="button" data-detail="ecosystem" data-id="${category.id}">Open category</button>
+        </div>
+      </article>
+    `).join("");
+
+    wrap.onclick = (event) => {
+      const button = event.target.closest("button");
+      if (button) renderEcosystem(button.dataset.ecosystemFilter);
+    };
+  }
+
+  function renderEcosystemMatrix() {
+    const columns = ecosystemCategories.map((category) => category.name);
+    const matrix = document.querySelector("#ecosystem-matrix");
+    matrix.querySelector("thead").innerHTML = `<tr><th>Report</th><th>Source type</th>${columns.map((column) => `<th>${column}</th>`).join("")}<th>Interpretation</th></tr>`;
+    matrix.querySelector("tbody").innerHTML = ecosystemMatrixRows.map((row) => `
+      <tr>
+        <td><button class="ops-mini-button" type="button" data-detail="model" data-id="${row.modelId}">${row.report}</button></td>
+        <td><a class="ops-source-link" href="${row.url}" target="_blank" rel="noopener">${row.sourceType}</a></td>
+        ${columns.map((column) => `<td class="${row.cells[column] !== "-" ? row.status : ""}">${row.cells[column]}</td>`).join("")}
+        <td>${row.note}</td>
+      </tr>
+    `).join("");
+  }
+
   function renderMethods() {
     document.querySelector("#method-grid").innerHTML = methodRegistry.map(([id, label, fullName, stage, note, usedBy, url]) => `
       <article class="ops-method-card">
@@ -2506,6 +2863,7 @@ permalink: /ai-tracker/
       ["benchmarks", "Benchmark Map", "Shared scores and eval setup"],
       ["figures", "Figure Atlas", "Original report images"],
       ["people", "People Network", "Authors, teams, disclosure level"],
+      ["ecosystem", "Launch Ecosystem", "Partners, providers, gateways"],
       ["glm", "GLM-5 Deep Dive", "Data, RL, eval and Pony Alpha"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
@@ -2526,6 +2884,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>Original Figure Atlas</h3><p>原图从 arXiv HTML、Z.ai blog、Kimi blog 直接引用，保留 source link。</p><div class="ops-mini-grid">${figureAtlas.slice(0, 8).map(([id, title, caption]) => `<div class="ops-mini-card"><strong>${title}</strong><span>${caption}</span><button class="ops-mini-button" type="button" data-detail="figure" data-id="${id}">Open</button></div>`).join("")}</div>`;
     } else if (active === "people") {
       detail.innerHTML = `<h3>People & Author Network</h3><p>作者表、团队发布、system card 和 agent paper 被放在同一层比较，避免把没有署名的官方发布误当成论文作者贡献。</p><div class="ops-mini-grid">${peopleRecords.slice(0, 10).map((record) => `<div class="ops-mini-card"><strong>${record.lab}</strong><span>${record.disclosure} / ${record.count ? `${record.count} authors` : "team-level"}</span><button class="ops-mini-button" type="button" data-detail="people" data-id="${record.id}">Open</button></div>`).join("")}</div>`;
+    } else if (active === "ecosystem") {
+      detail.innerHTML = `<h3>Launch Ecosystem</h3><p>GLM-5 Acknowledgement 暴露了可结构化的 partner map：open-source communities、inference providers、applications、AI gateways。其他报告只在有同类伙伴表时才标成 listed。</p><div class="ops-mini-grid">${ecosystemCategories.map((category) => `<div class="ops-mini-card"><strong>${category.name}</strong><span>${category.partners.length} partners / ${category.role}</span><button class="ops-mini-button" type="button" data-detail="ecosystem" data-id="${category.id}">Open</button></div>`).join("")}</div>`;
     } else {
       detail.innerHTML = `<h3>GLM-5 Report Deep Dive</h3><p>用户指定的 GLM-5 章节被结构化为阶段卡，所有阶段都挂回 arXiv PDF。</p><div class="ops-stage-grid">${reportDeepDives["glm-5"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     }
@@ -2560,6 +2920,7 @@ permalink: /ai-tracker/
           <li><strong>Benchmarks:</strong> ${(model.benchmarks || []).join(", ")}</li>
         </ul>
         <div class="ops-link-row">${linksHtml(model.links)}</div>
+        ${model.id === "glm-5" ? `<h3>Co-launch Ecosystem</h3><p>GLM-5 Acknowledgement lists ${ecosystemPartners.length} co-launch partners across ${ecosystemCategories.length} categories. Open the dedicated ecosystem section for category filters and cross-report comparison.</p><div class="ops-mini-grid">${ecosystemCategories.map((category) => `<div class="ops-mini-card"><strong>${category.name}</strong><span>${category.partners.length} partners</span><button class="ops-mini-button" type="button" data-detail="ecosystem" data-id="${category.id}">Open</button></div>`).join("")}</div>` : ""}
         ${deepDive.length ? `<h3>Report Sections</h3><div class="ops-stage-grid">${deepDive.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>` : ""}
         ${model.figures ? `<h3>Related Figures</h3><div class="ops-mini-grid">${model.figures.map((figureId) => {
           const fig = figureAtlas.find((item) => item[0] === figureId);
@@ -2608,6 +2969,38 @@ permalink: /ai-tracker/
         <div class="ops-people-chips">${record.people.map((person) => `<span class="ops-person-chip">${person}</span>`).join("")}</div>
         <h3>Evidence Sources</h3>
         <div class="ops-link-row">${linksHtml(record.sources)}</div>`;
+    } else if (kind === "ecosystem") {
+      const category = ecosystemCategories.find((item) => item.id === id);
+      if (!category) return;
+      title = category.name;
+      const reportRows = ecosystemMatrixRows.filter((row) => row.cells[category.name] && row.cells[category.name] !== "-");
+      html = `<h3 id="ops-drawer-title">${category.name}</h3><p>${category.role}</p>
+        <ul class="ops-detail-list">
+          <li><strong>Partner count:</strong> ${category.partners.length}</li>
+          <li><strong>Evidence:</strong> ${category.evidence}</li>
+          <li><strong>Source type:</strong> GLM-5 paper acknowledgement</li>
+        </ul>
+        <h3>Partners</h3>
+        <div class="ops-partner-cloud">${category.partners.map((partner) => `<button class="ops-partner-token" type="button" data-detail="ecosystem-partner" data-id="${makePartnerId(partner)}">${partner}</button>`).join("")}</div>
+        <h3>Cross-report Signals</h3>
+        <div class="ops-mini-grid">${reportRows.map((row) => `<div class="ops-mini-card"><strong>${row.report}</strong><span>${row.cells[category.name]} / ${row.sourceType}</span><a class="ops-source-link" href="${row.url}" target="_blank" rel="noopener">Source</a></div>`).join("")}</div>
+        <div class="ops-link-row"><a class="ops-source-link" href="${category.source}" target="_blank" rel="noopener">Open Acknowledgement</a></div>`;
+    } else if (kind === "ecosystem-partner") {
+      const partner = ecosystemPartners.find((item) => item.id === id);
+      if (!partner) return;
+      title = partner.name;
+      html = `<h3 id="ops-drawer-title">${partner.name}</h3><p>${partner.evidence}</p>
+        <ul class="ops-detail-list">
+          <li><strong>Category:</strong> ${partner.categoryName}</li>
+          <li><strong>Role layer:</strong> ${partner.role}</li>
+          <li><strong>Reports:</strong> ${partner.reports.join(", ")}</li>
+          <li><strong>Source type:</strong> paper acknowledgement</li>
+        </ul>
+        <div class="ops-link-row">
+          <a class="ops-source-link" href="${partner.source}" target="_blank" rel="noopener">Source</a>
+          <button class="ops-drill-button" type="button" data-detail="ecosystem" data-id="${partner.category}">Open category</button>
+          <button class="ops-drill-button" type="button" data-detail="model" data-id="glm-5">Open GLM-5</button>
+        </div>`;
     }
     crumb.textContent = `AI Tracker / ${kind} / ${title}`;
     body.innerHTML = html;
@@ -2630,7 +3023,7 @@ permalink: /ai-tracker/
         }
       });
     }, { threshold: 0.12 });
-    document.querySelectorAll(".ops-model-card, .ops-agent-card, .ops-company-card, .ops-road-card, .ops-corpus-card, .ops-method-card, .ops-figure-card, .ops-people-card").forEach((card) => observer.observe(card));
+    document.querySelectorAll(".ops-model-card, .ops-agent-card, .ops-company-card, .ops-road-card, .ops-corpus-card, .ops-method-card, .ops-figure-card, .ops-people-card, .ops-ecosystem-card").forEach((card) => observer.observe(card));
   }
 
   function drawRadar() {
@@ -2759,6 +3152,8 @@ permalink: /ai-tracker/
   renderFigures();
   renderPeople();
   renderPeopleMatrix();
+  renderEcosystem();
+  renderEcosystemMatrix();
   renderFilters();
   renderHeatmap();
   renderSources();
