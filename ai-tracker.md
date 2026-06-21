@@ -662,7 +662,8 @@ permalink: /ai-tracker/
   .ops-layer-rail,
   .ops-layer-detail,
   .ops-benchmark-shell,
-  .ops-corpus-shell {
+  .ops-corpus-shell,
+  .ops-people-shell {
     border: 1px solid rgba(94, 255, 223, 0.18);
     background: linear-gradient(180deg, rgba(5, 24, 23, 0.92), rgba(4, 14, 13, 0.72));
     box-shadow: 0 22px 80px rgba(0, 0, 0, 0.28);
@@ -772,6 +773,7 @@ permalink: /ai-tracker/
   .ops-method-grid,
   .ops-figure-grid,
   .ops-corpus-grid,
+  .ops-people-grid,
   .ops-stage-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -782,6 +784,7 @@ permalink: /ai-tracker/
   .ops-method-card,
   .ops-figure-card,
   .ops-corpus-card,
+  .ops-people-card,
   .ops-benchmark-card,
   .ops-stage-card {
     border: 1px solid rgba(94, 255, 223, 0.16);
@@ -793,6 +796,7 @@ permalink: /ai-tracker/
   .ops-mini-card strong,
   .ops-method-card strong,
   .ops-corpus-card strong,
+  .ops-people-card strong,
   .ops-benchmark-card strong,
   .ops-stage-card strong {
     display: block;
@@ -803,6 +807,7 @@ permalink: /ai-tracker/
   .ops-mini-card span,
   .ops-method-card span,
   .ops-corpus-card span,
+  .ops-people-card span,
   .ops-benchmark-card span,
   .ops-stage-card span {
     display: block;
@@ -827,7 +832,8 @@ permalink: /ai-tracker/
   }
 
   .ops-benchmark-shell,
-  .ops-corpus-shell {
+  .ops-corpus-shell,
+  .ops-people-shell {
     padding: clamp(14px, 3vw, 22px);
   }
 
@@ -925,6 +931,98 @@ permalink: /ai-tracker/
     display: grid;
     grid-template-rows: auto auto 1fr auto;
     min-height: 230px;
+  }
+
+  .ops-people-shell {
+    display: grid;
+    gap: 16px;
+  }
+
+  .ops-people-grid {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  }
+
+  .ops-people-card {
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    min-height: 280px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ops-people-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(255, 200, 87, 0.14), transparent 24%),
+      linear-gradient(135deg, rgba(94, 255, 223, 0.07), transparent 42%);
+  }
+
+  .ops-people-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .ops-people-meta,
+  .ops-people-chips,
+  .ops-people-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ops-people-meta {
+    margin-bottom: 10px;
+  }
+
+  .ops-people-pill,
+  .ops-person-chip {
+    border: 1px solid rgba(94, 255, 223, 0.22);
+    background: rgba(94, 255, 223, 0.08);
+    color: #dffdf7;
+    padding: 5px 8px;
+    font-size: 0.74rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .ops-person-chip {
+    border-color: rgba(255, 200, 87, 0.3);
+    background: rgba(255, 200, 87, 0.09);
+    color: #ffe6ad;
+    text-transform: none;
+  }
+
+  .ops-people-note {
+    color: #c9ece7;
+    line-height: 1.6;
+    margin: 10px 0 12px;
+  }
+
+  .ops-people-matrix {
+    display: grid;
+    gap: 10px;
+  }
+
+  .ops-people-matrix-row {
+    display: grid;
+    grid-template-columns: minmax(150px, 0.24fr) minmax(0, 1fr) minmax(140px, 0.2fr);
+    gap: 10px;
+    align-items: stretch;
+    border: 1px solid rgba(94, 255, 223, 0.14);
+    background: rgba(2, 9, 9, 0.5);
+    padding: 10px;
+  }
+
+  .ops-people-matrix-row strong {
+    color: var(--ops-cyan);
+  }
+
+  .ops-people-matrix-row span {
+    color: var(--ops-muted);
+    line-height: 1.45;
   }
 
   .ops-drawer[hidden] {
@@ -1089,6 +1187,10 @@ permalink: /ai-tracker/
       grid-template-columns: 116px repeat(7, 78px);
     }
 
+    .ops-people-matrix-row {
+      grid-template-columns: 1fr;
+    }
+
     .ops-drawer {
       grid-template-columns: 1fr;
       align-items: end;
@@ -1153,6 +1255,7 @@ permalink: /ai-tracker/
     <a href="#benchmarks">Benchmarks</a>
     <a href="#methods">Methods</a>
     <a href="#figures">Figures</a>
+    <a href="#people">People</a>
     <a href="#closed">Closed Model Watch</a>
     <a href="#agents">Agent Papers</a>
     <a href="#companies">Company Radar</a>
@@ -1253,6 +1356,26 @@ permalink: /ai-tracker/
       </p>
     </div>
     <div class="ops-figure-grid" id="figure-grid"></div>
+  </section>
+
+  <section class="ops-section" id="people">
+    <div class="ops-section-head">
+      <div>
+        <div class="ops-section-eyebrow">People & Author Network</div>
+        <h2>Author lists, teams, labs</h2>
+      </div>
+      <p>
+        人员名单按多文献对比整理：arXiv 技术报告保留作者表规模和代表作者，官方 blog/system card 没有个人署名时标注为团队级发布，避免把组织发布误写成个人贡献。
+      </p>
+    </div>
+    <div class="ops-controls" id="people-filters" aria-label="people filters"></div>
+    <div class="ops-people-shell">
+      <div class="ops-people-grid" id="people-grid"></div>
+      <div class="ops-panel">
+        <h3>Cross-report authorship map</h3>
+        <div class="ops-people-matrix" id="people-matrix"></div>
+      </div>
+    </div>
   </section>
 
   <section class="ops-section dark-band" id="closed">
@@ -1938,6 +2061,174 @@ permalink: /ai-tracker/
     ["amazon-nova-2", "Amazon Nova 2", "Amazon / AWS", "2025-2026", "AI service card", "Enterprise model line tracked via AWS responsible AI service cards and model docs.", "https://aws.amazon.com/nova/models/"]
   ];
 
+  const peopleRecords = [
+    {
+      id: "people-glm",
+      lab: "Z.ai / GLM",
+      cluster: "Open-weight frontier",
+      disclosure: "full arXiv author table + team-only blogs",
+      count: 187,
+      sources: [
+        ["GLM-5 arXiv", "https://arxiv.org/abs/2602.15763"],
+        ["GLM-5.2 blog", "https://z.ai/blog/glm-5.2"],
+        ["GLM-5.1 blog", "https://z.ai/blog/glm-5.1"]
+      ],
+      people: ["GLM-5-Team", "Aohan Zeng", "Xin Lv", "Zhenyu Hou", "Zhengxiao Du", "Qinkai Zheng"],
+      reports: ["GLM-5", "GLM-5.1", "GLM-5.2", "IndexCache"],
+      methods: ["DSA", "asynchronous RL", "OPD", "IndexShare", "agentic engineering"],
+      note: "GLM-5 provides an explicit 187-entry arXiv author table; GLM-5.1/5.2 are official Z.ai release posts, so the page treats them as team-level evidence and links them back to the GLM author cluster."
+    },
+    {
+      id: "people-deepseek",
+      lab: "DeepSeek-AI",
+      cluster: "Open-weight frontier",
+      disclosure: "full arXiv author table",
+      count: 319,
+      sources: [
+        ["DeepSeek-V4 arXiv HTML", "https://arxiv.org/html/2606.19348"],
+        ["DeepSeek-V4 arXiv abs", "https://arxiv.org/abs/2606.19348"]
+      ],
+      people: ["DeepSeek-AI", "Anyi Xu", "Bangcai Lin", "Bing Xue", "Bingxuan Wang", "Bingzheng Xu", "Damai Dai"],
+      reports: ["DeepSeek-V4 Pro", "DeepSeek-V4 Flash", "DeepSeek-V3/R1 lineage"],
+      methods: ["CSA", "HCA", "mHC", "Muon", "OPD", "GRPO"],
+      note: "DeepSeek-V4 exposes a large arXiv author table and is the primary personnel source for CSA/HCA/mHC/Muon/OPD details in this tracker."
+    },
+    {
+      id: "people-kimi",
+      lab: "Moonshot AI / Kimi",
+      cluster: "Open-source coding and agentic",
+      disclosure: "full arXiv author table + team-only docs/blogs",
+      count: 326,
+      sources: [
+        ["Kimi K2.5 arXiv", "https://arxiv.org/abs/2602.02276"],
+        ["Kimi K2.6 blog", "https://www.kimi.com/blog/kimi-k2-6"],
+        ["Kimi K2.7 Code docs", "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart"]
+      ],
+      people: ["Kimi Team", "Tongtong Bai", "Yifan Bai", "Yiping Bao", "S. H. Cai", "Yuan Cao"],
+      reports: ["Kimi K2.5", "Kimi K2.6", "Kimi K2.7 Code"],
+      methods: ["Agent Swarm", "joint text-vision RL", "MuonClip watchlist", "long-horizon coding"],
+      note: "Kimi K2.5 supplies the explicit 326-author table. K2.6 and K2.7 Code are official product/technical posts, so their personnel evidence is team-level unless a later formal report adds individual authors."
+    },
+    {
+      id: "people-qwen",
+      lab: "Alibaba / Qwen Team",
+      cluster: "Open + API frontier",
+      disclosure: "official team release",
+      count: null,
+      sources: [
+        ["Qwen3.7 blog", "https://qwen.ai/blog?id=qwen3.7"],
+        ["Qwen3-Coder GitHub", "https://github.com/QwenLM/Qwen3-Coder"],
+        ["Qwen technical-report hub", "https://github.com/QwenLM/Qwen3"]
+      ],
+      people: ["Qwen Team", "Alibaba Cloud"],
+      reports: ["Qwen3.7-Max", "Qwen3-Coder", "Qwen3 family"],
+      methods: ["coding RL", "agentic coding", "long-context API", "open model release"],
+      note: "Qwen entries are currently tracked as official team releases; individual attribution should be promoted only when a standalone 2026 report exposes an author list."
+    },
+    {
+      id: "people-openai",
+      lab: "OpenAI",
+      cluster: "Closed frontier",
+      disclosure: "system card / official release",
+      count: null,
+      sources: [
+        ["OpenAI research", "https://openai.com/research/"],
+        ["GPT-5.5 system card", "https://openai.com/index/gpt-5-5-system-card/"],
+        ["ChatGPT Agent system card", "https://openai.com/index/chatgpt-agent-system-card/"]
+      ],
+      people: ["OpenAI research", "Preparedness", "Model Behavior", "Safety Systems"],
+      reports: ["GPT-5.x", "ChatGPT Agent", "Operator-style agents"],
+      methods: ["system card", "agent safety", "tool policy", "preparedness eval"],
+      note: "Closed OpenAI model records are not personnel-attributed papers here. The tracker keeps them at org/team granularity unless the official page names authors."
+    },
+    {
+      id: "people-anthropic",
+      lab: "Anthropic",
+      cluster: "Closed frontier",
+      disclosure: "system card index",
+      count: null,
+      sources: [
+        ["Anthropic system cards", "https://www.anthropic.com/system-cards"],
+        ["Anthropic research", "https://www.anthropic.com/research"]
+      ],
+      people: ["Anthropic research", "Frontier Red Team", "Safety Science"],
+      reports: ["Claude Opus/Sonnet system cards", "Claude agentic evals"],
+      methods: ["constitutional AI", "frontier safety", "tool-use eval", "system card"],
+      note: "Claude facts are sourced through Anthropic system cards and research posts; the page avoids inventing per-person authorship for product cards."
+    },
+    {
+      id: "people-google",
+      lab: "Google DeepMind",
+      cluster: "Closed multimodal frontier",
+      disclosure: "model card / technical report mix",
+      count: null,
+      sources: [
+        ["DeepMind model cards", "https://deepmind.google/models/model-cards/"],
+        ["Gemini model cards", "https://deepmind.google/models/gemini/"]
+      ],
+      people: ["Google DeepMind", "Gemini Team"],
+      reports: ["Gemini 3.x", "Gemini model-card lineage"],
+      methods: ["multimodal eval", "safety model cards", "long-context"],
+      note: "Gemini watch entries are linked to official model cards. Individual names should be copied only from formal reports that expose author tables."
+    },
+    {
+      id: "people-agent-papers",
+      lab: "Agent paper lineage",
+      cluster: "Academic methods",
+      disclosure: "paper author lists",
+      count: null,
+      sources: [
+        ["ReAct", "https://arxiv.org/abs/2210.03629"],
+        ["Toolformer", "https://arxiv.org/abs/2302.04761"],
+        ["AutoGen", "https://arxiv.org/abs/2308.08155"],
+        ["SWE-agent", "https://arxiv.org/abs/2405.15793"]
+      ],
+      people: ["Shunyu Yao", "Timo Schick", "Qingyun Wu", "John Yang", "Ofir Press"],
+      reports: ["ReAct", "Toolformer", "AutoGen", "SWE-agent"],
+      methods: ["reason-act loop", "tool self-supervision", "multi-agent conversation", "agent-computer interface"],
+      note: "This cluster keeps named academic method authors next to frontier-model teams, so agent mechanisms can be traced back to their original literature instead of only to product releases."
+    },
+    {
+      id: "people-meta",
+      lab: "Meta AI",
+      cluster: "Open model + tool literature",
+      disclosure: "paper and official release mix",
+      count: null,
+      sources: [
+        ["Meta AI research", "https://ai.meta.com/research/"],
+        ["Toolformer", "https://arxiv.org/abs/2302.04761"],
+        ["Llama", "https://ai.meta.com/llama/"]
+      ],
+      people: ["Meta AI", "Timo Schick", "Jane Dwivedi-Yu", "Roberto Dessì", "Roberta Raileanu"],
+      reports: ["Toolformer", "Llama releases", "Meta open-model line"],
+      methods: ["tool use", "open weights", "multimodal open release"],
+      note: "Meta is split between named research papers such as Toolformer and team-level Llama release pages; the distinction is preserved in the source type."
+    },
+    {
+      id: "people-apple-amazon",
+      lab: "Apple / Amazon",
+      cluster: "Enterprise and on-device",
+      disclosure: "research page / service card",
+      count: null,
+      sources: [
+        ["Apple Foundation Models 3", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+        ["Amazon Nova models", "https://aws.amazon.com/nova/models/"],
+        ["AWS AI service cards", "https://docs.aws.amazon.com/ai/responsible-ai/"]
+      ],
+      people: ["Apple Machine Learning Research", "Amazon AGI", "AWS Responsible AI"],
+      reports: ["Apple Foundation Models 3", "Amazon Nova 2"],
+      methods: ["on-device privacy", "AI service cards", "enterprise safety"],
+      note: "These entries are intentionally team-level because official pages emphasize product/research organizations more than individual author tables."
+    }
+  ];
+
+  const peopleMatrixRows = [
+    ["Full arXiv author tables", "GLM-5: 187 authors; DeepSeek-V4: 319 authors; Kimi K2.5: 326 authors. These are the highest-confidence personnel lists because they come from formal arXiv metadata.", "GLM / DeepSeek / Kimi"],
+    ["Team-only official releases", "GLM-5.1/5.2, Kimi K2.6/K2.7 Code, Qwen3.7-Max, closed-model system cards, and enterprise service cards are tracked as team/org releases unless a page explicitly names individuals.", "Z.ai / Moonshot / Qwen / Closed labs"],
+    ["Method lineage authors", "ReAct, Toolformer, AutoGen, and SWE-agent keep named paper authors so agent methods can be traced across model reports and benchmark harnesses.", "Agent papers"],
+    ["Affiliation caution", "The tracker uses publication-time organization or official releasing entity. It does not infer a person's current employer from older papers or social profiles.", "All records"]
+  ];
+
   const methodRegistry = [
     ["csa", "CSA", "Compressed Sparse Attention", "DeepSeek V4 architecture", "Compresses KV cache blocks, then uses sparse selection over compressed entries for long-context efficiency.", ["deepseek-v4-pro", "deepseek-v4-flash"], "https://arxiv.org/html/2606.19348"],
     ["hca", "HCA", "Heavily Compressed Attention", "DeepSeek V4 architecture", "Uses a heavier compression rate than CSA and keeps dense attention over compressed entries.", ["deepseek-v4-pro", "deepseek-v4-flash"], "https://arxiv.org/html/2606.19348"],
@@ -1996,6 +2287,8 @@ permalink: /ai-tracker/
     ["Kimi K2.6", "official blog", "https://www.kimi.com/blog/kimi-k2-6", "Kimi K2.6 benchmark tables, footnotes, original figures"],
     ["Kimi K2.5", "technical report", "https://arxiv.org/pdf/2602.02276", "Kimi baseline and evaluation setup referenced by K2.6"],
     ["Kimi K2.7 Code", "model docs", "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart", "latest Kimi coding-model API line"],
+    ["GLM/DeepSeek/Kimi author tables", "arXiv metadata", "https://export.arxiv.org/api/query?id_list=2602.15763,2602.02276,2606.19348", "author counts and representative author lists for People Network"],
+    ["Agent paper authors", "paper set", "https://arxiv.org/abs/2308.08155", "AutoGen plus ReAct/Toolformer/SWE-agent author lineage"],
     ["Qwen3.7-Max", "official blog + docs", "https://qwen.ai/blog?id=qwen3.7", "latest Qwen API flagship source"],
     ["Qwen3-Coder", "code/research", "https://github.com/QwenLM/Qwen3-Coder", "open Qwen coding model line"],
     ["OpenAI GPT-5.5", "system card", "https://openai.com/index/gpt-5-5-system-card/", "closed model system-card source"],
@@ -2107,6 +2400,51 @@ permalink: /ai-tracker/
     };
   }
 
+  function renderPeople(filter = "all") {
+    const filters = ["all", "full arXiv", "team release", "closed", "academic"];
+    const wrap = document.querySelector("#people-filters");
+    wrap.innerHTML = filters.map((item) => `<button class="ops-filter ${item === filter ? "active" : ""}" data-people-filter="${item}">${item}</button>`).join("");
+    const rows = peopleRecords.filter((record) => {
+      const haystack = `${record.cluster} ${record.disclosure} ${record.lab}`.toLowerCase();
+      if (filter === "all") return true;
+      if (filter === "full arXiv") return record.count;
+      if (filter === "team release") return haystack.includes("team") || haystack.includes("official");
+      if (filter === "closed") return haystack.includes("closed");
+      if (filter === "academic") return haystack.includes("academic");
+      return haystack.includes(filter.toLowerCase());
+    });
+    document.querySelector("#people-grid").innerHTML = rows.map((record) => `
+      <article class="ops-people-card">
+        <div class="ops-people-meta">
+          <span class="ops-people-pill">${record.cluster}</span>
+          <span class="ops-people-pill">${record.count ? `${record.count} authors` : "team-level"}</span>
+        </div>
+        <strong>${record.lab}</strong>
+        <span>${record.disclosure}</span>
+        <p class="ops-people-note">${record.note}</p>
+        <div class="ops-people-chips">${record.people.slice(0, 7).map((person) => `<span class="ops-person-chip">${person}</span>`).join("")}</div>
+        <div class="ops-link-row">
+          ${linksHtml(record.sources.slice(0, 2))}
+          <button class="ops-drill-button" type="button" data-detail="people" data-id="${record.id}">Open detail</button>
+        </div>
+      </article>
+    `).join("");
+    wrap.onclick = (event) => {
+      const button = event.target.closest("button");
+      if (button) renderPeople(button.dataset.peopleFilter);
+    };
+  }
+
+  function renderPeopleMatrix() {
+    document.querySelector("#people-matrix").innerHTML = peopleMatrixRows.map(([title, note, labs]) => `
+      <div class="ops-people-matrix-row">
+        <strong>${title}</strong>
+        <span>${note}</span>
+        <span>${labs}</span>
+      </div>
+    `).join("");
+  }
+
   function renderMethods() {
     document.querySelector("#method-grid").innerHTML = methodRegistry.map(([id, label, fullName, stage, note, usedBy, url]) => `
       <article class="ops-method-card">
@@ -2167,6 +2505,7 @@ permalink: /ai-tracker/
       ["methods", "Method Atlas", "Training and eval methods"],
       ["benchmarks", "Benchmark Map", "Shared scores and eval setup"],
       ["figures", "Figure Atlas", "Original report images"],
+      ["people", "People Network", "Authors, teams, disclosure level"],
       ["glm", "GLM-5 Deep Dive", "Data, RL, eval and Pony Alpha"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
@@ -2185,6 +2524,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>Benchmark Map</h3><p>Benchmark 行是跨模型共享节点，可以查看 source note 和相关模型。</p><div class="ops-mini-grid">${benchmarkRows.slice(0, 12).map(([cat, name, metric]) => `<div class="ops-mini-card"><strong>${name}</strong><span>${cat} / ${metric}</span><button class="ops-mini-button" type="button" data-detail="benchmark" data-id="${name}">Open</button></div>`).join("")}</div>`;
     } else if (active === "figures") {
       detail.innerHTML = `<h3>Original Figure Atlas</h3><p>原图从 arXiv HTML、Z.ai blog、Kimi blog 直接引用，保留 source link。</p><div class="ops-mini-grid">${figureAtlas.slice(0, 8).map(([id, title, caption]) => `<div class="ops-mini-card"><strong>${title}</strong><span>${caption}</span><button class="ops-mini-button" type="button" data-detail="figure" data-id="${id}">Open</button></div>`).join("")}</div>`;
+    } else if (active === "people") {
+      detail.innerHTML = `<h3>People & Author Network</h3><p>作者表、团队发布、system card 和 agent paper 被放在同一层比较，避免把没有署名的官方发布误当成论文作者贡献。</p><div class="ops-mini-grid">${peopleRecords.slice(0, 10).map((record) => `<div class="ops-mini-card"><strong>${record.lab}</strong><span>${record.disclosure} / ${record.count ? `${record.count} authors` : "team-level"}</span><button class="ops-mini-button" type="button" data-detail="people" data-id="${record.id}">Open</button></div>`).join("")}</div>`;
     } else {
       detail.innerHTML = `<h3>GLM-5 Report Deep Dive</h3><p>用户指定的 GLM-5 章节被结构化为阶段卡，所有阶段都挂回 arXiv PDF。</p><div class="ops-stage-grid">${reportDeepDives["glm-5"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     }
@@ -2251,6 +2592,22 @@ permalink: /ai-tracker/
       const [rid, name, lab, date, type, note, url] = record;
       title = name;
       html = `<h3 id="ops-drawer-title">${name}</h3><p>${note}</p><ul class="ops-detail-list"><li><strong>Lab:</strong> ${lab}</li><li><strong>Date:</strong> ${date}</li><li><strong>Source type:</strong> ${type}</li></ul><div class="ops-link-row"><a class="ops-source-link" href="${url}" target="_blank" rel="noopener">Source</a></div>`;
+    } else if (kind === "people") {
+      const record = peopleRecords.find((item) => item.id === id);
+      if (!record) return;
+      title = record.lab;
+      html = `<h3 id="ops-drawer-title">${record.lab}</h3><p>${record.note}</p>
+        <ul class="ops-detail-list">
+          <li><strong>Cluster:</strong> ${record.cluster}</li>
+          <li><strong>Disclosure:</strong> ${record.disclosure}</li>
+          <li><strong>Author table size:</strong> ${record.count ? `${record.count} listed authors` : "team-level / not listed"}</li>
+          <li><strong>Reports:</strong> ${record.reports.join(", ")}</li>
+          <li><strong>Methods:</strong> ${record.methods.join(", ")}</li>
+        </ul>
+        <h3>Representative People / Teams</h3>
+        <div class="ops-people-chips">${record.people.map((person) => `<span class="ops-person-chip">${person}</span>`).join("")}</div>
+        <h3>Evidence Sources</h3>
+        <div class="ops-link-row">${linksHtml(record.sources)}</div>`;
     }
     crumb.textContent = `AI Tracker / ${kind} / ${title}`;
     body.innerHTML = html;
@@ -2273,7 +2630,7 @@ permalink: /ai-tracker/
         }
       });
     }, { threshold: 0.12 });
-    document.querySelectorAll(".ops-model-card, .ops-agent-card, .ops-company-card, .ops-road-card, .ops-corpus-card, .ops-method-card, .ops-figure-card").forEach((card) => observer.observe(card));
+    document.querySelectorAll(".ops-model-card, .ops-agent-card, .ops-company-card, .ops-road-card, .ops-corpus-card, .ops-method-card, .ops-figure-card, .ops-people-card").forEach((card) => observer.observe(card));
   }
 
   function drawRadar() {
@@ -2400,6 +2757,8 @@ permalink: /ai-tracker/
   renderBenchmarkTable();
   renderMethods();
   renderFigures();
+  renderPeople();
+  renderPeopleMatrix();
   renderFilters();
   renderHeatmap();
   renderSources();
