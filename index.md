@@ -11,7 +11,8 @@ Nice to meet you! I'm a physics grad student who loves playing with light, mater
 [📧 hmyan@stu.pku.edu.cn](mailto:hmyan@stu.pku.edu.cn) |
 [📧 yanhaoming@outlook.com](mailto:yanhaoming@outlook.com) |
 [💻 GitHub](https://github.com/newtontech) |
-[🎓 Google Scholar](https://scholar.google.com/citations?user=YOUR_ID)
+[🎓 Google Scholar](https://scholar.google.com/citations?user=YOUR_ID) |
+[AI Research Tracker](/ai-tracker/)
 
 ---
 
