@@ -2304,6 +2304,38 @@ permalink: /ai-tracker/
         body: "Llama 4 models are released under Meta's community license with open weights on Hugging Face. Deployment is supported through vLLM, TensorRT-LLM, and major inference providers. The open-weight release enables fine-tuning, distillation, and local deployment — a key differentiator from closed API-only models like GPT-5.5 or Claude Fable 5.",
         source: "https://ai.meta.com/llama/"
       }
+    ],
+    "gemini-family": [
+      {
+        title: "Gemini 2.5 Pro: Hybrid Reasoning Architecture",
+        stage: "architecture / release",
+        body: "Gemini 2.5 Pro is Google DeepMind's first fully hybrid reasoning model, enabling developers to toggle thinking on/off per request. Released March 2025, it leads GPQA Diamond (94.3%) and AIME 2025 math/science benchmarks among frontier models. The model supports multimodal input (text, image, video, audio) with 1M-token context. Pricing at $1.25 input / $10 output per 1M tokens positions it as the high-capability tier. The DeepMind model card PDF is the authoritative source for capabilities, safety evaluations, and supported modalities.",
+        source: "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf"
+      },
+      {
+        title: "Gemini 2.5 Flash: Efficient Hybrid Reasoning",
+        stage: "architecture / release",
+        body: "Gemini 2.5 Flash launched April 2025 as the cost-efficient member of the 2.5 family, priced at $0.30 input / $1.20 output per 1M tokens — roughly 4x cheaper than Pro. It supports the same thinking on/off hybrid reasoning toggle, making it suitable for applications that need occasional deep reasoning without paying Pro-tier pricing. The model card documents safety evaluations and supported modality combinations. The developers.googleblog.com post details the thinking update mechanics.",
+        source: "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf"
+      },
+      {
+        title: "Gemini 3.1 Pro: Gemini 3 Series Flagship",
+        stage: "architecture / release",
+        body: "Gemini 3.1 Pro is the current Gemini 3 series high-capability multimodal reasoning model, tracked via the DeepMind model-card index. The model card (updated February 2026) positions it as the next-generation successor to the 2.5 line. The DeepMind model-card index is the canonical source; individual capability numbers should be copied only from the formal model card page, not from third-party benchmark reposts.",
+        source: "https://deepmind.google/models/model-cards/gemini-3-1-pro/"
+      },
+      {
+        title: "Cross-model Method Lineage: 1.5 → 2.0 → 2.5 → 3.x",
+        stage: "methods",
+        body: "The Gemini family progresses from dense transformer baselines (1.5) through multimodal scaling (2.0) to hybrid reasoning with thinking toggles (2.5) and next-generation architectures (3.x). The 2.5 generation's key innovation is the thinking on/off mechanism — developers can trade latency for accuracy per request without switching models. This contrasts with OpenAI's approach (separate o-series reasoning models) and Anthropic's approach (adaptive thinking always-on in Claude Fable 5). Gemini retains native multimodality across all generations.",
+        source: "https://deepmind.google/models/model-cards/"
+      },
+      {
+        title: "Provider Ecosystem: Model Cards, API, Vertex AI",
+        stage: "ecosystem / deployment",
+        body: "Gemini models are available through Google AI Studio (free tier + API key), Vertex AI (enterprise with IAM, regional endpoints, CMEK), and Google Cloud ML. The DeepMind model-card index provides a single canonical page per model version. Unlike OpenAI (system cards) or Anthropic (system-card index), DeepMind's model cards follow a structured PDF format documenting capabilities, limitations, and safety evaluations. The card index at deepmind.google/models/model-cards/ is the recommended entry point for provenance tracking.",
+        source: "https://deepmind.google/models/model-cards/"
+      }
     ]
   };
 
@@ -2906,7 +2938,8 @@ permalink: /ai-tracker/
       links: [
         ["Model card", "https://deepmind.google/models/model-cards/gemini-3-1-pro/"],
         ["Card index", "https://deepmind.google/models/model-cards/"]
-      ]
+      ],
+      deepDive: "gemini-family"
     },
     {
       name: "Gemini 2.5 Pro",
@@ -2920,7 +2953,8 @@ permalink: /ai-tracker/
         ["Card index", "https://deepmind.google/models/model-cards/"],
         ["API docs", "https://ai.google.dev/gemini-api/docs/models"],
         ["Blog", "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-model-thinking-updates-march-2025/"]
-      ]
+      ],
+      deepDive: "gemini-family"
     },
     {
       name: "Gemini 2.5 Flash",
@@ -2934,7 +2968,8 @@ permalink: /ai-tracker/
         ["Card index", "https://deepmind.google/models/model-cards/"],
         ["API docs", "https://ai.google.dev/gemini-api/docs/models"],
         ["Blog", "https://developers.googleblog.com/en/gemini-2-5-thinking-model-updates/"]
-      ]
+      ],
+      deepDive: "gemini-family"
     },
     {
       name: "Grok 4.3",
