@@ -63,17 +63,47 @@ commit_and_maybe_push() {
   git commit -m "$COMMIT_PREFIX iteration $iter"
   local commit_sha
   commit_sha="$(git rev-parse HEAD)"
+  local markers_file="$RUN_DIR/live-markers-iter-$iter.txt"
+  write_live_markers "$commit_sha" "$markers_file"
   if [ "$AUTO_PUSH" = "1" ]; then
     git -c http.version=HTTP/1.1 -c http.postBuffer=524288000 push origin "$(git rev-parse --abbrev-ref HEAD)"
     if [ "$VERIFY_LIVE" = "1" ]; then
-      wait_for_pages_build "$commit_sha"
-      verify_live_page "$commit_sha"
+      wait_for_pages_build "$commit_sha" "$markers_file"
+      verify_live_page "$commit_sha" "$markers_file"
     fi
   fi
 }
 
+write_live_markers() {
+  local commit_sha="$1"
+  local markers_file="$2"
+  git show --unified=0 --format= "$commit_sha" -- "$TARGET_PAGE" \
+    | awk '
+      /^\+[^+]/ {
+        s = substr($0, 2)
+        gsub(/^[[:space:]]+|[[:space:]]+$/, "", s)
+        if (s ~ /^$/ || s ~ /^\/\// || s ~ /^\/\*/ || s ~ /^\*/ || s ~ /^<|^>|^\{|\}|^\]|\[$/) next
+        if (s ~ /^(const|let|var|function|if|for|return|document|window)[[:space:](=]/) next
+        marker = ""
+        if (match(s, /"[^"]{8,120}"/)) {
+          marker = substr(s, RSTART + 1, RLENGTH - 2)
+        } else {
+          marker = s
+          gsub(/^[A-Za-z0-9_.$ -]+:[[:space:]]*/, "", marker)
+          gsub(/[",;]+$/, "", marker)
+        }
+        if (marker ~ /^https?:\/\//) next
+        if (tolower(marker) ~ /^(architecture|training|pre-training|mid-training|post-training|evaluation|agentic training|method|paper|official blog|model card|system card|official announcement|api docs)$/) next
+        if (length(marker) >= 8 && length(marker) <= 120 && marker ~ /[[:alpha:]][[:alpha:]]/) print marker
+      }
+    ' \
+    | awk '!seen[$0]++' \
+    | head -5 > "$markers_file"
+}
+
 wait_for_pages_build() {
   local commit_sha="$1"
+  local markers_file="${2:-}"
   if ! command -v gh >/dev/null 2>&1; then
     echo "gh not found; skipping GitHub Pages API wait."
     return 0
@@ -89,21 +119,40 @@ wait_for_pages_build() {
     if [ "$latest_commit" = "$commit_sha" ] && [ "$latest_status" = "built" ]; then
       return 0
     fi
+    if [ -s "$markers_file" ] && live_page_has_markers "$commit_sha" "$markers_file"; then
+      echo "Live page contains markers for $commit_sha; continuing despite Pages API lag."
+      return 0
+    fi
     sleep 8
   done
   echo "STOP: GitHub Pages did not build $commit_sha within ${PAGES_WAIT_SECONDS}s."
   return 6
 }
 
-verify_live_page() {
+live_page_has_markers() {
   local commit_sha="$1"
+  local markers_file="${2:-}"
   local url="${LIVE_URL}?v=${commit_sha}"
-  echo "Verifying live page: $url"
   local html
-  html="$(curl -L -fsS "$url")"
+  html="$(curl -L -fsS "$url" 2>/dev/null)" || return 1
   [[ "$html" == *"AI Research Tracker"* ]]
   [[ "$html" == *"ops-shell"* ]]
   [[ "$html" == *"pagerState"* ]]
+  if [ -s "$markers_file" ]; then
+    local marker
+    while IFS= read -r marker; do
+      [ -z "$marker" ] && continue
+      [[ "$html" == *"$marker"* ]] || return 1
+    done < "$markers_file"
+  fi
+}
+
+verify_live_page() {
+  local commit_sha="$1"
+  local markers_file="${2:-}"
+  local url="${LIVE_URL}?v=${commit_sha}"
+  echo "Verifying live page: $url"
+  live_page_has_markers "$commit_sha" "$markers_file"
   echo "Live page verified for $commit_sha"
 }
 
