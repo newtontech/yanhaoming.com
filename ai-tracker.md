@@ -1466,14 +1466,14 @@ permalink: /ai-tracker/
       <div class="ops-kicker">AI Research Intelligence Dashboard / 2026-06-23</div>
       <h1 class="ops-title">AI Research <span>War Room</span></h1>
       <p class="ops-subtitle">
-        一个面向大语言模型、智能体和公司研究动向的情报面板。这里把论文、技术报告、system card、model card、官方发布、代码和权重分开标注，避免把闭源模型的安全卡误写成论文。覆盖 GLM、DeepSeek、Kimi、Qwen、Llama、MiniMax、Mistral、GPT、Claude、Gemini、Grok 等系列。
+        一个面向大语言模型、智能体和公司研究动向的情报面板。这里把论文、技术报告、system card、model card、官方发布、代码和权重分开标注，避免把闭源模型的安全卡误写成论文。覆盖 GLM、DeepSeek、Kimi、Qwen、Llama、MiniMax、Mistral、ERNIE、GPT、Claude、Gemini、Grok 等系列。
       </p>
       <div class="ops-hero-actions">
         <a class="ops-button" href="#system">进入多层情报系统</a>
         <a class="ops-button ghost" href="#benchmarks">查看 benchmark 雷达</a>
       </div>
       <div class="ops-stat-grid" aria-label="tracker summary">
-        <div class="ops-stat"><strong>90+</strong><span>模型、论文、system card、model card、blog 与报告条目</span></div>
+        <div class="ops-stat"><strong>100+</strong><span>模型、论文、system card、model card、blog 与报告条目</span></div>
         <div class="ops-stat"><strong>2026</strong><span>顶级实验室大模型本体报告 corpus</span></div>
         <div class="ops-stat"><strong>25+</strong><span>benchmark 与训练方法可交叉跳转</span></div>
         <div class="ops-stat"><strong>100%</strong><span>条目附源链接并标注来源类型</span></div>
@@ -1933,6 +1933,44 @@ permalink: /ai-tracker/
         stage: "inference / capacity",
         body: "Opus 4.8, Opus 4.7, Opus 4.6, and Sonnet 4.6 support up to 300K output tokens through the Message Batches API using the output-300k-2026-03-24 beta header, triple the standard 128K synchronous limit. This enables very long-form generation tasks that previously required chunking.",
         source: "https://docs.anthropic.com/en/docs/about-claude/models"
+      }
+    ],
+    "ernie-4.5": [
+      {
+        title: "Heterogeneous Multimodal MoE Architecture",
+        stage: "architecture",
+        body: "ERNIE 4.5 introduces a heterogeneous MoE structure supporting parameter sharing across modalities while allowing dedicated parameters for each modality. The largest model has 424B total parameters with 47B active; a lighter variant has 21B total with 3B active. This design enhances multimodal understanding without compromising text-task performance. Modality-isolated routing, router orthogonal loss, and multimodal token-balanced loss ensure both text and vision modalities reinforce each other during training.",
+        source: "https://ernie.baidu.com/blog/posts/ernie4.5/"
+      },
+      {
+        title: "Scaling-Efficient Infrastructure",
+        stage: "training infrastructure",
+        body: "ERNIE 4.5 achieves 47% Model FLOPs Utilization (MFU) in its largest language model pre-training. The training stack uses intra-node expert parallelism, memory-efficient pipeline scheduling, FP8 mixed-precision training, and fine-grained recomputation. For inference, multi-expert parallel collaboration and convolutional code quantization enable 4-bit/2-bit lossless quantization. PD disaggregation with dynamic role switching optimizes resource utilization across hardware platforms.",
+        source: "https://ernie.baidu.com/blog/posts/ernie4.5/"
+      },
+      {
+        title: "Modality-Specific Post-Training",
+        stage: "post-training",
+        body: "ERNIE 4.5 employs modality-specific post-training: LLMs are optimized for general-purpose language understanding and generation, while VLMs focus on visual-language understanding with both thinking and non-thinking modes. Post-training combines Supervised Fine-tuning (SFT), Direct Preference Optimization (DPO), and a modified reinforcement learning method called Unified Preference Optimization (UPO). All models are trained on PaddlePaddle with ERNIEKit for industrial-grade fine-tuning.",
+        source: "https://ernie.baidu.com/blog/posts/ernie4.5/"
+      },
+      {
+        title: "Benchmark Results: 22/28 Wins vs DeepSeek-V3",
+        stage: "evaluation",
+        body: "ERNIE-4.5-300B-A47B-Base surpasses DeepSeek-V3-671B-A37B-Base on 22 out of 28 benchmarks across all major capability categories. The post-trained 300B model achieves state-of-the-art scores on IFEval, Multi-IF, SimpleQA, and ChineseSimpleQA. The lightweight 21B-A3B model outperforms Qwen3-30B-A3B on BBH and CMATH despite having ~30% fewer total parameters, demonstrating strong parameter efficiency.",
+        source: "https://ernie.baidu.com/blog/posts/ernie4.5/"
+      },
+      {
+        title: "Vision-Language Models: Thinking + Non-Thinking",
+        stage: "multimodal eval",
+        body: "ERNIE-4.5-VL-424B-A47B delivers consistently strong results across the full multimodal evaluation suite. In thinking mode, it narrows or surpasses the gap to OpenAI-o1 on MathVista, MMMU, and VisualPuzzle, while maintaining competitive performance on perception-focused datasets like CV-Bench and RealWorldQA. The lightweight VL-28B-A3B achieves competitive or superior results vs Qwen2.5-VL-7B and Qwen2.5-VL-32B across most benchmarks.",
+        source: "https://ernie.baidu.com/blog/posts/ernie4.5/"
+      },
+      {
+        title: "Open-Source Ecosystem: Apache 2.0 + ERNIEKit + FastDeploy",
+        stage: "ecosystem / deployment",
+        body: "All ERNIE 4.5 models are released under Apache 2.0. The ecosystem includes ERNIEKit (industrial-grade fine-tuning toolkit with SFT, LoRA, DPO, QAT, PTQ) and FastDeploy (multi-hardware deployment with OpenAI-compatible API). Models are available on Hugging Face, Baidu AI Studio, and GitHub. PyTorch-compatible formats are provided alongside PaddlePaddle-native weights. FastDeploy supports vLLM, TensorRT-LLM, and SGLang backends.",
+        source: "https://ernie.baidu.com/blog/posts/ernie4.5/"
       }
     ],
     "minimax-m2": [
@@ -2612,15 +2650,23 @@ permalink: /ai-tracker/
       id: "ernie-4-5",
       name: "ERNIE 4.5",
       org: "Baidu",
-      date: "2025 active",
-      openness: "open/API mix",
-      type: "official blog",
-      tags: ["multimodal", "Chinese", "foundation"],
+      date: "2025-06",
+      openness: "open weights (Apache 2.0) + API",
+      type: "technical report + official blog",
+      tags: ["MoE", "multimodal", "Chinese", "foundation", "open", "10 variants"],
       status: "active",
-      note: "Baidu ERNIE 4.5 is retained as a China frontier baseline until a newer 2026 model-body report is confirmed.",
-      links: [["Baidu ERNIE", "https://ernie.baidu.com/blog/posts/ernie4.5/"]],
-      methods: ["multimodal foundation"],
-      benchmarks: ["Chinese eval", "multimodal eval"]
+      note: "ERNIE 4.5 is a family of 10 multimodal models: MoE variants with 47B and 3B active parameters (largest 424B total), plus a 0.3B dense model. Heterogeneous MoE architecture with modality-isolated routing. Achieves 47% MFU in pre-training. Surpasses DeepSeek-V3-671B on 22/28 benchmarks. VLMs support thinking and non-thinking modes. All models Apache 2.0.",
+      links: [
+        ["Blog", "https://ernie.baidu.com/blog/posts/ernie4.5/"],
+        ["Technical report", "https://ernie.baidu.com/blog/publication/ERNIE_Technical_Report.pdf"],
+        ["GitHub", "https://github.com/paddlepaddle/ernie"],
+        ["HF 300B-A47B", "https://huggingface.co/baidu/ERNIE-4.5-300B-A47B"],
+        ["HF VL-28B-A3B", "https://huggingface.co/baidu/ERNIE-4.5-VL-28B-A3B-Thinking"],
+        ["AI Studio", "https://aistudio.baidu.com"]
+      ],
+      methods: ["heterogeneous MoE", "modality-isolated routing", "router orthogonal loss", "FP8 training", "SFT", "DPO", "UPO", "convolutional code quantization"],
+      benchmarks: ["IFEval", "SimpleQA", "ChineseSimpleQA", "BBH", "CMATH", "MathVista", "MMMU", "CV-Bench", "RealWorldQA", "22/28 vs DeepSeek-V3"],
+      deepDive: "ernie-4.5"
     },
     {
       id: "openai-gpt-4-1",
@@ -3049,7 +3095,7 @@ permalink: /ai-tracker/
     }
   ];
 
-  const heatmapCompanies = ["OpenAI", "Anthropic", "Google", "Meta", "Z.ai", "DeepSeek", "Alibaba", "Moonshot", "xAI", "Mistral"];
+  const heatmapCompanies = ["OpenAI", "Anthropic", "Google", "Meta", "Z.ai", "DeepSeek", "Alibaba", "Moonshot", "xAI", "Mistral", "Baidu"];
   const heatmapTopics = ["Agent", "Coding", "Reasoning", "Long ctx", "Vision", "Open", "Safety"];
   const heatmapScores = {
     OpenAI: [3, 3, 3, 3, 2, 0, 3],
@@ -3061,7 +3107,8 @@ permalink: /ai-tracker/
     Alibaba: [3, 3, 3, 3, 3, 3, 1],
     Moonshot: [3, 3, 2, 2, 3, 0, 1],
     xAI: [2, 2, 3, 3, 2, 0, 1],
-    Mistral: [3, 3, 3, 1, 1, 3, 1]
+    Mistral: [3, 3, 3, 1, 1, 3, 1],
+    Baidu: [1, 1, 2, 1, 3, 3, 1]
   };
 
   const corpusRecords = [
@@ -3091,7 +3138,8 @@ permalink: /ai-tracker/
     ["apple-afm-3", "Apple Foundation Models 3", "Apple", "2026", "research page", "On-device/private foundation model line; source type remains research page until a full tech report is available.", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
     ["amazon-nova-2", "Amazon Nova 2", "Amazon / AWS", "2025-2026", "AI service card", "Enterprise model line tracked via AWS responsible AI service cards and model docs.", "https://aws.amazon.com/nova/models/"],
     ["mistral-devstral", "Mistral Devstral", "Mistral AI / All Hands AI", "2025-05", "official blog", "Agentic coding LLM scoring 46.8% on SWE-Bench Verified under OpenHands scaffold. Apache 2.0, runs on RTX 4090 / 32GB Mac. Built with All Hands AI for real GitHub issue resolution.", "https://mistral.ai/news/devstral"],
-    ["mistral-magistral", "Mistral Magistral", "Mistral AI", "2026", "official blog", "First Mistral reasoning model: Small (24B, Apache 2.0) and Medium (enterprise). 73.6% AIME 2024, multilingual CoT, training/RL paper. Flash Answers 10x throughput.", "https://mistral.ai/news/magistral"]
+    ["mistral-magistral", "Mistral Magistral", "Mistral AI", "2026", "official blog", "First Mistral reasoning model: Small (24B, Apache 2.0) and Medium (enterprise). 73.6% AIME 2024, multilingual CoT, training/RL paper. Flash Answers 10x throughput.", "https://mistral.ai/news/magistral"],
+    ["ernie-4-5", "ERNIE 4.5 Technical Report", "Baidu / ERNIE Team", "2025-06", "technical report + official blog", "10 multimodal variants: MoE (424B/47B active, 21B/3B active) + 0.3B dense. Heterogeneous MoE with modality-isolated routing, 47% MFU, SFT/DPO/UPO post-training, ERNIEKit + FastDeploy. Apache 2.0.", "https://ernie.baidu.com/blog/posts/ernie4.5/"]
   ];
 
   const peopleRecords = [
@@ -3301,12 +3349,29 @@ permalink: /ai-tracker/
       reports: ["Devstral", "Magistral Small", "Magistral Medium"],
       methods: ["agentic coding scaffold", "reasoning RL", "multi-step logic fine-tuning", "Flash Answers"],
       note: "Mistral's Devstral and Magistral releases are official blog posts with training/RL paper. Devstral is co-developed with All Hands AI. No individual author tables are exposed in the current sources."
+    },
+    {
+      id: "people-baidu",
+      lab: "Baidu / ERNIE Team",
+      cluster: "Chinese frontier + open-source",
+      disclosure: "team-level technical report",
+      count: null,
+      sources: [
+        ["ERNIE 4.5 blog", "https://ernie.baidu.com/blog/posts/ernie4.5/"],
+        ["ERNIE 4.5 technical report", "https://ernie.baidu.com/blog/publication/ERNIE_Technical_Report.pdf"],
+        ["GitHub", "https://github.com/paddlepaddle/ernie"],
+        ["HF models", "https://huggingface.co/baidu"]
+      ],
+      people: ["Baidu ERNIE Team", "PaddlePaddle"],
+      reports: ["ERNIE 4.5 family (10 variants)", "ERNIE X1"],
+      methods: ["heterogeneous MoE", "modality-isolated routing", "UPO", "ERNIEKit", "FastDeploy"],
+      note: "ERNIE 4.5 is credited to 'Baidu-ERNIE-Team' in the technical report citation. No individual author tables are exposed. The GitHub repo and HF hub provide team-level evidence for the open-source release."
     }
   ];
 
   const peopleMatrixRows = [
     ["Full arXiv author tables", "GLM-5: 187 authors; DeepSeek-V4: 319 authors; Kimi K2.5: 326 authors; Qwen3: 61 authors; Qwen3-Coder-Next: 20 authors. These are the highest-confidence personnel lists because they come from formal arXiv metadata.", "GLM / DeepSeek / Kimi / Qwen"],
-    ["Team-only official releases", "GLM-5.1/5.2, Kimi K2.6/K2.7 Code, Qwen3.7-Max, closed-model system cards, Mistral Devstral/Magistral blogs, and enterprise service cards are tracked as team/org releases unless a page explicitly names individuals.", "Z.ai / Moonshot / Qwen / Mistral / Closed labs"],
+    ["Team-only official releases", "GLM-5.1/5.2, Kimi K2.6/K2.7 Code, Qwen3.7-Max, closed-model system cards, Mistral Devstral/Magistral blogs, ERNIE 4.5 team report, and enterprise service cards are tracked as team/org releases unless a page explicitly names individuals.", "Z.ai / Moonshot / Qwen / Mistral / Baidu / Closed labs"],
     ["Method lineage authors", "ReAct, Toolformer, AutoGen, and SWE-agent keep named paper authors so agent methods can be traced across model reports and benchmark harnesses.", "Agent papers"],
     ["Affiliation caution", "The tracker uses publication-time organization or official releasing entity. It does not infer a person's current employer from older papers or social profiles.", "All records"]
   ];
@@ -3503,7 +3568,10 @@ permalink: /ai-tracker/
     ["ReAct", "paper", "https://arxiv.org/abs/2210.03629", "agent reasoning/action foundation"],
     ["SWE-agent", "paper + code", "https://arxiv.org/abs/2405.15793", "software-engineering agent baseline"],
     ["Mistral Devstral", "official blog", "https://mistral.ai/news/devstral", "Agentic coding LLM, SWE-Bench Verified 46.8%, OpenHands/SWE-Agent scaffold, Apache 2.0"],
-    ["Mistral Magistral", "official blog", "https://mistral.ai/news/magistral", "First reasoning model: Small 24B open + Medium enterprise, 73.6% AIME 2024, multilingual CoT, training/RL paper"]
+    ["Mistral Magistral", "official blog", "https://mistral.ai/news/magistral", "First reasoning model: Small 24B open + Medium enterprise, 73.6% AIME 2024, multilingual CoT, training/RL paper"],
+    ["ERNIE 4.5 blog", "official blog", "https://ernie.baidu.com/blog/posts/ernie4.5/", "10 multimodal variants, heterogeneous MoE, modality-isolated routing, 47% MFU, SFT/DPO/UPO, ERNIEKit + FastDeploy, Apache 2.0"],
+    ["ERNIE 4.5 technical report", "technical report", "https://ernie.baidu.com/blog/publication/ERNIE_Technical_Report.pdf", "Full technical report with architecture details, benchmark tables, and training infrastructure"],
+    ["ERNIE 4.5 GitHub", "code", "https://github.com/paddlepaddle/ernie", "Official ERNIE repo with PaddlePaddle training/inference code and ERNIEKit"]
   ];
 
   const pagerState = {};
@@ -3607,7 +3675,8 @@ permalink: /ai-tracker/
       ["GPT-4.1", "OpenAI instruction-following model with 1M context and 54.6% SWE-bench", "coding"],
       ["GPT-5.5", "OpenAI system card 是闭源模型事实入口", "card"],
       ["Mistral Devstral", "agentic coding LLM with All Hands AI, 46.8% SWE-Bench Verified, Apache 2.0", "open"],
-      ["Mistral Magistral", "first reasoning model: Small 24B open + Medium enterprise, 73.6% AIME 2024", "reasoning"]
+      ["Mistral Magistral", "first reasoning model: Small 24B open + Medium enterprise, 73.6% AIME 2024", "reasoning"],
+      ["ERNIE 4.5", "Baidu 10-variant multimodal family: 424B MoE, heterogeneous routing, 47% MFU, Apache 2.0, ERNIEKit + FastDeploy", "open"]
     ];
     document.querySelector("#ops-feed").innerHTML = feed.map((item, index) => `
       <div class="ops-feed-item">
@@ -3865,7 +3934,8 @@ permalink: /ai-tracker/
       ["anthropic", "Anthropic Claude", "Opus 4.8, Fable/Mythos 5, system cards, adaptive thinking"],
       ["minimax", "MiniMax M2/M3", "Forge RL, self-evolution, MSA sparse attention, 1M context"],
       ["llama", "Llama 4 Family", "Scout, Maverick, Behemoth, MoE, 10M context, open weights"],
-      ["mistral", "Mistral Devstral / Magistral", "Agentic coding, reasoning model, open weights, multilingual CoT"]
+      ["mistral", "Mistral Devstral / Magistral", "Agentic coding, reasoning model, open weights, multilingual CoT"],
+      ["ernie", "ERNIE 4.5 Family", "Heterogeneous MoE, multimodal, 10 variants, Apache 2.0, 47% MFU, ERNIEKit + FastDeploy"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
       <button class="ops-layer-button ${id === active ? "active" : ""}" type="button" data-layer="${id}">
@@ -3893,18 +3963,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>Llama 4 Family Deep Dive</h3><p>Meta Llama 4 从 Scout/Maverick（17B active, MoE, 10M context, early fusion multimodal）到 Behemoth（288B active teacher model, 256 experts, in-training）的架构和训练演进。30T+ tokens pre-training, online RL + DPO post-training, synthetic data from Behemoth distillation。所有阶段卡片都挂回 Meta 官方 blog。</p><div class="ops-stage-grid">${(reportDeepDives["llama-4"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "mistral") {
       detail.innerHTML = `<h3>Mistral Devstral / Magistral Deep Dive</h3><p>Mistral 从 Devstral（agentic coding LLM, 46.8% SWE-Bench Verified, 与 All Hands AI 合作）到 Magistral（first reasoning model, Small 24B open + Medium enterprise, 73.6% AIME 2024, multilingual CoT）的演进。所有阶段卡片都挂回 Mistral 官方 blog。</p><div class="ops-stage-grid">${(reportDeepDives["mistral-devstral-magistral"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
-    } else if (active === "openai") {
-      detail.innerHTML = `<h3>OpenAI GPT Family Deep Dive</h3><p>OpenAI 从 GPT-4o（多模态端到端）到 GPT-4.1（instruction following + 1M context）到 GPT-5.5（agentic tool use）的演进路线。所有阶段卡片都挂回官方 release 或 system card。</p><div class="ops-stage-grid">${reportDeepDives["openai-gpt-family"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
-    } else if (active === "anthropic") {
-      detail.innerHTML = `<h3>Anthropic Claude Deep Dive</h3><p>Anthropic 从 Claude 2 到 Claude 3/3.5 到 Claude 4.x 再到 Fable 5 / Mythos 5 的演进。16 个 system card 覆盖完整能力、安全评估和部署决策。Opus 4.8 是当前 agentic coding 前沿；Fable 5 引入 adaptive thinking 和新 tokenizer。所有阶段卡片都挂回 Anthropic system card index 和 API docs。</p><div class="ops-stage-grid">${reportDeepDives["anthropic-claude"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
-    } else if (active === "kimi") {
-      detail.innerHTML = `<h3>Kimi K2.5 / K2.6 / K2.7 Code Deep Dive</h3><p>Kimi 从 K2.5 基线技术报告（326 作者 arXiv 表）到 K2.6 官方技术博客（agent swarms、proactive agents、Claw Groups、benchmark tables）再到 K2.7 Code API 模型文档的演进。所有阶段卡片都挂回 arXiv 或官方来源。</p><div class="ops-stage-grid">${reportDeepDives["kimi-k2-6"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
-    } else if (active === "qwen") {
-      const allDives = [...(reportDeepDives["qwen3-family"] || []), ...(reportDeepDives["qwen3-coder-next"] || [])];
-      detail.innerHTML = `<h3>Qwen3 / Qwen3-Coder-Next Deep Dive</h3><p>Qwen3 从 235B MoE 旗舰（thinking/non-thinking unified mode、thinking budget、119 语言、Apache 2.0）到 Qwen3-Coder-Next 80B/3B-activated coding agent（agentic training、verifiable tasks、executable environments）的演进。所有阶段卡片都挂回 arXiv 论文。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
-    } else if (active === "deepseek") {
-      const allDives = [...(reportDeepDives["deepseek-v3"] || []), ...(reportDeepDives["deepseek-r1"] || []), ...(reportDeepDives["deepseek-v4-pro"] || [])];
-      detail.innerHTML = `<h3>DeepSeek V3 / R1 / V4 Deep Dive</h3><p>DeepSeek 从 V3（671B MoE + FP8 + MTP）到 R1（emergent reasoning via RL）再到 V4（CSA + HCA + 1M context）的架构和训练演进。所有阶段卡片都挂回 arXiv 报告。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
+    } else if (active === "ernie") {
+      detail.innerHTML = `<h3>ERNIE 4.5 Family Deep Dive</h3><p>Baidu ERNIE 4.5 是一个包含 10 个变体的多模态模型家族：MoE 架构（424B total / 47B active 最大版本）、异构模态路由、47% MFU、22/28 benchmark 超越 DeepSeek-V3。VLM 支持 thinking + non-thinking 双模式。所有模型 Apache 2.0 开源，附带 ERNIEKit + FastDeploy 工具链。所有阶段卡片都挂回官方 blog 和技术报告。</p><div class="ops-stage-grid">${(reportDeepDives["ernie-4.5"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else {
       const allDives = [...(reportDeepDives["glm-5"] || []), ...(reportDeepDives["glm-5.2"] || [])];
       detail.innerHTML = `<h3>GLM-5 / GLM-5.2 Report Deep Dive</h3><p>GLM-5 从 vibe coding 到 agentic engineering 的过渡（arXiv 2602.15763），加上 GLM-5.2 的 1M 上下文、IndexCache、slime 和 long-horizon 工程演进。所有阶段卡片都挂回 arXiv 论文和官方博客。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
