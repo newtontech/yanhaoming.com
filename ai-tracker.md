@@ -1463,17 +1463,17 @@ permalink: /ai-tracker/
   <section class="ops-hero" id="top">
     <canvas id="ops-radar" aria-hidden="true"></canvas>
     <div>
-      <div class="ops-kicker">AI Research Intelligence Dashboard / 2026-06-22</div>
+      <div class="ops-kicker">AI Research Intelligence Dashboard / 2026-06-23</div>
       <h1 class="ops-title">AI Research <span>War Room</span></h1>
       <p class="ops-subtitle">
-        一个面向大语言模型、智能体和公司研究动向的情报面板。这里把论文、技术报告、system card、model card、官方发布、代码和权重分开标注，避免把闭源模型的安全卡误写成论文。
+        一个面向大语言模型、智能体和公司研究动向的情报面板。这里把论文、技术报告、system card、model card、官方发布、代码和权重分开标注，避免把闭源模型的安全卡误写成论文。覆盖 GLM、DeepSeek、Kimi、Qwen、Llama、MiniMax、Mistral、GPT、Claude、Gemini、Grok 等系列。
       </p>
       <div class="ops-hero-actions">
         <a class="ops-button" href="#system">进入多层情报系统</a>
         <a class="ops-button ghost" href="#benchmarks">查看 benchmark 雷达</a>
       </div>
       <div class="ops-stat-grid" aria-label="tracker summary">
-        <div class="ops-stat"><strong>80+</strong><span>模型、论文、system card、model card、blog 与报告条目</span></div>
+        <div class="ops-stat"><strong>90+</strong><span>模型、论文、system card、model card、blog 与报告条目</span></div>
         <div class="ops-stat"><strong>2026</strong><span>顶级实验室大模型本体报告 corpus</span></div>
         <div class="ops-stat"><strong>25+</strong><span>benchmark 与训练方法可交叉跳转</span></div>
         <div class="ops-stat"><strong>100%</strong><span>条目附源链接并标注来源类型</span></div>
@@ -2191,6 +2191,44 @@ permalink: /ai-tracker/
         source: "https://arxiv.org/abs/2603.00729"
       }
     ],
+    "mistral-devstral-magistral": [
+      {
+        title: "Devstral: Agentic LLM for Software Engineering",
+        stage: "architecture / release",
+        body: "Devstral is an agentic LLM for software engineering tasks, built under a collaboration between Mistral AI and All Hands AI. It is designed to solve real GitHub issues by running over code agent scaffolds such as OpenHands or SWE-Agent. Devstral scores 46.8% on SWE-Bench Verified under the OpenHands scaffold, outperforming prior open-source SoTA models by more than 6% points. It surpasses DeepSeek-V3-0324 (671B) and Qwen3 232B-A22B under the same test scaffold, and beats GPT-4.1-mini by over 20%.",
+        source: "https://mistral.ai/news/devstral"
+      },
+      {
+        title: "Devstral: Architecture and Deployment",
+        stage: "architecture / deployment",
+        body: "Devstral is light enough to run on a single RTX 4090 or a Mac with 32GB RAM, making it suitable for local deployment, on-device use, and privacy-sensitive enterprise repositories. The API name is devstral-small-2505, priced at $0.1/M input tokens and $0.3/M output tokens — the same as Mistral Small 3.1.",
+        source: "https://mistral.ai/news/devstral"
+      },
+      {
+        title: "Devstral: Open-Weight and Ecosystem",
+        stage: "ecosystem",
+        body: "Released under Apache 2.0 license. Available on HuggingFace, Ollama, Kaggle, Unsloth, and LM Studio. Enterprise deployments support fine-tuning on private codebases, continued pre-training, and distillation. Described as a research preview with a larger agentic coding model forthcoming.",
+        source: "https://mistral.ai/news/devstral"
+      },
+      {
+        title: "Magistral: First Reasoning Model",
+        stage: "architecture / release",
+        body: "Magistral is Mistral AI's first reasoning model, released in two variants: Magistral Small (24B open-weight, Apache 2.0) and Magistral Medium (enterprise). Magistral Medium scores 73.6% on AIME 2024 (90% with majority voting @64). Magistral Small scores 70.7% (83.3% maj@64). Chain-of-thought reasoning works natively across global languages and alphabets including English, French, Spanish, German, Italian, Arabic, Russian, and Simplified Chinese.",
+        source: "https://mistral.ai/news/magistral"
+      },
+      {
+        title: "Magistral: Training and RL",
+        stage: "post-training / RL",
+        body: "The release is supported by a paper covering comprehensive evaluations of Magistral, training infrastructure, reinforcement learning algorithm, and novel observations for training reasoning models. Magistral is fine-tuned for multi-step logic with transparent, traceable thought processes. Flash Answers in Le Chat achieves up to 10x faster token throughput than competitors.",
+        source: "https://mistral.ai/news/magistral"
+      },
+      {
+        title: "Magistral: Enterprise Deployment",
+        stage: "ecosystem / deployment",
+        body: "Magistral Medium is available on Amazon SageMaker, IBM WatsonX, Azure AI, and Google Cloud Marketplace. Suited for regulated industries (legal, finance, healthcare, government) where traceable reasoning meets compliance requirements. Magistral Small self-deployment available via HuggingFace.",
+        source: "https://mistral.ai/news/magistral"
+      }
+    ],
     "llama-4": [
       {
         title: "Llama 4 Scout & Maverick: MoE Architecture",
@@ -2481,15 +2519,22 @@ permalink: /ai-tracker/
       id: "mistral-devstral-magistral",
       name: "Mistral Devstral / Magistral",
       org: "Mistral AI",
-      date: "2025-2026 watch",
-      openness: "open/API mix",
-      type: "official docs + release",
-      tags: ["coding", "reasoning", "open"],
-      status: "watch",
-      note: "Devstral tracks coding/agent releases and Magistral tracks reasoning. The source type is official docs/blog until a model-body paper is confirmed.",
-      links: [["Model docs", "https://docs.mistral.ai/models/overview"], ["Devstral", "https://mistral.ai/news/devstral"], ["Magistral", "https://mistral.ai/news/magistral"]],
-      methods: ["coding post-training", "reasoning tuning"],
-      benchmarks: ["SWE", "reasoning"]
+      date: "2025-05 / 2026",
+      openness: "open weights (Small) + API (Medium)",
+      type: "official blog + paper",
+      tags: ["coding", "agent", "reasoning", "open", "multilingual"],
+      status: "active",
+      note: "Devstral is an agentic coding LLM built with All Hands AI, scoring 46.8% on SWE-Bench Verified (open SoTA under OpenHands scaffold). Magistral is Mistral's first reasoning model: Small (24B, Apache 2.0) and Medium (enterprise). Magistral Medium scores 73.6% on AIME 2024. Both have source-backed official blog releases plus a training/RL paper.",
+      links: [
+        ["Devstral blog", "https://mistral.ai/news/devstral"],
+        ["Magistral blog", "https://mistral.ai/news/magistral"],
+        ["Model docs", "https://docs.mistral.ai/models/overview"],
+        ["HF Devstral", "https://huggingface.co/mistralai/Devstral-Small-2505"],
+        ["HF Magistral Small", "https://huggingface.co/mistralai/Magistral-Small-2506"]
+      ],
+      methods: ["agentic coding scaffold (OpenHands/SWE-Agent)", "reasoning RL", "multi-step logic fine-tuning", "Flash Answers (10x throughput)"],
+      benchmarks: ["SWE-Bench Verified", "AIME 2024", "majority voting @64"],
+      deepDive: "mistral-devstral-magistral"
     },
     {
       id: "minimax-m3",
@@ -3004,7 +3049,7 @@ permalink: /ai-tracker/
     }
   ];
 
-  const heatmapCompanies = ["OpenAI", "Anthropic", "Google", "Meta", "Z.ai", "DeepSeek", "Alibaba", "Moonshot", "xAI"];
+  const heatmapCompanies = ["OpenAI", "Anthropic", "Google", "Meta", "Z.ai", "DeepSeek", "Alibaba", "Moonshot", "xAI", "Mistral"];
   const heatmapTopics = ["Agent", "Coding", "Reasoning", "Long ctx", "Vision", "Open", "Safety"];
   const heatmapScores = {
     OpenAI: [3, 3, 3, 3, 2, 0, 3],
@@ -3015,7 +3060,8 @@ permalink: /ai-tracker/
     DeepSeek: [2, 2, 3, 3, 0, 3, 1],
     Alibaba: [3, 3, 3, 3, 3, 3, 1],
     Moonshot: [3, 3, 2, 2, 3, 0, 1],
-    xAI: [2, 2, 3, 3, 2, 0, 1]
+    xAI: [2, 2, 3, 3, 2, 0, 1],
+    Mistral: [3, 3, 3, 1, 1, 3, 1]
   };
 
   const corpusRecords = [
@@ -3043,7 +3089,9 @@ permalink: /ai-tracker/
     ["xai-grok-build", "Grok Build 0.1", "xAI", "2026", "model docs (early access)", "Fast coding model for agentic coding, 256K context, $1.00/$2.00. Early access; aliases include grok-code-fast.", "https://docs.x.ai/developers/models/grok-build-0.1"],
     ["xai-grok-4-1", "Grok 4.1", "xAI", "2025-11", "model card PDF", "Previous-generation baseline model card (Nov 2025). Knowledge cutoff Nov 2024.", "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf"],
     ["apple-afm-3", "Apple Foundation Models 3", "Apple", "2026", "research page", "On-device/private foundation model line; source type remains research page until a full tech report is available.", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
-    ["amazon-nova-2", "Amazon Nova 2", "Amazon / AWS", "2025-2026", "AI service card", "Enterprise model line tracked via AWS responsible AI service cards and model docs.", "https://aws.amazon.com/nova/models/"]
+    ["amazon-nova-2", "Amazon Nova 2", "Amazon / AWS", "2025-2026", "AI service card", "Enterprise model line tracked via AWS responsible AI service cards and model docs.", "https://aws.amazon.com/nova/models/"],
+    ["mistral-devstral", "Mistral Devstral", "Mistral AI / All Hands AI", "2025-05", "official blog", "Agentic coding LLM scoring 46.8% on SWE-Bench Verified under OpenHands scaffold. Apache 2.0, runs on RTX 4090 / 32GB Mac. Built with All Hands AI for real GitHub issue resolution.", "https://mistral.ai/news/devstral"],
+    ["mistral-magistral", "Mistral Magistral", "Mistral AI", "2026", "official blog", "First Mistral reasoning model: Small (24B, Apache 2.0) and Medium (enterprise). 73.6% AIME 2024, multilingual CoT, training/RL paper. Flash Answers 10x throughput.", "https://mistral.ai/news/magistral"]
   ];
 
   const peopleRecords = [
@@ -3238,12 +3286,27 @@ permalink: /ai-tracker/
       reports: ["Grok 4.3", "Grok 4.20", "Grok Build 0.1", "Grok 4.1"],
       methods: ["always-on reasoning", "Mantle inference engine", "encrypted reasoning content", "agentic tool calling"],
       note: "xAI model records are team-level releases via API docs and AWS model cards. No individual author tables are exposed. The Grok 4.1 model card PDF (Nov 2025) is the earliest source in the current tracker."
+    },
+    {
+      id: "people-mistral",
+      lab: "Mistral AI",
+      cluster: "Open-weight frontier",
+      disclosure: "official blog + training/RL paper",
+      count: null,
+      sources: [
+        ["Devstral blog", "https://mistral.ai/news/devstral"],
+        ["Magistral blog", "https://mistral.ai/news/magistral"]
+      ],
+      people: ["Mistral AI", "All Hands AI (Devstral collaboration)"],
+      reports: ["Devstral", "Magistral Small", "Magistral Medium"],
+      methods: ["agentic coding scaffold", "reasoning RL", "multi-step logic fine-tuning", "Flash Answers"],
+      note: "Mistral's Devstral and Magistral releases are official blog posts with training/RL paper. Devstral is co-developed with All Hands AI. No individual author tables are exposed in the current sources."
     }
   ];
 
   const peopleMatrixRows = [
     ["Full arXiv author tables", "GLM-5: 187 authors; DeepSeek-V4: 319 authors; Kimi K2.5: 326 authors; Qwen3: 61 authors; Qwen3-Coder-Next: 20 authors. These are the highest-confidence personnel lists because they come from formal arXiv metadata.", "GLM / DeepSeek / Kimi / Qwen"],
-    ["Team-only official releases", "GLM-5.1/5.2, Kimi K2.6/K2.7 Code, Qwen3.7-Max, closed-model system cards, and enterprise service cards are tracked as team/org releases unless a page explicitly names individuals.", "Z.ai / Moonshot / Qwen / Closed labs"],
+    ["Team-only official releases", "GLM-5.1/5.2, Kimi K2.6/K2.7 Code, Qwen3.7-Max, closed-model system cards, Mistral Devstral/Magistral blogs, and enterprise service cards are tracked as team/org releases unless a page explicitly names individuals.", "Z.ai / Moonshot / Qwen / Mistral / Closed labs"],
     ["Method lineage authors", "ReAct, Toolformer, AutoGen, and SWE-agent keep named paper authors so agent methods can be traced across model reports and benchmark harnesses.", "Agent papers"],
     ["Affiliation caution", "The tracker uses publication-time organization or official releasing entity. It does not infer a person's current employer from older papers or social profiles.", "All records"]
   ];
@@ -3438,7 +3501,9 @@ permalink: /ai-tracker/
     ["Grok 4.1 model card", "model card PDF", "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf", "xAI previous-generation baseline model card"],
     ["xAI models index", "API docs", "https://docs.x.ai/developers/models", "xAI full model lineup, pricing, capabilities, and alias system"],
     ["ReAct", "paper", "https://arxiv.org/abs/2210.03629", "agent reasoning/action foundation"],
-    ["SWE-agent", "paper + code", "https://arxiv.org/abs/2405.15793", "software-engineering agent baseline"]
+    ["SWE-agent", "paper + code", "https://arxiv.org/abs/2405.15793", "software-engineering agent baseline"],
+    ["Mistral Devstral", "official blog", "https://mistral.ai/news/devstral", "Agentic coding LLM, SWE-Bench Verified 46.8%, OpenHands/SWE-Agent scaffold, Apache 2.0"],
+    ["Mistral Magistral", "official blog", "https://mistral.ai/news/magistral", "First reasoning model: Small 24B open + Medium enterprise, 73.6% AIME 2024, multilingual CoT, training/RL paper"]
   ];
 
   const pagerState = {};
@@ -3540,7 +3605,9 @@ permalink: /ai-tracker/
       ["Qwen3-Coder-Next", "80B/3B-activated coding agent with agentic training and executable environments", "coding"],
       ["DeepSeek V4", "Pro/Flash 支持 1M context，API 与 HF 同步出现", "weights"],
       ["GPT-4.1", "OpenAI instruction-following model with 1M context and 54.6% SWE-bench", "coding"],
-      ["GPT-5.5", "OpenAI system card 是闭源模型事实入口", "card"]
+      ["GPT-5.5", "OpenAI system card 是闭源模型事实入口", "card"],
+      ["Mistral Devstral", "agentic coding LLM with All Hands AI, 46.8% SWE-Bench Verified, Apache 2.0", "open"],
+      ["Mistral Magistral", "first reasoning model: Small 24B open + Medium enterprise, 73.6% AIME 2024", "reasoning"]
     ];
     document.querySelector("#ops-feed").innerHTML = feed.map((item, index) => `
       <div class="ops-feed-item">
@@ -3797,7 +3864,8 @@ permalink: /ai-tracker/
       ["openai", "OpenAI GPT Family", "GPT-4o, GPT-4.1, GPT-5.5 lineage"],
       ["anthropic", "Anthropic Claude", "Opus 4.8, Fable/Mythos 5, system cards, adaptive thinking"],
       ["minimax", "MiniMax M2/M3", "Forge RL, self-evolution, MSA sparse attention, 1M context"],
-      ["llama", "Llama 4 Family", "Scout, Maverick, Behemoth, MoE, 10M context, open weights"]
+      ["llama", "Llama 4 Family", "Scout, Maverick, Behemoth, MoE, 10M context, open weights"],
+      ["mistral", "Mistral Devstral / Magistral", "Agentic coding, reasoning model, open weights, multilingual CoT"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
       <button class="ops-layer-button ${id === active ? "active" : ""}" type="button" data-layer="${id}">
@@ -3823,6 +3891,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>MiniMax M2 / M3 Deep Dive</h3><p>MiniMax 从 M2（229.9B MoE / 9.8B activated + Forge agent-native RL + self-evolution scaffold）到 M3（1M context via MSA sparse attention + native multimodality + $0.60/MTok）的演进。所有阶段卡片都挂回 arXiv 论文和官方博客。</p><div class="ops-stage-grid">${(reportDeepDives["minimax-m2"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "llama") {
       detail.innerHTML = `<h3>Llama 4 Family Deep Dive</h3><p>Meta Llama 4 从 Scout/Maverick（17B active, MoE, 10M context, early fusion multimodal）到 Behemoth（288B active teacher model, 256 experts, in-training）的架构和训练演进。30T+ tokens pre-training, online RL + DPO post-training, synthetic data from Behemoth distillation。所有阶段卡片都挂回 Meta 官方 blog。</p><div class="ops-stage-grid">${(reportDeepDives["llama-4"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
+    } else if (active === "mistral") {
+      detail.innerHTML = `<h3>Mistral Devstral / Magistral Deep Dive</h3><p>Mistral 从 Devstral（agentic coding LLM, 46.8% SWE-Bench Verified, 与 All Hands AI 合作）到 Magistral（first reasoning model, Small 24B open + Medium enterprise, 73.6% AIME 2024, multilingual CoT）的演进。所有阶段卡片都挂回 Mistral 官方 blog。</p><div class="ops-stage-grid">${(reportDeepDives["mistral-devstral-magistral"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "openai") {
       detail.innerHTML = `<h3>OpenAI GPT Family Deep Dive</h3><p>OpenAI 从 GPT-4o（多模态端到端）到 GPT-4.1（instruction following + 1M context）到 GPT-5.5（agentic tool use）的演进路线。所有阶段卡片都挂回官方 release 或 system card。</p><div class="ops-stage-grid">${reportDeepDives["openai-gpt-family"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "anthropic") {
