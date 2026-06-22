@@ -2006,6 +2006,70 @@ permalink: /ai-tracker/
         body: "DeepSeek distills R1's reasoning capabilities into smaller models (1.5B to 70B parameters). The distilled DeepSeek-R1-Distill-Qwen-32B outperforms OpenAI-o1-mini on multiple benchmarks. This demonstrates that reasoning patterns from large RL-trained models can be effectively transferred to compact architectures.",
         source: "https://arxiv.org/abs/2501.12948"
       }
+    ],
+    "qwen3-family": [
+      {
+        title: "Dense + MoE Architecture, 0.6B to 235B",
+        stage: "architecture",
+        body: "Qwen3 includes both dense and Mixture-of-Expert (MoE) architectures, with parameter scales from 0.6B to 235B. The flagship Qwen3-235B-A22B has 235B total parameters with 22B activated per token. The series is designed to advance performance, efficiency, and multilingual capabilities under Apache 2.0.",
+        source: "https://arxiv.org/abs/2505.09388"
+      },
+      {
+        title: "Unified Thinking / Non-Thinking Mode",
+        stage: "inference design",
+        body: "Qwen3's key innovation is integrating thinking mode (complex multi-step reasoning) and non-thinking mode (rapid context-driven responses) into a single unified framework. This eliminates the need to switch between chat-optimized models (e.g., GPT-4o) and dedicated reasoning models (e.g., QwQ-32B), enabling dynamic mode switching based on user queries or chat templates.",
+        source: "https://arxiv.org/abs/2505.09388"
+      },
+      {
+        title: "Thinking Budget Mechanism",
+        stage: "inference / efficiency",
+        body: "Qwen3 introduces a thinking budget mechanism that lets users allocate computational resources adaptively during inference, balancing latency and performance based on task complexity. This allows the same model to handle both quick responses and deep reasoning without switching endpoints.",
+        source: "https://arxiv.org/abs/2505.09388"
+      },
+      {
+        title: "Knowledge Distillation from Flagship to Small Models",
+        stage: "distillation",
+        body: "By leveraging knowledge from flagship models, Qwen3 significantly reduces the computational resources required to build smaller-scale models while ensuring highly competitive performance. This enables the 0.6B-32B dense models and smaller MoE variants to punch above their parameter class.",
+        source: "https://arxiv.org/abs/2505.09388"
+      },
+      {
+        title: "119-Language Multilingual Expansion",
+        stage: "data / multilingual",
+        body: "Compared to Qwen2.5's 29 languages, Qwen3 expands multilingual support to 119 languages and dialects, enhancing global accessibility through improved cross-lingual understanding and generation capabilities.",
+        source: "https://arxiv.org/abs/2505.09388"
+      },
+      {
+        title: "Benchmark Results & Author Table",
+        stage: "evaluation",
+        body: "Qwen3 achieves state-of-the-art results across diverse benchmarks including code generation, mathematical reasoning, and agent tasks, competitive against larger MoE models and proprietary models. The paper lists 61 authors including An Yang, Binyuan Hui, Junyang Lin, and Fan Zhou.",
+        source: "https://arxiv.org/abs/2505.09388"
+      }
+    ],
+    "qwen3-coder-next": [
+      {
+        title: "80B Total / 3B Activated MoE for Coding",
+        stage: "architecture",
+        body: "Qwen3-Coder-Next is an 80-billion-parameter model that activates only 3 billion parameters during inference, enabling strong coding capability with efficient inference. It explores how far strong training recipes can push the capability limits of models with small active parameter footprints.",
+        source: "https://arxiv.org/abs/2603.00729"
+      },
+      {
+        title: "Agentic Training with Executable Environments",
+        stage: "agentic training",
+        body: "The model performs agentic training through large-scale synthesis of verifiable coding tasks paired with executable environments, allowing learning directly from environment feedback via mid-training and reinforcement learning. This is a direct application of the verifiable-trajectory approach seen in MiniMax M2's Forge system, but at a much smaller active parameter scale.",
+        source: "https://arxiv.org/abs/2603.00729"
+      },
+      {
+        title: "SWE-Bench & Terminal-Bench Evaluation",
+        stage: "evaluation",
+        body: "Across agent-centric benchmarks including SWE-Bench and Terminal-Bench, Qwen3-Coder-Next achieves competitive performance relative to its active parameter count. The paper releases both base and instruction-tuned open-weight versions to support research and real-world coding agent development.",
+        source: "https://arxiv.org/abs/2603.00729"
+      },
+      {
+        title: "Alphabetical Author Table (20 Authors)",
+        stage: "people",
+        body: "The paper lists 20 authors alphabetically by last name, including Ruisheng Cao, Mouxiang Chen, Binyuan Hui, Junyang Lin, and Fan Zhou. Several authors overlap with the Qwen3 main technical report, establishing a shared team lineage.",
+        source: "https://arxiv.org/abs/2603.00729"
+      }
     ]
   };
 
@@ -2194,8 +2258,29 @@ permalink: /ai-tracker/
         ["GitHub", "https://github.com/QwenLM/Qwen3-Coder"],
         ["API platform", "https://qwen.ai/apiplatform"]
       ],
-      methods: ["agentic coding", "repository training"],
-      benchmarks: ["SWE", "Terminal Bench", "Codeforces"]
+      methods: ["agentic coding", "repository training", "verifiable coding tasks", "executable environments", "mid-training RL"],
+      benchmarks: ["SWE-Bench", "Terminal-Bench", "Codeforces"],
+      deepDive: "qwen3-coder-next"
+    },
+    {
+      id: "qwen3-235b",
+      name: "Qwen3-235B-A22B",
+      org: "Alibaba / Qwen Team",
+      date: "2025-05",
+      openness: "open weights",
+      type: "paper",
+      tags: ["MoE", "235B", "thinking mode", "119 languages", "open"],
+      status: "paper",
+      note: "Qwen3 is the latest Qwen model family with both dense and MoE architectures from 0.6B to 235B parameters. Key innovations include unified thinking/non-thinking mode, thinking budget mechanism, knowledge distillation from flagship to small models, and 119-language multilingual support. Apache 2.0 licensed.",
+      links: [
+        ["arXiv", "https://arxiv.org/abs/2505.09388"],
+        ["PDF", "https://arxiv.org/pdf/2505.09388"],
+        ["HF", "https://huggingface.co/Qwen/Qwen3-235B-A22B"],
+        ["GitHub", "https://github.com/QwenLM/Qwen3"]
+      ],
+      methods: ["MoE routing", "thinking/non-thinking unified mode", "thinking budget", "knowledge distillation", "multilingual expansion"],
+      benchmarks: ["code generation", "mathematical reasoning", "agent tasks", "multilingual eval"],
+      deepDive: "qwen3-family"
     },
     {
       id: "llama-4",
@@ -2664,8 +2749,9 @@ permalink: /ai-tracker/
     ["deepseek-v4-pro", "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence", "DeepSeek-AI", "2026-04-24", "technical report", "Model-body report for Pro/Flash with CSA, HCA, mHC, Muon, OPD, GRPO, 1M context, and benchmark Tables 6/7.", "https://arxiv.org/html/2606.19348"],
     ["kimi-k2-6", "Kimi K2.6 Tech Blog: Advancing Open-Source Coding", "Moonshot AI", "2026", "official blog", "Official Kimi K2.6 source for coding, agent swarms, proactive agents, Claw Groups, benchmark tables, images, and evaluation footnotes.", "https://www.kimi.com/blog/kimi-k2-6"],
     ["kimi-k2-5", "Kimi K2.5 Technical Report", "Moonshot AI", "2026", "technical report", "Cited by K2.6 footnotes for prompts and benchmark setup; retained as Kimi baseline source.", "https://arxiv.org/pdf/2602.02276"],
+    ["qwen3-235b", "Qwen3 Technical Report", "Alibaba / Qwen Team", "2025-05", "paper", "Dense + MoE family from 0.6B to 235B with unified thinking/non-thinking mode, thinking budget, knowledge distillation, and 119-language support. Apache 2.0. 61 authors.", "https://arxiv.org/abs/2505.09388"],
+    ["qwen3-coder-next", "Qwen3-Coder-Next Technical Report", "Alibaba / Qwen Team", "2026-02", "paper", "80B total / 3B activated MoE specialized for coding agents. Agentic training via verifiable coding tasks + executable environments with mid-training RL. Competitive on SWE-Bench and Terminal-Bench. 20 authors.", "https://arxiv.org/abs/2603.00729"],
     ["qwen-3-7-max", "Qwen3.7-Max", "Alibaba / Qwen", "2026-06", "official blog/docs", "Current Qwen API flagship watch item; kept separate from open Qwen3-Coder records.", "https://qwen.ai/blog?id=qwen3.7"],
-    ["qwen3-coder-next", "Qwen3-Coder / Coder-Next", "Alibaba / Qwen", "2026 watch", "research/code source", "Open Qwen coding line; promoted to paper record when a standalone 2026 model-body paper is confirmed.", "https://github.com/QwenLM/Qwen3-Coder"],
     ["openai-gpt-5-5", "GPT-5.5", "OpenAI", "2026", "system card", "Closed model source is a system card, not a paper.", "https://openai.com/index/gpt-5-5-system-card/"],
     ["openai-gpt-4-1", "GPT-4.1 / mini / nano", "OpenAI", "2025-04", "official release + system card", "Instruction-following model with 1M context, 54.6% SWE-bench Verified, and instruction hierarchy safety eval.", "https://openai.com/index/gpt-4-1/"],
     ["openai-gpt-4o", "GPT-4o / 4o-mini", "OpenAI", "2024-05", "official release", "Natively multimodal model (text + audio + vision end-to-end); 4o-mini replaces GPT-3.5 Turbo.", "https://openai.com/index/hello-gpt-4o/"],
@@ -2730,17 +2816,18 @@ permalink: /ai-tracker/
       id: "people-qwen",
       lab: "Alibaba / Qwen Team",
       cluster: "Open + API frontier",
-      disclosure: "official team release",
-      count: null,
+      disclosure: "full arXiv author tables (Qwen3 + Coder-Next)",
+      count: 61,
       sources: [
+        ["Qwen3 arXiv", "https://arxiv.org/abs/2505.09388"],
+        ["Qwen3-Coder-Next arXiv", "https://arxiv.org/abs/2603.00729"],
         ["Qwen3.7 blog", "https://qwen.ai/blog?id=qwen3.7"],
-        ["Qwen3-Coder GitHub", "https://github.com/QwenLM/Qwen3-Coder"],
-        ["Qwen technical-report hub", "https://github.com/QwenLM/Qwen3"]
+        ["Qwen3-Coder GitHub", "https://github.com/QwenLM/Qwen3-Coder"]
       ],
-      people: ["Qwen Team", "Alibaba Cloud"],
-      reports: ["Qwen3.7-Max", "Qwen3-Coder", "Qwen3 family"],
-      methods: ["coding RL", "agentic coding", "long-context API", "open model release"],
-      note: "Qwen entries are currently tracked as official team releases; individual attribution should be promoted only when a standalone 2026 report exposes an author list."
+      people: ["An Yang", "Binyuan Hui", "Junyang Lin", "Fan Zhou", "Ruisheng Cao", "Mouxiang Chen", "Zeyu Cui", "Jingren Zhou"],
+      reports: ["Qwen3 Technical Report", "Qwen3-Coder-Next", "Qwen3.7-Max", "Qwen3-Coder"],
+      methods: ["MoE routing", "thinking/non-thinking unified mode", "agentic training", "verifiable coding tasks", "knowledge distillation"],
+      note: "Qwen3 Technical Report (arXiv 2505.09388) provides a 61-author table. Qwen3-Coder-Next (arXiv 2603.00729) provides 20 alphabetical authors. Several authors (Binyuan Hui, Junyang Lin, Fan Zhou) appear in both reports, establishing shared team lineage."
     },
     {
       id: "people-openai",
@@ -2856,7 +2943,7 @@ permalink: /ai-tracker/
   ];
 
   const peopleMatrixRows = [
-    ["Full arXiv author tables", "GLM-5: 187 authors; DeepSeek-V4: 319 authors; Kimi K2.5: 326 authors. These are the highest-confidence personnel lists because they come from formal arXiv metadata.", "GLM / DeepSeek / Kimi"],
+    ["Full arXiv author tables", "GLM-5: 187 authors; DeepSeek-V4: 319 authors; Kimi K2.5: 326 authors; Qwen3: 61 authors; Qwen3-Coder-Next: 20 authors. These are the highest-confidence personnel lists because they come from formal arXiv metadata.", "GLM / DeepSeek / Kimi / Qwen"],
     ["Team-only official releases", "GLM-5.1/5.2, Kimi K2.6/K2.7 Code, Qwen3.7-Max, closed-model system cards, and enterprise service cards are tracked as team/org releases unless a page explicitly names individuals.", "Z.ai / Moonshot / Qwen / Closed labs"],
     ["Method lineage authors", "ReAct, Toolformer, AutoGen, and SWE-agent keep named paper authors so agent methods can be traced across model reports and benchmark harnesses.", "Agent papers"],
     ["Affiliation caution", "The tracker uses publication-time organization or official releasing entity. It does not infer a person's current employer from older papers or social profiles.", "All records"]
@@ -3033,6 +3120,8 @@ permalink: /ai-tracker/
     ["GLM-5 co-launch partners", "paper acknowledgement", "https://arxiv.org/html/2602.15763v2", "52 ecosystem partners across open-source communities, inference providers, applications, and AI gateways"],
     ["Agent paper authors", "paper set", "https://arxiv.org/abs/2308.08155", "AutoGen plus ReAct/Toolformer/SWE-agent author lineage"],
     ["Qwen3.7-Max", "official blog + docs", "https://qwen.ai/blog?id=qwen3.7", "latest Qwen API flagship source"],
+    ["Qwen3 Technical Report", "paper", "https://arxiv.org/abs/2505.09388", "Dense + MoE family (0.6B-235B), thinking/non-thinking mode, thinking budget, knowledge distillation, 119 languages"],
+    ["Qwen3-Coder-Next", "paper", "https://arxiv.org/abs/2603.00729", "80B/3B-activated coding agent model with agentic training, verifiable tasks, executable environments, mid-training RL"],
     ["Qwen3-Coder", "code/research", "https://github.com/QwenLM/Qwen3-Coder", "open Qwen coding model line"],
     ["OpenAI GPT-5.5", "system card", "https://openai.com/index/gpt-5-5-system-card/", "closed model system-card source"],
     ["OpenAI GPT-4.1", "official release + system card", "https://openai.com/index/gpt-4-1/", "instruction following, 1M context, coding, and safety eval source"],
@@ -3141,6 +3230,8 @@ permalink: /ai-tracker/
       ["Kimi K2.7 Code", "Kimi 最新 coding model 已进入官方模型列表", "API"],
       ["Qwen3.7-Max", "面向 agent 的 Qwen 旗舰线，阿里云列出 2026-06 快照", "agent"],
       ["GLM-5.2", "Z.ai long-horizon flagship，强调 1M 工程上下文", "long ctx"],
+      ["Qwen3-235B", "open MoE flagship with thinking/non-thinking unified mode, 119 languages, Apache 2.0", "paper"],
+      ["Qwen3-Coder-Next", "80B/3B-activated coding agent with agentic training and executable environments", "coding"],
       ["DeepSeek V4", "Pro/Flash 支持 1M context，API 与 HF 同步出现", "weights"],
       ["GPT-4.1", "OpenAI instruction-following model with 1M context and 54.6% SWE-bench", "coding"],
       ["GPT-5.5", "OpenAI system card 是闭源模型事实入口", "card"]
@@ -3396,6 +3487,7 @@ permalink: /ai-tracker/
       ["glm", "GLM-5 Deep Dive", "Data, RL, eval and Pony Alpha"],
       ["deepseek", "DeepSeek V3/R1/V4", "MoE, GRPO, reasoning RL, CSA, HCA"],
       ["kimi", "Kimi K2.5/K2.6/K2.7", "Agent swarms, coding, MuonClip lineage"],
+      ["qwen", "Qwen3 / Coder-Next", "Thinking mode, MoE, agentic coding, 119 langs"],
       ["openai", "OpenAI GPT Family", "GPT-4o, GPT-4.1, GPT-5.5 lineage"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
@@ -3422,6 +3514,9 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>OpenAI GPT Family Deep Dive</h3><p>OpenAI 从 GPT-4o（多模态端到端）到 GPT-4.1（instruction following + 1M context）到 GPT-5.5（agentic tool use）的演进路线。所有阶段卡片都挂回官方 release 或 system card。</p><div class="ops-stage-grid">${reportDeepDives["openai-gpt-family"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "kimi") {
       detail.innerHTML = `<h3>Kimi K2.5 / K2.6 / K2.7 Code Deep Dive</h3><p>Kimi 从 K2.5 基线技术报告（326 作者 arXiv 表）到 K2.6 官方技术博客（agent swarms、proactive agents、Claw Groups、benchmark tables）再到 K2.7 Code API 模型文档的演进。所有阶段卡片都挂回 arXiv 或官方来源。</p><div class="ops-stage-grid">${reportDeepDives["kimi-k2-6"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
+    } else if (active === "qwen") {
+      const allDives = [...(reportDeepDives["qwen3-family"] || []), ...(reportDeepDives["qwen3-coder-next"] || [])];
+      detail.innerHTML = `<h3>Qwen3 / Qwen3-Coder-Next Deep Dive</h3><p>Qwen3 从 235B MoE 旗舰（thinking/non-thinking unified mode、thinking budget、119 语言、Apache 2.0）到 Qwen3-Coder-Next 80B/3B-activated coding agent（agentic training、verifiable tasks、executable environments）的演进。所有阶段卡片都挂回 arXiv 论文。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "deepseek") {
       const allDives = [...(reportDeepDives["deepseek-v3"] || []), ...(reportDeepDives["deepseek-r1"] || []), ...(reportDeepDives["deepseek-v4-pro"] || [])];
       detail.innerHTML = `<h3>DeepSeek V3 / R1 / V4 Deep Dive</h3><p>DeepSeek 从 V3（671B MoE + FP8 + MTP）到 R1（emergent reasoning via RL）再到 V4（CSA + HCA + 1M context）的架构和训练演进。所有阶段卡片都挂回 arXiv 报告。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
