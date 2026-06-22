@@ -2517,6 +2517,75 @@ permalink: /ai-tracker/
       methods: ["GRPO", "cold-start Long-CoT", "reasoning RL", "self-verification", "distillation"],
       benchmarks: ["AIME 2024", "MATH-500", "LiveCodeBench", "GPQA Diamond"],
       deepDive: "deepseek-r1"
+    },
+    {
+      id: "grok-4-3",
+      name: "Grok 4.3",
+      org: "xAI",
+      date: "2026-06-15",
+      openness: "API",
+      type: "model docs + AWS model card",
+      tags: ["reasoning", "1M context", "tool use", "enterprise", "API"],
+      status: "latest",
+      note: "Grok 4.3 is xAI's current flagship model with always-on configurable reasoning (none/low/medium/high). 1M-token context, text+image input, function calling, structured outputs. Runs on Mantle, a new inference engine on Amazon Bedrock. Launched June 15, 2026. Knowledge cutoff November 2024. Priced at $1.25 input / $2.50 output per 1M tokens. xAI claims lowest hallucination rate and strongest agentic tool calling.",
+      links: [
+        ["xAI docs", "https://docs.x.ai/developers/models/grok-4.3"],
+        ["AWS model card", "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-xai-grok-4-3.html"],
+        ["xAI models page", "https://docs.x.ai/developers/models"]
+      ],
+      methods: ["always-on reasoning", "configurable reasoning effort", "Mantle inference engine", "encrypted reasoning content", "agentic tool calling"],
+      benchmarks: ["non-hallucination rate", "tool calling", "instruction following", "contract review", "financial doc Q&A"]
+    },
+    {
+      id: "grok-4-20",
+      name: "Grok 4.20",
+      org: "xAI",
+      date: "2026",
+      openness: "API",
+      type: "model docs",
+      tags: ["speed", "reasoning", "1M context", "low hallucination", "API"],
+      status: "current",
+      note: "Grok 4.20 is xAI's speed-focused model with industry-leading speed and lowest hallucination rate. Available in reasoning and non-reasoning variants. 1M-token context. Same pricing as Grok 4.3 ($1.25/$2.50). Strict prompt adherence for precise, truthful responses.",
+      links: [
+        ["Reasoning variant", "https://docs.x.ai/developers/models/grok-4.20-0309-reasoning"],
+        ["xAI models page", "https://docs.x.ai/developers/models"]
+      ],
+      methods: ["fast inference", "low hallucination", "prompt adherence", "reasoning/non-reasoning variants"],
+      benchmarks: ["speed benchmarks", "hallucination rate"]
+    },
+    {
+      id: "grok-build-01",
+      name: "Grok Build 0.1",
+      org: "xAI",
+      date: "2026",
+      openness: "API (early access)",
+      type: "model docs",
+      tags: ["coding", "agentic", "fast", "256K context", "API"],
+      status: "early access",
+      note: "Grok Build 0.1 is xAI's fast coding model trained specifically for agentic coding tasks. Currently in early access. 256K-token context (vs 1M for Grok 4.3). Priced at $1.00 input / $2.00 output per 1M tokens — cheaper than the flagship line. Aliases include grok-code-fast.",
+      links: [
+        ["xAI docs", "https://docs.x.ai/developers/models/grok-build-0.1"],
+        ["xAI models page", "https://docs.x.ai/developers/models"]
+      ],
+      methods: ["agentic coding training", "fast inference optimization"],
+      benchmarks: ["agentic coding tasks"]
+    },
+    {
+      id: "grok-4-1",
+      name: "Grok 4.1",
+      org: "xAI",
+      date: "2025-11",
+      openness: "API",
+      type: "model card (PDF)",
+      tags: ["baseline", "reasoning", "previous generation"],
+      status: "baseline",
+      note: "Grok 4.1 model card (November 2025) serves as the previous-generation baseline. The xAI docs API page tracks it as a prior release behind Grok 4.3. Knowledge cutoff November 2024. AWS Bedrock also provides a model card for the 4.1 generation.",
+      links: [
+        ["Model card PDF", "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf"],
+        ["xAI models page", "https://docs.x.ai/developers/models"]
+      ],
+      methods: ["reasoning", "tool use"],
+      benchmarks: ["reasoning", "tool calling"]
     }
   ];
 
@@ -2640,16 +2709,40 @@ permalink: /ai-tracker/
       ]
     },
     {
-      name: "Grok 4.3 / 4.1 baseline",
+      name: "Grok 4.3",
+      org: "xAI",
+      date: "2026-06-15",
+      type: "model docs + AWS model card",
+      tags: ["reasoning", "1M context", "tool use", "enterprise", "API"],
+      note: "Grok 4.3 is xAI flagship. Always-on configurable reasoning (none/low/medium/high), 1M context, Mantle inference engine on Bedrock. $1.25/$2.50 per MTok. Launched June 15, 2026. Knowledge cutoff Nov 2024. Source type is model docs + AWS model card, not a paper.",
+      links: [
+        ["xAI docs", "https://docs.x.ai/developers/models/grok-4.3"],
+        ["AWS model card", "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-xai-grok-4-3.html"],
+        ["xAI models", "https://docs.x.ai/developers/models"]
+      ]
+    },
+    {
+      name: "Grok 4.20",
       org: "xAI",
       date: "2026",
-      type: "API docs + model card",
-      tags: ["reasoning", "tool use", "API"],
-      note: "dmux 研究报告显示 4.1 是上一代 model card 基线，当前 API 线应追踪 Grok 4.3；AWS Bedrock 提供可访问 model card。",
+      type: "model docs",
+      tags: ["speed", "low hallucination", "reasoning variants", "API"],
+      note: "Grok 4.20 is xAI speed-tier model. Reasoning + non-reasoning variants, 1M context, lowest hallucination rate claim. Same pricing as Grok 4.3.",
       links: [
-        ["AWS model card", "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-xai-grok-4-3.html"],
-        ["xAI docs", "https://docs.x.ai/developers/models/grok-4.3"],
-        ["4.1 card PDF", "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf"]
+        ["Reasoning variant", "https://docs.x.ai/developers/models/grok-4.20-0309-reasoning"],
+        ["xAI models", "https://docs.x.ai/developers/models"]
+      ]
+    },
+    {
+      name: "Grok Build 0.1",
+      org: "xAI",
+      date: "2026 early access",
+      type: "model docs",
+      tags: ["coding", "agentic", "fast", "256K context", "API"],
+      note: "Grok Build 0.1 is xAI's fast coding model for agentic coding, in early access. 256K context, $1.00/$2.00 per MTok — cheaper than flagship.",
+      links: [
+        ["xAI docs", "https://docs.x.ai/developers/models/grok-build-0.1"],
+        ["xAI models", "https://docs.x.ai/developers/models"]
       ]
     },
     {
@@ -2774,7 +2867,7 @@ permalink: /ai-tracker/
     }
   ];
 
-  const heatmapCompanies = ["OpenAI", "Anthropic", "Google", "Meta", "Z.ai", "DeepSeek", "Alibaba", "Moonshot"];
+  const heatmapCompanies = ["OpenAI", "Anthropic", "Google", "Meta", "Z.ai", "DeepSeek", "Alibaba", "Moonshot", "xAI"];
   const heatmapTopics = ["Agent", "Coding", "Reasoning", "Long ctx", "Vision", "Open", "Safety"];
   const heatmapScores = {
     OpenAI: [3, 3, 3, 3, 2, 0, 3],
@@ -2784,7 +2877,8 @@ permalink: /ai-tracker/
     "Z.ai": [3, 3, 2, 3, 2, 0, 1],
     DeepSeek: [2, 2, 3, 3, 0, 3, 1],
     Alibaba: [3, 3, 3, 3, 3, 3, 1],
-    Moonshot: [3, 3, 2, 2, 3, 0, 1]
+    Moonshot: [3, 3, 2, 2, 3, 0, 1],
+    xAI: [2, 2, 3, 3, 2, 0, 1]
   };
 
   const corpusRecords = [
@@ -2806,7 +2900,10 @@ permalink: /ai-tracker/
     ["gemini-3-1", "Gemini 3.1 Pro", "Google DeepMind", "2026", "model card", "Closed multimodal reasoning model facts from DeepMind model-card index.", "https://deepmind.google/models/model-cards/gemini-3-1-pro/"],
     ["gemini-2-5-pro", "Gemini 2.5 Pro", "Google DeepMind", "2025-03", "model card PDF", "Hybrid reasoning model with thinking on/off; leads GPQA, AIME 2025 math/science benchmarks.", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf"],
     ["gemini-2-5-flash", "Gemini 2.5 Flash", "Google DeepMind", "2025-04", "model card PDF", "Efficient hybrid reasoning model at $0.30/1M tokens; supports thinking on/off.", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf"],
-    ["xai-grok", "Grok 4.x", "xAI", "2026", "model card/API docs", "Closed model watch item; use model card/API docs, not a paper label.", "https://docs.x.ai/developers/models/grok-4.3"],
+    ["xai-grok-4-3", "Grok 4.3", "xAI", "2026-06-15", "model docs + AWS model card", "xAI flagship with always-on configurable reasoning, 1M context, Mantle inference engine, $1.25/$2.50. Source is model docs and AWS Bedrock model card, not a paper.", "https://docs.x.ai/developers/models/grok-4.3"],
+    ["xai-grok-4-20", "Grok 4.20", "xAI", "2026", "model docs", "Speed-tier model with reasoning + non-reasoning variants, 1M context, lowest hallucination rate claim. Same pricing as Grok 4.3.", "https://docs.x.ai/developers/models/grok-4.20-0309-reasoning"],
+    ["xai-grok-build", "Grok Build 0.1", "xAI", "2026", "model docs (early access)", "Fast coding model for agentic coding, 256K context, $1.00/$2.00. Early access; aliases include grok-code-fast.", "https://docs.x.ai/developers/models/grok-build-0.1"],
+    ["xai-grok-4-1", "Grok 4.1", "xAI", "2025-11", "model card PDF", "Previous-generation baseline model card (Nov 2025). Knowledge cutoff Nov 2024.", "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf"],
     ["apple-afm-3", "Apple Foundation Models 3", "Apple", "2026", "research page", "On-device/private foundation model line; source type remains research page until a full tech report is available.", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
     ["amazon-nova-2", "Amazon Nova 2", "Amazon / AWS", "2025-2026", "AI service card", "Enterprise model line tracked via AWS responsible AI service cards and model docs.", "https://aws.amazon.com/nova/models/"]
   ];
@@ -2986,6 +3083,22 @@ permalink: /ai-tracker/
       reports: ["Apple Foundation Models 3", "Amazon Nova 2"],
       methods: ["on-device privacy", "AI service cards", "enterprise safety"],
       note: "These entries are intentionally team-level because official pages emphasize product/research organizations more than individual author tables."
+    },
+    {
+      id: "people-xai",
+      lab: "xAI",
+      cluster: "Closed frontier",
+      disclosure: "model docs / AWS model card",
+      count: null,
+      sources: [
+        ["xAI models docs", "https://docs.x.ai/developers/models"],
+        ["AWS Grok 4.3 card", "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-xai-grok-4-3.html"],
+        ["Grok 4.1 model card", "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf"]
+      ],
+      people: ["xAI"],
+      reports: ["Grok 4.3", "Grok 4.20", "Grok Build 0.1", "Grok 4.1"],
+      methods: ["always-on reasoning", "Mantle inference engine", "encrypted reasoning content", "agentic tool calling"],
+      note: "xAI model records are team-level releases via API docs and AWS model cards. No individual author tables are exposed. The Grok 4.1 model card PDF (Nov 2025) is the earliest source in the current tracker."
     }
   ];
 
@@ -3178,7 +3291,12 @@ permalink: /ai-tracker/
     ["Gemini 3.1 Pro", "model card", "https://deepmind.google/models/model-cards/gemini-3-1-pro/", "Google DeepMind closed model card"],
     ["Gemini 2.5 Pro", "model card PDF", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf", "Google DeepMind hybrid reasoning model card"],
     ["Gemini 2.5 Flash", "model card PDF", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf", "Google DeepMind efficient hybrid reasoning model card"],
-    ["Grok 4.x", "API docs", "https://docs.x.ai/developers/models/grok-4.3", "xAI closed model watch source"],
+    ["Grok 4.3", "model docs + AWS model card", "https://docs.x.ai/developers/models/grok-4.3", "xAI flagship: always-on reasoning, 1M context, Mantle engine, $1.25/$2.50, launched Jun 2026"],
+    ["Grok 4.3 AWS card", "AWS model card", "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-xai-grok-4-3.html", "Bedrock Mantle endpoint, reasoning effort config, enterprise use cases"],
+    ["Grok 4.20", "model docs", "https://docs.x.ai/developers/models/grok-4.20-0309-reasoning", "xAI speed-tier: reasoning + non-reasoning variants, 1M context, low hallucination"],
+    ["Grok Build 0.1", "model docs (early access)", "https://docs.x.ai/developers/models/grok-build-0.1", "xAI fast coding model for agentic coding, 256K context, $1.00/$2.00"],
+    ["Grok 4.1 model card", "model card PDF", "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf", "xAI previous-generation baseline model card"],
+    ["xAI models index", "API docs", "https://docs.x.ai/developers/models", "xAI full model lineup, pricing, capabilities, and alias system"],
     ["ReAct", "paper", "https://arxiv.org/abs/2210.03629", "agent reasoning/action foundation"],
     ["SWE-agent", "paper + code", "https://arxiv.org/abs/2405.15793", "software-engineering agent baseline"]
   ];
