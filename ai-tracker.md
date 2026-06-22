@@ -2471,6 +2471,12 @@ permalink: /ai-tracker/
         source: "https://aws.amazon.com/nova/models/"
       },
       {
+        title: "Nova 2 Lite: Thinking Effort Control",
+        stage: "inference / reasoning",
+        body: "Nova 2 Lite provides four thinking effort levels (off, low, medium, high) that developers can configure per request. This is analogous to xAI's Grok 4.3 configurable reasoning and Anthropic's adaptive thinking, but with explicit level control rather than invisible budget adjustment. The thinking budget mechanism allows the same model to handle both quick classification tasks and deep multi-step reasoning without switching endpoints.",
+        source: "https://aws.amazon.com/nova/models/"
+      },
+      {
         title: "Nova 2 Pro: Most Intelligent Model for Complex Workloads",
         stage: "architecture / preview",
         body: "Amazon Nova 2 Pro is the most intelligent model in the Nova 2 family, targeting highly complex workloads including advanced multi-step reasoning, long-range planning, and sophisticated agentic workflows. It excels at multi-document analysis, video reasoning, and software migrations. Nova 2 Pro is positioned as the best teacher for model distillation to produce faster, more cost-effective models. Available in preview with early access via Nova Forge customers.",
@@ -2492,6 +2498,12 @@ permalink: /ai-tracker/
         title: "Customization: SFT, RFT, and Nova Forge",
         stage: "ecosystem / customization",
         body: "Nova 2 Lite offers the most comprehensive customization suite for any proprietary model family, available through Amazon Bedrock and Amazon SageMaker AI across the full training lifecycle: pre-training, supervised fine-tuning (SFT), and reinforcement fine-tuning (RFT). Custom Nova models built via SageMaker AI can be deployed with SageMaker Inference for optimal performance, with control over instance types, auto-scaling, and concurrency.",
+        source: "https://aws.amazon.com/nova/models/"
+      },
+      {
+        title: "Nova Forge: Custom Model Training Platform",
+        stage: "ecosystem / training",
+        body: "Nova Forge is Amazon's platform for building custom frontier intelligence models. It provides tools for data preparation, model selection, fine-tuning, and evaluation within the Bedrock ecosystem. Nova 2 Pro is positioned as the best teacher model for distillation through Nova Forge, enabling enterprises to create smaller, faster models tailored to specific domains without training from scratch.",
         source: "https://aws.amazon.com/nova/models/"
       },
       {
@@ -3131,6 +3143,78 @@ permalink: /ai-tracker/
       methods: ["image generation", "image editing", "specialized adapters", "multi-aspect-ratio"],
       benchmarks: ["image quality human eval"],
       deepDive: "apple-afm-3"
+    },
+    {
+      id: "amazon-nova-2-lite",
+      name: "Amazon Nova 2 Lite",
+      org: "Amazon / AWS",
+      date: "2025-12",
+      openness: "API",
+      type: "AI service card + official docs",
+      tags: ["reasoning", "1M context", "thinking effort", "MCP tools", "enterprise", "API"],
+      status: "active",
+      note: "Nova 2 Lite is Amazon's fast, cost-effective reasoning model with developer-configurable thinking effort (off/low/medium/high), 1M-token context, built-in code interpreter, web grounding, and remote MCP tool support. Positioned for customer service, document processing, and business automation. The most customizable proprietary model family via SFT, RFT, and Nova Forge.",
+      links: [
+        ["Nova models", "https://aws.amazon.com/nova/models/"],
+        ["AI service card", "https://docs.aws.amazon.com/ai/responsible-ai/nova-2-lite/overview.html"],
+        ["Getting started", "https://docs.aws.amazon.com/nova/latest/nova2-userguide/getting-started-console.html"],
+        ["Customization", "https://docs.aws.amazon.com/nova/latest/userguide/customization.html"]
+      ],
+      methods: ["configurable thinking effort", "SFT", "RFT", "Nova Forge distillation", "MCP tool support"],
+      benchmarks: ["reasoning", "coding", "document processing", "agent tasks"],
+      deepDive: "amazon-nova-2"
+    },
+    {
+      id: "amazon-nova-2-pro",
+      name: "Amazon Nova 2 Pro",
+      org: "Amazon / AWS",
+      date: "2025-12 (preview)",
+      openness: "API (preview)",
+      type: "official docs",
+      tags: ["reasoning", "planning", "distillation teacher", "enterprise", "API"],
+      status: "preview",
+      note: "Nova 2 Pro is the most intelligent model in the Nova 2 family, targeting complex multi-step reasoning, long-range planning, and agentic workflows. Positioned as the best teacher model for distillation. Excels at multi-document analysis, video reasoning, and software migrations. Available in preview via Nova Forge.",
+      links: [
+        ["Nova models", "https://aws.amazon.com/nova/models/"]
+      ],
+      methods: ["multi-step reasoning", "distillation teacher", "long-range planning"],
+      benchmarks: ["multi-document analysis", "video reasoning", "software migration"],
+      deepDive: "amazon-nova-2"
+    },
+    {
+      id: "amazon-nova-2-sonic",
+      name: "Amazon Nova 2 Sonic",
+      org: "Amazon / AWS",
+      date: "2025-12",
+      openness: "API",
+      type: "official docs",
+      tags: ["speech-to-speech", "multimodal", "7 languages", "cross-modal", "enterprise", "API"],
+      status: "active",
+      note: "Nova 2 Sonic unifies speech understanding and generation in a single model. Supports 7 languages, polyglot voices, voice-text switching within a session, async tool use, and 1M context. Deployed in production for Alexa Greeting (Ring) and Webex AI Receptionist. Claims industry-leading conversational quality.",
+      links: [
+        ["Nova models", "https://aws.amazon.com/nova/models/"],
+        ["Speech docs", "https://docs.aws.amazon.com/nova/latest/userguide/speech.html"]
+      ],
+      methods: ["unified speech understanding/generation", "cross-modal interaction", "async tool use"],
+      benchmarks: ["conversational quality", "speech recognition", "speech generation"],
+      deepDive: "amazon-nova-2"
+    },
+    {
+      id: "amazon-nova-embedding",
+      name: "Amazon Nova Multimodal Embedding",
+      org: "Amazon / AWS",
+      date: "2025-12",
+      openness: "API",
+      type: "official docs",
+      tags: ["embedding", "multimodal", "RAG", "unified", "enterprise", "API"],
+      status: "active",
+      note: "Unified embedding model supporting text, documents, images, video, and audio through a single model. Maps diverse content types into a unified vector space for agentic RAG and semantic search. Replaces multiple specialized embedding models with a single solution for cross-modal retrieval.",
+      links: [
+        ["Nova models", "https://aws.amazon.com/nova/models/"]
+      ],
+      methods: ["unified cross-modal embedding", "agentic RAG"],
+      benchmarks: ["cross-modal retrieval", "semantic search"],
+      deepDive: "amazon-nova-2"
     }
   ];
 
@@ -3853,7 +3937,11 @@ permalink: /ai-tracker/
     ["tool-harness", "Agent harnesses", "SWE/Terminal/browser/MCP tools", "evaluation", "DeepSeek, Kimi, and GLM all use long-step agent harnesses with shell/file/search/browser/tool constraints; details differ by report.", ["deepseek-v4-pro", "kimi-k2-6", "glm-5"], "https://arxiv.org/html/2606.19348"],
     ["ifp", "IFP", "Instruction-Following Pruning", "on-device architecture", "Apple AFM 3 Core Advanced uses IFP to store 20B parameters in NAND flash and activate only 1-4B per request via per-prompt expert selection. Shared + routed experts break the DRAM barrier for consumer hardware.", ["apple-afm-3-core-adv"], "https://machinelearning.apple.com/research/pruning-large-language"],
     ["pt-moe", "PT-MoE", "Parallel-Track Mixture-of-Experts", "server architecture", "Apple AFM 3 Cloud uses PT-MoE combining track parallelism, MoE sparse computation, and interleaved global-local attention. Introduced in 2025 tech report and refined for AFM 3.", ["apple-afm-3-cloud"], "https://machinelearning.apple.com/research/apple-foundation-models-tech-report-2025"],
-    ["apple-qat", "Apple QAT", "Quantization Aware Training for on-device", "optimization", "Apple uses QAT to compress AFM 3 models substantially while maintaining accuracy, targeting Apple silicon deployment. Combined with IFP for on-device models.", ["apple-afm-3-core-adv", "apple-afm-3-cloud"], "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"]
+    ["apple-qat", "Apple QAT", "Quantization Aware Training for on-device", "optimization", "Apple uses QAT to compress AFM 3 models substantially while maintaining accuracy, targeting Apple silicon deployment. Combined with IFP for on-device models.", ["apple-afm-3-core-adv", "apple-afm-3-cloud"], "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+    ["nova-thinking", "Nova Thinking Effort", "Configurable thinking effort (off/low/medium/high)", "inference / reasoning", "Amazon Nova 2 Lite provides developer-configurable thinking effort levels, allowing per-request latency-accuracy tradeoff without switching models. Analogous to xAI Grok 4.3 configurable reasoning but with explicit level control.", ["amazon-nova-2-lite"], "https://aws.amazon.com/nova/models/"],
+    ["nova-forge", "Nova Forge", "Custom model training and distillation platform", "ecosystem / training", "Nova Forge enables enterprises to prepare data, select teacher models (including Nova 2 Pro as distillation source), fine-tune, and evaluate custom models within the Bedrock ecosystem. Supports SFT, RFT, and full lifecycle customization.", ["amazon-nova-2-lite", "amazon-nova-2-pro"], "https://aws.amazon.com/nova/models/"],
+    ["nova-unified-speech", "Nova Unified Speech", "Unified speech understanding and generation", "multimodal / audio", "Nova 2 Sonic merges speech recognition and synthesis into a single model with cross-modal voice-text switching, async tool use, and 7-language polyglot support. Deployed in production for Alexa and Webex.", ["amazon-nova-2-sonic"], "https://aws.amazon.com/nova/models/"],
+    ["nova-mm-embedding", "Nova Multimodal Embedding", "Unified cross-modal embedding for RAG", "embedding / retrieval", "Nova Multimodal Embedding maps text, documents, images, video, and audio into a unified vector space, replacing multiple specialized embedding models with a single cross-modal solution for agentic RAG.", ["amazon-nova-embedding"], "https://aws.amazon.com/nova/models/"]
   ];
 
   const figureAtlas = [
@@ -3942,7 +4030,12 @@ permalink: /ai-tracker/
     ["Apple AFM 3 research page", "research page", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models", "AFM 3 family overview: five models (Core, Core Advanced, Cloud, ADM Cloud, Cloud Pro), IFP architecture, PT-MoE, training, evaluation, responsible AI"],
     ["Apple 2025 tech report", "paper (arXiv)", "https://arxiv.org/abs/2507.13575", "Apple Intelligence Foundation Language Models Tech Report 2025: PT-MoE server model, 3B on-device model, KV-cache sharing, 2-bit QAT, Foundation Models framework"],
     ["Apple IFP paper", "paper", "https://machinelearning.apple.com/research/pruning-large-language", "Instruction-Following Pruning technique used by AFM 3 Core Advanced for sparse on-device architecture"],
-    ["Apple PCC expansion", "blog", "https://security.apple.com/blog/expanding-pcc/", "Private Cloud Compute expansion to NVIDIA GPUs in Google Cloud for AFM 3 Cloud Pro"]
+    ["Apple PCC expansion", "blog", "https://security.apple.com/blog/expanding-pcc/", "Private Cloud Compute expansion to NVIDIA GPUs in Google Cloud for AFM 3 Cloud Pro"],
+    ["Amazon Nova 2 models", "AI service card + official docs", "https://aws.amazon.com/nova/models/", "Nova 2 family: Lite (reasoning, 1M context, thinking effort), Pro (preview, distillation teacher), Sonic (speech-to-speech), Multimodal Embedding"],
+    ["Nova 2 Lite responsible AI", "AI service card", "https://docs.aws.amazon.com/ai/responsible-ai/nova-2-lite/overview.html", "Responsible AI documentation for Nova 2 Lite"],
+    ["Nova 2 customization", "official docs", "https://docs.aws.amazon.com/nova/latest/userguide/customization.html", "SFT, RFT, and Nova Forge customization via Bedrock and SageMaker AI"],
+    ["Nova 2 speech", "official docs", "https://docs.aws.amazon.com/nova/latest/userguide/speech.html", "Nova 2 Sonic speech-to-speech model documentation"],
+    ["Nova 2 agents", "official docs", "https://docs.aws.amazon.com/nova/latest/userguide/agents.html", "Nova 2 agent capabilities and MCP tool support"]
   ];
 
   const pagerState = {};
@@ -4049,7 +4142,8 @@ permalink: /ai-tracker/
       ["Mistral Magistral", "first reasoning model: Small 24B open + Medium enterprise, 73.6% AIME 2024", "reasoning"],
       ["ERNIE 4.5", "Baidu 10-variant multimodal family: 424B MoE, heterogeneous routing, 47% MFU, Apache 2.0, ERNIEKit + FastDeploy", "open"],
       ["Apple AFM 3", "Five-model family: IFP sparse on-device (20B/1-4B active), PT-MoE server, PCC to NVIDIA GPU, Google collab", "on-device"],
-      ["Apple PCC + NVIDIA", "Private Cloud Compute extended to NVIDIA GPUs in Google Cloud for AFM 3 Cloud Pro", "infra"]
+      ["Apple PCC + NVIDIA", "Private Cloud Compute extended to NVIDIA GPUs in Google Cloud for AFM 3 Cloud Pro", "infra"],
+      ["Amazon Nova 2", "Lite reasoning + Pro distillation + Sonic speech + Multimodal Embedding, Nova Forge customization, Bedrock + SageMaker", "enterprise"]
     ];
     document.querySelector("#ops-feed").innerHTML = feed.map((item, index) => `
       <div class="ops-feed-item">
@@ -4311,7 +4405,8 @@ permalink: /ai-tracker/
       ["ernie", "ERNIE 4.5 Family", "Heterogeneous MoE, multimodal, 10 variants, Apache 2.0, 47% MFU, ERNIEKit + FastDeploy"],
       ["hunyuan", "Hunyuan T1 / TurboS / A13B", "Hybrid-Transformer-Mamba MoE, reasoning RL, 2x decoding speed, open A13B"],
       ["grok", "xAI Grok Family", "Grok 4.3 / 4.20 / Build 0.1, configurable reasoning, Mantle engine, encrypted CoT"],
-      ["apple", "Apple AFM 3 Family", "IFP sparse on-device, PT-MoE server, Private Cloud Compute, 5 models, Google/NVIDIA collab"]
+      ["apple", "Apple AFM 3 Family", "IFP sparse on-device, PT-MoE server, Private Cloud Compute, 5 models, Google/NVIDIA collab"],
+      ["nova", "Amazon Nova 2 Family", "Lite reasoning, Pro distillation, Sonic speech, Multimodal Embedding, Nova Forge customization"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
       <button class="ops-layer-button ${id === active ? "active" : ""}" type="button" data-layer="${id}">
@@ -4347,6 +4442,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>xAI Grok Deep Dive</h3><p>xAI Grok 家族从 Grok 4.1（previous-gen model card PDF）到 Grok 4.3（flagship, always-on configurable reasoning, 4 levels, Mantle engine on Bedrock, encrypted CoT）到 Grok 4.20（speed tier, low hallucination, reasoning + non-reasoning variants）再到 Grok Build 0.1（fast coding model, 256K context, $1.00/$2.00, early access）的演进。所有阶段卡片都挂回 xAI 开发者文档和 AWS Bedrock model card。当前 Grok 家族没有 arXiv 论文——source type 精确标注为 model docs / model card / official release。</p><div class="ops-stage-grid">${(reportDeepDives["xai-grok"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "apple") {
       detail.innerHTML = `<h3>Apple AFM 3 Family Deep Dive</h3><p>Apple 第三代 Foundation Models 是五个模型的家族：两个 on-device（AFM 3 Core 3B dense + AFM 3 Core Advanced 20B sparse/1-4B active via IFP）和三个 server（AFM 3 Cloud PT-MoE、ADM 3 Cloud image、AFM 3 Cloud Pro on NVIDIA GPU）。与 Google 合作构建；Private Cloud Compute 保证用户数据不存储。IFP 架构突破 DRAM 限制，PT-MoE 结合 track parallelism + MoE + interleaved global-local attention。Human eval 显示 AFM 3 Core 在 45.6% prompt 上优于 2025 baseline，AFM 3 Cloud 在 64.7% 上优于 baseline。TTS MOS 4.15。PCC 扩展到 NVIDIA GPU 是首个 Apple 基础模型运行在 Apple 硅之外。所有阶段卡片都挂回 Apple ML 研究页面和 2025 tech report。</p><div class="ops-stage-grid">${(reportDeepDives["apple-afm-3"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
+    } else if (active === "nova") {
+      detail.innerHTML = `<h3>Amazon Nova 2 Family Deep Dive</h3><p>Amazon Nova 2 是一个多模型家族：Lite（fast reasoning, 1M context, configurable thinking effort, MCP tools）、Pro（preview, most intelligent, distillation teacher）、Sonic（unified speech-to-speech, 7 languages, cross-modal）和 Multimodal Embedding（unified RAG across text/image/video/audio）。Nova Forge 提供最全面的 proprietary model 定制套件：SFT、RFT 和 SageMaker AI deployment。Enterprise partners include LangChain, Cisco/Webex, Siemens, Securonix, and AWS Transform。所有阶段卡片都挂回 AWS 官方 model docs 和 AI service card。</p><div class="ops-stage-grid">${(reportDeepDives["amazon-nova-2"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else {
       const allDives = [...(reportDeepDives["glm-5"] || []), ...(reportDeepDives["glm-5.2"] || [])];
       detail.innerHTML = `<h3>GLM-5 / GLM-5.2 Report Deep Dive</h3><p>GLM-5 从 vibe coding 到 agentic engineering 的过渡（arXiv 2602.15763），加上 GLM-5.2 的 1M 上下文、IndexCache、slime 和 long-horizon 工程演进。所有阶段卡片都挂回 arXiv 论文和官方博客。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
