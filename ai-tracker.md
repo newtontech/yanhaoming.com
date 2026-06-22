@@ -2412,6 +2412,56 @@ permalink: /ai-tracker/
         body: "The xAI model lineup is source-tracked across three tiers: (1) Grok 4.1 has a formal PDF model card — closest to the Anthropic system card format. (2) Grok 4.3 and 4.20 have xAI developer docs + AWS Bedrock model cards — equivalent to API documentation with safety info. (3) Grok Build 0.1 is early-access model docs only. None of the current Grok models have a peer-reviewed paper or arXiv preprint. The tracker labels each source type accurately to avoid misclassifying docs as papers.",
         source: "https://docs.x.ai/developers/models"
       }
+    ],
+    "apple-afm-3": [
+      {
+        title: "AFM 3 Family: Five Models Across On-Device and Server",
+        stage: "architecture / release",
+        body: "Apple's third-generation Foundation Models (AFM 3) is a family of five models custom-built in collaboration with Google. Two on-device models (AFM 3 Core at 3B dense, AFM 3 Core Advanced at 20B sparse with 1-4B active) and three server models (AFM 3 Cloud, ADM 3 Cloud for image, AFM 3 Cloud Pro for agentic tool use). All on-device and most server models are optimized for Apple silicon; AFM 3 Cloud Pro runs on NVIDIA GPUs in Google Cloud via extended Private Cloud Compute.",
+        source: "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"
+      },
+      {
+        title: "AFM 3 Core Advanced: Instruction-Following Pruning Architecture",
+        stage: "architecture",
+        body: "AFM 3 Core Advanced introduces a novel sparsely activated architecture built on Instruction-Following Pruning (IFP). The full 20B model is stored in flash memory (NAND); a lightweight dense block selects a fixed set of experts per prompt, periodically reselecting during generation. High-percentage always-active 'shared experts' plus input-dependent 'routed experts' swapped into DRAM only when needed. This breaks the DRAM barrier that limits traditional MoE on consumer hardware, enabling inference-time elasticity — the model size scales per request without managing an ensemble.",
+        source: "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"
+      },
+      {
+        title: "AFM 3 Cloud: PT-MoE Server Foundation",
+        stage: "architecture / server",
+        body: "AFM 3 Cloud implements Parallel-Track Mixture-of-Experts (PT-MoE), building on the 2025 tech report foundation. PT-MoE combines track parallelism, mixture-of-experts sparse computation, and interleaved global-local attention. The architecture stabilizes training and improves recall within the context window for complex server-side queries. Optimized for Apple silicon Private Cloud Compute; user data is never stored or shared.",
+        source: "https://machinelearning.apple.com/research/apple-foundation-models-tech-report-2025"
+      },
+      {
+        title: "ADM 3 Cloud: Image Generation and Editing",
+        stage: "multimodal / image",
+        body: "ADM 3 Cloud handles image creation, editing, and Genmoji. It generalizes across aspect ratios and resolutions, draws on the broader AFM family for guidance, and uses specialized adapters for downstream tasks (Spatial Reframing in Photos, touch-based modifications, Image Playground personalization). The base model natively handles creation, editing, and Genmoji without task-specific fine-tuning.",
+        source: "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"
+      },
+      {
+        title: "Training: Shared Foundation → Specialized → Multi-stage RL",
+        stage: "training",
+        body: "All five AFM 3 models share a common initial foundation before specializing for their architectures and use cases. Pre-training was significantly scaled on cloud TPU accelerators. Multimodal capabilities (audio, image understanding, long-context reasoning, visual generation) were added as specialization stages. Post-training combines supervised fine-tuning with multi-stage reinforcement learning on a new asynchronous platform. Quantization Aware Training compresses models for target hardware while maintaining accuracy.",
+        source: "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"
+      },
+      {
+        title: "Evaluation: Human Grading Across Text, Image, and Audio",
+        stage: "evaluation",
+        body: "In-house human graders evaluate along Instruction Following, Truthfulness, Presentation, and Image Understanding dimensions. AFM 3 Core preferred on 45.6% of text prompts vs 23.3% for 2025 baseline. AFM 3 Cloud preferred on 64.7% vs 8.7% — a generational leap. AFM 3 Core Advanced achieves 4.15 MOS for TTS (vs 3.87 production baseline) and 4.24 on conversational text. Dictation shows 44.7% vs 17.6% preference on Overall Quality. AFM 3 Cloud Pro adds ~10% relative improvement over AFM 3 Cloud on text, ~14% on math.",
+        source: "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"
+      },
+      {
+        title: "Responsible AI and Privacy Architecture",
+        stage: "safety / privacy",
+        body: "AFM 3 runs exclusively on-device and on Private Cloud Compute. Training uses publicly available data, licensed/purchased data, open-sourced data, dedicated studies, and synthetic data — never user private data or interactions. Web publishers can opt out. Safety: multilingual post-training alignment, language-specific guardrail models, human red teaming by native speakers across supported locales. Four Responsible AI principles guide development: empower users, represent users globally, design with care, protect privacy.",
+        source: "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"
+      },
+      {
+        title: "Private Cloud Compute: NVIDIA Extension via Google Cloud",
+        stage: "infrastructure",
+        body: "For AFM 3 Cloud Pro, Apple worked with Google and NVIDIA to extend Private Cloud Compute to NVIDIA GPUs in Google Cloud, maintaining the same privacy guarantees. This is a notable infrastructure expansion — AFM 3 Cloud Pro is the first Apple foundation model running outside Apple's own silicon, enabled by the PCC trust architecture.",
+        source: "https://security.apple.com/blog/expanding-pcc/"
+      }
     ]
   };
 
@@ -2969,6 +3019,80 @@ permalink: /ai-tracker/
       ],
       methods: ["reasoning", "tool use"],
       benchmarks: ["reasoning", "tool calling"]
+    },
+    {
+      id: "apple-afm-3-core-adv",
+      name: "AFM 3 Core Advanced",
+      org: "Apple",
+      date: "2026-06",
+      openness: "on-device (closed)",
+      type: "research page",
+      tags: ["on-device", "sparse", "20B", "1-4B active", "IFP", "multimodal"],
+      status: "latest",
+      note: "AFM 3 Core Advanced is Apple's most powerful on-device model: 20B parameters with 1-4B active at inference via Instruction-Following Pruning (IFP). Full model stored in NAND flash; per-prompt expert selection with shared + routed experts. Natively multimodal (expressive voices, high-accuracy dictation). Optimized for Apple silicon. TTS MOS 4.15 (vs 3.87 production baseline).",
+      links: [
+        ["AFM 3 page", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+        ["2025 tech report", "https://machinelearning.apple.com/research/apple-foundation-models-tech-report-2025"],
+        ["IFP paper", "https://machinelearning.apple.com/research/pruning-large-language"]
+      ],
+      methods: ["Instruction-Following Pruning (IFP)", "sparse expert routing", "flash-to-DRAM expert swap", "shared + routed experts", "QAT"],
+      benchmarks: ["human eval text", "image understanding", "TTS MOS", "dictation"],
+      figures: ["apple-afm3-arch", "apple-afm3-text-eval", "apple-afm3-image-eval", "apple-afm3-dictation-eval"],
+      deepDive: "apple-afm-3"
+    },
+    {
+      id: "apple-afm-3-cloud",
+      name: "AFM 3 Cloud",
+      org: "Apple",
+      date: "2026-06",
+      openness: "PCC server (closed)",
+      type: "research page + 2025 tech report",
+      tags: ["server", "PT-MoE", "Private Cloud Compute", "Apple silicon", "multimodal"],
+      status: "latest",
+      note: "AFM 3 Cloud is Apple's server-side workhorse built on Parallel-Track MoE (PT-MoE). Optimized for speed, efficiency, and performance on Private Cloud Compute. User data never stored or shared. Preferred on 64.7% of text prompts vs 8.7% for 2025 baseline. ~36% relative improvement in overall response satisfaction.",
+      links: [
+        ["AFM 3 page", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+        ["2025 tech report", "https://machinelearning.apple.com/research/apple-foundation-models-tech-report-2025"],
+        ["arXiv 2025", "https://arxiv.org/abs/2507.13575"]
+      ],
+      methods: ["PT-MoE", "track parallelism", "interleaved global-local attention", "multi-stage RL", "QAT", "Private Cloud Compute"],
+      benchmarks: ["human eval text", "image understanding", "instruction following"],
+      deepDive: "apple-afm-3"
+    },
+    {
+      id: "apple-afm-3-cloud-pro",
+      name: "AFM 3 Cloud Pro",
+      org: "Apple / Google / NVIDIA",
+      date: "2026-06",
+      openness: "PCC-NVIDIA (closed)",
+      type: "research page",
+      tags: ["server", "agentic", "reasoning", "NVIDIA GPU", "Google Cloud"],
+      status: "latest",
+      note: "AFM 3 Cloud Pro is Apple's most capable server model, powering agentic tool use and complex reasoning. First Apple foundation model running on NVIDIA GPUs in Google Cloud via extended Private Cloud Compute. ~10% relative improvement over AFM 3 Cloud on text; ~14% on math. Optimized for NVIDIA GPUs (not Apple silicon).",
+      links: [
+        ["AFM 3 page", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+        ["PCC expansion", "https://security.apple.com/blog/expanding-pcc/"]
+      ],
+      methods: ["agentic tool use", "complex reasoning", "NVIDIA GPU optimization", "extended PCC"],
+      benchmarks: ["math", "agentic tool use", "complex reasoning"],
+      deepDive: "apple-afm-3"
+    },
+    {
+      id: "apple-adm-3-cloud",
+      name: "ADM 3 Cloud (Image)",
+      org: "Apple",
+      date: "2026-06",
+      openness: "PCC server (closed)",
+      type: "research page",
+      tags: ["image generation", "image editing", "Genmoji", "multimodal"],
+      status: "latest",
+      note: "ADM 3 Cloud handles image creation, editing, and Genmoji. Generalizes across aspect ratios and resolutions. Uses specialized adapters for Spatial Reframing, touch-based modifications, and Image Playground personalization. Base model natively handles creation, editing, and Genmoji.",
+      links: [
+        ["AFM 3 page", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"]
+      ],
+      methods: ["image generation", "image editing", "specialized adapters", "multi-aspect-ratio"],
+      benchmarks: ["image quality human eval"],
+      deepDive: "apple-afm-3"
     }
   ];
 
@@ -3135,13 +3259,16 @@ permalink: /ai-tracker/
       name: "Apple Foundation Models 3",
       org: "Apple",
       date: "2026-06",
-      type: "research page",
-      tags: ["on-device", "privacy", "closed"],
-      note: "Apple AFM 3 是 Apple Intelligence 路线的最新研究入口；完整技术报告需要后续跟踪。",
+      type: "research page + 2025 tech report",
+      tags: ["on-device", "sparse", "Private Cloud Compute", "PT-MoE", "IFP"],
+      note: "Apple AFM 3 是五个模型的家族：两个 on-device（Core 3B dense + Core Advanced 20B sparse/1-4B active via IFP）和三个 server（Cloud PT-MoE、ADM Cloud image、Cloud Pro on NVIDIA GPU）。与 Google 合作构建；Private Cloud Compute 保证用户数据不存储。2025 tech report（arXiv 2507.13575）提供 PT-MoE 架构细节；2026-06 研究页面提供 AFM 3 全家族信息。",
       links: [
-        ["AFM 3", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
-        ["2025 report", "https://machinelearning.apple.com/research/apple-foundation-models-tech-report-2025"]
-      ]
+        ["AFM 3 page", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+        ["2025 tech report", "https://machinelearning.apple.com/research/apple-foundation-models-tech-report-2025"],
+        ["arXiv 2025", "https://arxiv.org/abs/2507.13575"],
+        ["PCC expansion", "https://security.apple.com/blog/expanding-pcc/"]
+      ],
+      deepDive: "apple-afm-3"
     },
     {
       name: "Amazon Nova 2",
@@ -3253,7 +3380,7 @@ permalink: /ai-tracker/
     }
   ];
 
-  const heatmapCompanies = ["OpenAI", "Anthropic", "Google", "Meta", "Z.ai", "DeepSeek", "Alibaba", "Moonshot", "xAI", "Mistral", "Baidu"];
+  const heatmapCompanies = ["OpenAI", "Anthropic", "Google", "Meta", "Z.ai", "DeepSeek", "Alibaba", "Moonshot", "xAI", "Mistral", "Baidu", "Apple"];
   const heatmapTopics = ["Agent", "Coding", "Reasoning", "Long ctx", "Vision", "Open", "Safety"];
   const heatmapScores = {
     OpenAI: [3, 3, 3, 3, 2, 0, 3],
@@ -3266,7 +3393,8 @@ permalink: /ai-tracker/
     Moonshot: [3, 3, 2, 2, 3, 0, 1],
     xAI: [2, 2, 3, 3, 2, 0, 1],
     Mistral: [3, 3, 3, 1, 1, 3, 1],
-    Baidu: [1, 1, 2, 1, 3, 3, 1]
+    Baidu: [1, 1, 2, 1, 3, 3, 1],
+    Apple: [1, 1, 2, 1, 3, 0, 3]
   };
 
   const corpusRecords = [
@@ -3300,7 +3428,10 @@ permalink: /ai-tracker/
     ["ernie-4-5", "ERNIE 4.5 Technical Report", "Baidu / ERNIE Team", "2025-06", "technical report + official blog", "10 multimodal variants: MoE (424B/47B active, 21B/3B active) + 0.3B dense. Heterogeneous MoE with modality-isolated routing, 47% MFU, SFT/DPO/UPO post-training, ERNIEKit + FastDeploy. Apache 2.0.", "https://ernie.baidu.com/blog/posts/ernie4.5/"],
     ["hunyuan-t1", "Hunyuan-T1 Reasoning Model", "Tencent Hunyuan", "2025-03-21", "official release + GitHub docs", "Reasoning model built on TurboS base. Hybrid-Transformer-Mamba MoE architecture. 96.7% RL compute. MMLU-PRO 87.2, GPQA-diamond 69.3, LiveCodeBench 64.9, MATH-500 96.2, ArenaHard 91.9. 2x decoding speed on long sequences.", "https://tencent.github.io/llm.hunyuan.T1/README_EN.html"],
     ["hunyuan-turbos", "Hunyuan-TurboS Technical Report", "Tencent Hunyuan", "2025-03", "paper + official announcement", "First ultra-large Hybrid-Transformer-Mamba MoE model. Integrates Transformer contextual processing with Mamba2 speed and memory efficiency. Long-sequence optimization with 2x decoding speed.", "https://arxiv.org/pdf/2505.15431"],
-    ["hunyuan-a13b", "Hunyuan-A13B Open-Source MoE", "Tencent Hunyuan", "2025-06", "paper + code", "80B total / 13B active open-source MoE. First open-source hybrid reasoning model at 13B active level. Fine-grained MoE with strong reasoning and long-context understanding.", "https://huggingface.co/tencent/Hunyuan-A13B-Instruct"]
+    ["hunyuan-a13b", "Hunyuan-A13B Open-Source MoE", "Tencent Hunyuan", "2025-06", "paper + code", "80B total / 13B active open-source MoE. First open-source hybrid reasoning model at 13B active level. Fine-grained MoE with strong reasoning and long-context understanding.", "https://huggingface.co/tencent/Hunyuan-A13B-Instruct"],
+    ["apple-afm-3", "Introducing the Third Generation of Apple Foundation Models", "Apple", "2026-06", "research page", "Five-model AFM 3 family: Core (3B dense), Core Advanced (20B sparse/1-4B active via IFP), Cloud (PT-MoE), ADM Cloud (image), Cloud Pro (NVIDIA GPU). Built with Google. Private Cloud Compute. Human eval, TTS MOS 4.15, dictation. Source type is research page, not paper.", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+    ["apple-afm-2025", "Apple Intelligence Foundation Language Models Tech Report 2025", "Apple", "2025-07", "paper (arXiv 2507.13575)", "3B on-device model with KV-cache sharing and 2-bit QAT; server PT-MoE model with track parallelism and interleaved global-local attention. Trained on multilingual multimodal data. Foundation Models framework with guided generation and LoRA.", "https://arxiv.org/abs/2507.13575"],
+    ["apple-pcc-expansion", "Expanding Private Cloud Compute to NVIDIA GPUs", "Apple / Google / NVIDIA", "2026-06", "blog", "PCC extension to NVIDIA GPUs in Google Cloud for AFM 3 Cloud Pro. Maintains same privacy guarantees. First Apple foundation model outside Apple silicon.", "https://security.apple.com/blog/expanding-pcc/"]
   ];
 
   const peopleRecords = [
@@ -3467,18 +3598,21 @@ permalink: /ai-tracker/
     {
       id: "people-apple-amazon",
       lab: "Apple / Amazon",
-      cluster: "Enterprise and on-device",
-      disclosure: "research page / service card",
+      cluster: "Enterprise, on-device, and Private Cloud Compute",
+      disclosure: "research page + 2025 tech report (arXiv) / service card",
       count: null,
       sources: [
-        ["Apple Foundation Models 3", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+        ["Apple AFM 3 page", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+        ["Apple 2025 tech report", "https://arxiv.org/abs/2507.13575"],
+        ["Apple IFP paper", "https://machinelearning.apple.com/research/pruning-large-language"],
+        ["Apple PCC expansion", "https://security.apple.com/blog/expanding-pcc/"],
         ["Amazon Nova models", "https://aws.amazon.com/nova/models/"],
         ["AWS AI service cards", "https://docs.aws.amazon.com/ai/responsible-ai/"]
       ],
-      people: ["Apple Machine Learning Research", "Amazon AGI", "AWS Responsible AI"],
-      reports: ["Apple Foundation Models 3", "Amazon Nova 2"],
-      methods: ["on-device privacy", "AI service cards", "enterprise safety"],
-      note: "These entries are intentionally team-level because official pages emphasize product/research organizations more than individual author tables."
+      people: ["Apple Machine Learning Research", "Apple / Google (AFM 3 collaboration)", "Apple / Google / NVIDIA (PCC expansion)", "Amazon AGI", "AWS Responsible AI"],
+      reports: ["Apple AFM 3 (5 models)", "Apple 2025 Tech Report (PT-MoE)", "Amazon Nova 2"],
+      methods: ["IFP (Instruction-Following Pruning)", "PT-MoE", "Private Cloud Compute", "QAT", "on-device sparse routing", "AI service cards", "enterprise safety"],
+      note: "Apple AFM 3 is a five-model family with rich source backing: research page (2026-06), 2025 tech report on arXiv (PT-MoE), IFP paper, and PCC expansion blog. Built in collaboration with Google; AFM 3 Cloud Pro extends PCC to NVIDIA GPUs. Apple entries remain team-level — no individual author tables exposed. Amazon Nova 2 is tracked via AWS AI service cards."
     },
     {
       id: "people-xai",
@@ -3673,7 +3807,10 @@ permalink: /ai-tracker/
     ["forge-rl", "Forge RL", "Agent-native reinforcement learning", "post-training / RL", "MiniMax M2's Forge system adapts to long-horizon agent trajectories with windowed-FIFO scheduling, prefix-tree merging, and inference optimization. Supports both white-box and black-box agent decoupling.", ["minimax-m2", "minimax-m3"], "https://arxiv.org/abs/2605.26494"],
     ["msa", "MSA", "Mini Sparse Attention", "inference / architecture", "MiniMax M3 uses MSA for 1M-token context with 15.6x faster decoding at 1M tokens compared to dense attention baselines.", ["minimax-m3"], "https://www.minimax.io/blog/minimax-m3"],
     ["self-evolution", "Self-evolution scaffold", "Autonomous training-run debugging", "agentic training", "MiniMax M2.7 checkpoint autonomously debugs training runs and modifies its own scaffold — an early step toward self-improving agent infrastructure.", ["minimax-m2"], "https://arxiv.org/abs/2605.26494"],
-    ["tool-harness", "Agent harnesses", "SWE/Terminal/browser/MCP tools", "evaluation", "DeepSeek, Kimi, and GLM all use long-step agent harnesses with shell/file/search/browser/tool constraints; details differ by report.", ["deepseek-v4-pro", "kimi-k2-6", "glm-5"], "https://arxiv.org/html/2606.19348"]
+    ["tool-harness", "Agent harnesses", "SWE/Terminal/browser/MCP tools", "evaluation", "DeepSeek, Kimi, and GLM all use long-step agent harnesses with shell/file/search/browser/tool constraints; details differ by report.", ["deepseek-v4-pro", "kimi-k2-6", "glm-5"], "https://arxiv.org/html/2606.19348"],
+    ["ifp", "IFP", "Instruction-Following Pruning", "on-device architecture", "Apple AFM 3 Core Advanced uses IFP to store 20B parameters in NAND flash and activate only 1-4B per request via per-prompt expert selection. Shared + routed experts break the DRAM barrier for consumer hardware.", ["apple-afm-3-core-adv"], "https://machinelearning.apple.com/research/pruning-large-language"],
+    ["pt-moe", "PT-MoE", "Parallel-Track Mixture-of-Experts", "server architecture", "Apple AFM 3 Cloud uses PT-MoE combining track parallelism, MoE sparse computation, and interleaved global-local attention. Introduced in 2025 tech report and refined for AFM 3.", ["apple-afm-3-cloud"], "https://machinelearning.apple.com/research/apple-foundation-models-tech-report-2025"],
+    ["apple-qat", "Apple QAT", "Quantization Aware Training for on-device", "optimization", "Apple uses QAT to compress AFM 3 models substantially while maintaining accuracy, targeting Apple silicon deployment. Combined with IFP for on-device models.", ["apple-afm-3-core-adv", "apple-afm-3-cloud"], "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"]
   ];
 
   const figureAtlas = [
@@ -3686,7 +3823,12 @@ permalink: /ai-tracker/
     ["glm52-throughput", "GLM-5.2 inference throughput", "Long-context engine optimization figure", "https://z-cdn-media.chatglm.cn/prompts-rich-media-resources/5.2-blog/rJip3TCbGl.png", "https://z.ai/blog/glm-5.2"],
     ["kimi-k26-1", "Kimi K2.6 original blog figure 1", "Official Kimi K2.6 report image from Moonshot blog", "https://kimi-file.moonshot.cn/prod-chat-kimi/kfs/4/2/2026-04-20/1d7j2jpl3v89kkei5mq70?x-tos-process=image%2Fauto-orient%2C1%2Fstrip%2Fignore-error%2C1", "https://www.kimi.com/blog/kimi-k2-6"],
     ["kimi-k26-2", "Kimi K2.6 original blog figure 2", "Official Kimi K2.6 report image from Moonshot blog", "https://kimi-file.moonshot.cn/prod-chat-kimi/kfs/4/2/2026-04-20/1d7j305qav1fc641b5670?x-tos-process=image%2Fauto-orient%2C1%2Fstrip%2Fignore-error%2C1", "https://www.kimi.com/blog/kimi-k2-6"],
-    ["kimi-k26-3", "Kimi K2.6 original blog figure 3", "Official Kimi K2.6 report image from Moonshot blog", "https://kimi-file.moonshot.cn/prod-chat-kimi/kfs/4/2/2026-04-20/1d7j1727f2ena623likig?x-tos-process=image%2Fauto-orient%2C1%2Fstrip%2Fignore-error%2C1", "https://www.kimi.com/blog/kimi-k2-6"]
+    ["kimi-k26-3", "Kimi K2.6 original blog figure 3", "Official Kimi K2.6 report image from Moonshot blog", "https://kimi-file.moonshot.cn/prod-chat-kimi/kfs/4/2/2026-04-20/1d7j1727f2ena623likig?x-tos-process=image%2Fauto-orient%2C1%2Fstrip%2Fignore-error%2C1", "https://www.kimi.com/blog/kimi-k2-6"],
+    ["apple-afm3-arch", "AFM 3 Core Advanced Architecture", "Sparse expert routing with NAND-to-DRAM swap via Instruction-Following Pruning", "https://mlr.cdn-apple.com/media/model_architecture_828e4d39be5c_1c1d967c_0578_543fa159_5f92_4343_bde7_cb5c498339f6_32b129fba7.png", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+    ["apple-afm3-text-eval", "AFM 3 Human Evaluation: Text", "Side-by-side human eval of general text capabilities, AFM 3 Core/Cloud vs 2025 baselines across locale groups", "https://mlr.cdn-apple.com/media/hero_AFM_7f9df52a3e.png", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+    ["apple-afm3-image-eval", "AFM 3 Human Evaluation: Image Understanding", "Side-by-side human eval of image understanding capabilities in English, AFM 3 Core/Cloud vs 2025 baselines", "https://mlr.cdn-apple.com/media/hero_AFM_7f9df52a3e.png", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+    ["apple-afm3-dictation-eval", "AFM 3 Human Evaluation: Dictation", "Side-by-side human eval for dictation across 7 quality dimensions, AFM 3 Core Advanced vs production dictation", "https://mlr.cdn-apple.com/media/hero_AFM_7f9df52a3e.png", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"],
+    ["apple-adm3-examples", "ADM 3 Cloud Image Generation Examples", "Photorealistic image generation across diverse subjects and complex lighting conditions", "https://mlr.cdn-apple.com/media/adm_3_cloud_collage_example_2f4c2f5594.png", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models"]
   ];
 
   const scoreModels = ["GLM-5.2", "GLM-5", "DeepSeek V4 Pro Max", "MiniMax M3", "Kimi K2.6", "Qwen3.7-Max", "GPT-5.x", "Claude Opus", "Gemini"];
@@ -3753,7 +3895,11 @@ permalink: /ai-tracker/
     ["Hunyuan-T1 GitHub docs", "official docs", "https://tencent.github.io/llm.hunyuan.T1/README_EN.html", "Hunyuan-T1 reasoning model: Hybrid-Transformer-Mamba MoE, 96.7% RL compute, MMLU-PRO 87.2, MATH-500 96.2"],
     ["Hunyuan-TurboS paper", "paper", "https://arxiv.org/pdf/2505.15431", "First ultra-large Hybrid-Transformer-Mamba MoE architecture, Mamba2 integration, 2x decoding speed"],
     ["Hunyuan-TurboS GitHub", "code", "https://github.com/Tencent-Hunyuan/Hunyuan-TurboS", "Official TurboS repo with model weights and architecture details"],
-    ["Hunyuan-A13B HuggingFace", "open weights", "https://huggingface.co/tencent/Hunyuan-A13B-Instruct", "80B total / 13B active open-source MoE, first open-source hybrid reasoning model at 13B active level"]
+    ["Hunyuan-A13B HuggingFace", "open weights", "https://huggingface.co/tencent/Hunyuan-A13B-Instruct", "80B total / 13B active open-source MoE, first open-source hybrid reasoning model at 13B active level"],
+    ["Apple AFM 3 research page", "research page", "https://machinelearning.apple.com/research/introducing-third-generation-of-apple-foundation-models", "AFM 3 family overview: five models (Core, Core Advanced, Cloud, ADM Cloud, Cloud Pro), IFP architecture, PT-MoE, training, evaluation, responsible AI"],
+    ["Apple 2025 tech report", "paper (arXiv)", "https://arxiv.org/abs/2507.13575", "Apple Intelligence Foundation Language Models Tech Report 2025: PT-MoE server model, 3B on-device model, KV-cache sharing, 2-bit QAT, Foundation Models framework"],
+    ["Apple IFP paper", "paper", "https://machinelearning.apple.com/research/pruning-large-language", "Instruction-Following Pruning technique used by AFM 3 Core Advanced for sparse on-device architecture"],
+    ["Apple PCC expansion", "blog", "https://security.apple.com/blog/expanding-pcc/", "Private Cloud Compute expansion to NVIDIA GPUs in Google Cloud for AFM 3 Cloud Pro"]
   ];
 
   const pagerState = {};
@@ -3858,7 +4004,9 @@ permalink: /ai-tracker/
       ["GPT-5.5", "OpenAI system card 是闭源模型事实入口", "card"],
       ["Mistral Devstral", "agentic coding LLM with All Hands AI, 46.8% SWE-Bench Verified, Apache 2.0", "open"],
       ["Mistral Magistral", "first reasoning model: Small 24B open + Medium enterprise, 73.6% AIME 2024", "reasoning"],
-      ["ERNIE 4.5", "Baidu 10-variant multimodal family: 424B MoE, heterogeneous routing, 47% MFU, Apache 2.0, ERNIEKit + FastDeploy", "open"]
+      ["ERNIE 4.5", "Baidu 10-variant multimodal family: 424B MoE, heterogeneous routing, 47% MFU, Apache 2.0, ERNIEKit + FastDeploy", "open"],
+      ["Apple AFM 3", "Five-model family: IFP sparse on-device (20B/1-4B active), PT-MoE server, PCC to NVIDIA GPU, Google collab", "on-device"],
+      ["Apple PCC + NVIDIA", "Private Cloud Compute extended to NVIDIA GPUs in Google Cloud for AFM 3 Cloud Pro", "infra"]
     ];
     document.querySelector("#ops-feed").innerHTML = feed.map((item, index) => `
       <div class="ops-feed-item">
@@ -4119,7 +4267,8 @@ permalink: /ai-tracker/
       ["mistral", "Mistral Devstral / Magistral", "Agentic coding, reasoning model, open weights, multilingual CoT"],
       ["ernie", "ERNIE 4.5 Family", "Heterogeneous MoE, multimodal, 10 variants, Apache 2.0, 47% MFU, ERNIEKit + FastDeploy"],
       ["hunyuan", "Hunyuan T1 / TurboS / A13B", "Hybrid-Transformer-Mamba MoE, reasoning RL, 2x decoding speed, open A13B"],
-      ["grok", "xAI Grok Family", "Grok 4.3 / 4.20 / Build 0.1, configurable reasoning, Mantle engine, encrypted CoT"]
+      ["grok", "xAI Grok Family", "Grok 4.3 / 4.20 / Build 0.1, configurable reasoning, Mantle engine, encrypted CoT"],
+      ["apple", "Apple AFM 3 Family", "IFP sparse on-device, PT-MoE server, Private Cloud Compute, 5 models, Google/NVIDIA collab"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
       <button class="ops-layer-button ${id === active ? "active" : ""}" type="button" data-layer="${id}">
@@ -4128,7 +4277,7 @@ permalink: /ai-tracker/
     `).join("");
     const detail = document.querySelector("#ops-layer-detail");
     if (active === "models") {
-      detail.innerHTML = `<h3>Frontier Model Families</h3><p>每个模型版本拆成独立记录，避免把 GLM-5、GLM-5.1、GLM-5.2 或 Kimi K2.5/K2.6/K2.7-Code 混成一个条目。</p><div class="ops-mini-grid">${modelRecords.slice(0, 12).map((model) => `<div class="ops-mini-card"><strong>${model.name}</strong><span>${model.type} / ${model.status}</span><button class="ops-mini-button" type="button" data-detail="model" data-id="${model.id}">Open</button></div>`).join("")}</div>`;
+      detail.innerHTML = `<h3>Frontier Model Families</h3><p>每个模型版本拆成独立记录，避免把 GLM-5、GLM-5.1、GLM-5.2 或 Kimi K2.5/K2.6/K2.7-Code 混成一个条目。</p><div class="ops-mini-grid">${modelRecords.slice(0, 16).map((model) => `<div class="ops-mini-card"><strong>${model.name}</strong><span>${model.type} / ${model.status}</span><button class="ops-mini-button" type="button" data-detail="model" data-id="${model.id}">Open</button></div>`).join("")}</div>`;
     } else if (active === "reports") {
       detail.innerHTML = `<h3>2026 Report Corpus</h3><p>paper、technical report、official blog、system card、model card 分开标注。</p><div class="ops-mini-grid">${corpusRecords.map(([id, title, lab, date, type]) => `<div class="ops-mini-card"><strong>${title}</strong><span>${lab} / ${date} / ${type}</span><button class="ops-mini-button" type="button" data-detail="corpus" data-id="${id}">Open</button></div>`).join("")}</div>`;
     } else if (active === "methods") {
@@ -4153,6 +4302,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>Hunyuan T1 / TurboS / A13B Deep Dive</h3><p>腾讯混元从 TurboS（世界首个超大规模 Hybrid-Transformer-Mamba MoE）到 T1（reasoning model, 96.7% compute on RL, MMLU-PRO 87.2, MATH-500 96.2）再到 A13B（80B total / 13B active open-source MoE）的架构和训练演进。Hybrid-Transformer-Mamba 架构在长序列处理上实现 2x 解码加速，是目前唯一在生产环境部署该架构的前沿模型家族。所有阶段卡片都挂回官方 GitHub docs 和 arXiv 论文。</p><div class="ops-stage-grid">${(reportDeepDives["hunyuan"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "grok") {
       detail.innerHTML = `<h3>xAI Grok Deep Dive</h3><p>xAI Grok 家族从 Grok 4.1（previous-gen model card PDF）到 Grok 4.3（flagship, always-on configurable reasoning, 4 levels, Mantle engine on Bedrock, encrypted CoT）到 Grok 4.20（speed tier, low hallucination, reasoning + non-reasoning variants）再到 Grok Build 0.1（fast coding model, 256K context, $1.00/$2.00, early access）的演进。所有阶段卡片都挂回 xAI 开发者文档和 AWS Bedrock model card。当前 Grok 家族没有 arXiv 论文——source type 精确标注为 model docs / model card / official release。</p><div class="ops-stage-grid">${(reportDeepDives["xai-grok"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
+    } else if (active === "apple") {
+      detail.innerHTML = `<h3>Apple AFM 3 Family Deep Dive</h3><p>Apple 第三代 Foundation Models 是五个模型的家族：两个 on-device（AFM 3 Core 3B dense + AFM 3 Core Advanced 20B sparse/1-4B active via IFP）和三个 server（AFM 3 Cloud PT-MoE、ADM 3 Cloud image、AFM 3 Cloud Pro on NVIDIA GPU）。与 Google 合作构建；Private Cloud Compute 保证用户数据不存储。IFP 架构突破 DRAM 限制，PT-MoE 结合 track parallelism + MoE + interleaved global-local attention。Human eval 显示 AFM 3 Core 在 45.6% prompt 上优于 2025 baseline，AFM 3 Cloud 在 64.7% 上优于 baseline。TTS MOS 4.15。PCC 扩展到 NVIDIA GPU 是首个 Apple 基础模型运行在 Apple 硅之外。所有阶段卡片都挂回 Apple ML 研究页面和 2025 tech report。</p><div class="ops-stage-grid">${(reportDeepDives["apple-afm-3"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else {
       const allDives = [...(reportDeepDives["glm-5"] || []), ...(reportDeepDives["glm-5.2"] || [])];
       detail.innerHTML = `<h3>GLM-5 / GLM-5.2 Report Deep Dive</h3><p>GLM-5 从 vibe coding 到 agentic engineering 的过渡（arXiv 2602.15763），加上 GLM-5.2 的 1M 上下文、IndexCache、slime 和 long-horizon 工程演进。所有阶段卡片都挂回 arXiv 论文和官方博客。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
