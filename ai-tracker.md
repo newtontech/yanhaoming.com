@@ -1771,6 +1771,44 @@ permalink: /ai-tracker/
 
 <script>
   const reportDeepDives = {
+    "openai-gpt-family": [
+      {
+        title: "GPT-4o: Native Multimodal Architecture",
+        stage: "architecture / release",
+        body: "GPT-4o is OpenAI's natively multimodal model, processing text, audio, and vision in a single end-to-end neural network. Released May 2024, it matches GPT-4 Turbo performance on text while being 2x faster and 50% cheaper. The model accepts text, audio, image, and video inputs; outputs text, audio, and image. Audio input/output latency averages 320ms, enabling real-time voice conversation.",
+        source: "https://openai.com/index/hello-gpt-4o/"
+      },
+      {
+        title: "GPT-4o-mini: Efficient Sibling",
+        stage: "release",
+        body: "GPT-4o-mini launched July 2024 as a smaller, faster, cheaper model replacing GPT-3.5 Turbo in the API. It scores 82% on MMLU (vs GPT-3.5's 70%) and supports 16K context. Pricing at $0.15/1M input tokens made it the most cost-efficient model in the GPT-4o family at launch.",
+        source: "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/"
+      },
+      {
+        title: "GPT-4.1: Instruction Following + Long Context",
+        stage: "release",
+        body: "GPT-4.1 launched April 2025 as a text-only model focused on instruction following (75.5% on IFEval), long-context comprehension (1M tokens, 10.5% on Needle-in-a-Haystack at 1M), and coding (54.6% on SWE-bench Verified). It supports 1M input / 32K output tokens. Available in three sizes: GPT-4.1, GPT-4.1 mini, and GPT-4.1 nano.",
+        source: "https://openai.com/index/gpt-4-1/"
+      },
+      {
+        title: "GPT-4.1 Safety & Instruction Following",
+        stage: "evaluation / safety",
+        body: "The GPT-4.1 system card evaluates instruction hierarchy compliance, refusals, hallucination rates, and chain-of-thought safety. GPT-4.1 scores 83.4% on refusals for disallowed content (up from GPT-4o's 76.1%). The model follows the instruction hierarchy more strictly, reducing prompt injection susceptibility.",
+        source: "https://openai.com/index/gpt-4-1-system-card/"
+      },
+      {
+        title: "GPT-5.5: Agentic + Tool Use Frontier",
+        stage: "release",
+        body: "GPT-5.5 (April 2026) and GPT-5.5 Instant (May 2026) represent OpenAI's current agentic frontier. The system card covers tool use, computer use, web browsing, and file management capabilities. GPT-5.5 Pro extends the line with enhanced reasoning. The Instant variant became ChatGPT's default model.",
+        source: "https://openai.com/index/gpt-5-5-system-card/"
+      },
+      {
+        title: "Cross-model Method Lineage",
+        stage: "methods",
+        body: "OpenAI's 2024-2026 lineup shows a progression from multimodal end-to-end (GPT-4o) to specialized instruction-following (GPT-4.1) to agentic tool-use (GPT-5.5). RLHF remains the core alignment method across the family, with GPT-4.1 adding structured output guarantees and GPT-5.5 adding agent safety evaluations.",
+        source: "https://openai.com/index/hello-gpt-4o/"
+      }
+    ],
     "glm-5": [
       {
         title: "2.2 Pre-training Data",
@@ -2183,6 +2221,44 @@ permalink: /ai-tracker/
       benchmarks: ["Chinese eval", "multimodal eval"]
     },
     {
+      id: "openai-gpt-4-1",
+      name: "GPT-4.1 / mini / nano",
+      org: "OpenAI",
+      date: "2025-04",
+      openness: "API",
+      type: "official release + system card",
+      tags: ["instruction following", "long-context", "coding", "API"],
+      status: "active",
+      note: "GPT-4.1 is a text-only model optimized for instruction following (75.5% IFEval), 1M-token context (10.5% Needle-in-a-Haystack at 1M), and coding (54.6% SWE-bench Verified). Ships in three sizes: GPT-4.1, mini, nano. System card evaluates instruction hierarchy compliance and refusal rates.",
+      links: [
+        ["Release", "https://openai.com/index/gpt-4-1/"],
+        ["System card", "https://openai.com/index/gpt-4-1-system-card/"],
+        ["API docs", "https://platform.openai.com/docs/models/gpt-4-1"]
+      ],
+      methods: ["RLHF", "instruction hierarchy", "structured output", "long-context"],
+      benchmarks: ["IFEval", "SWE-bench Verified", "Needle-in-a-Haystack", "Aider polyglot"],
+      deepDive: "openai-gpt-family"
+    },
+    {
+      id: "openai-gpt-4o",
+      name: "GPT-4o / 4o-mini",
+      org: "OpenAI",
+      date: "2024-05",
+      openness: "API",
+      type: "official release",
+      tags: ["multimodal", "real-time", "efficient", "API"],
+      status: "baseline",
+      note: "GPT-4o is OpenAI's natively multimodal model (text + audio + vision end-to-end). 2x faster and 50% cheaper than GPT-4 Turbo on text tasks. Audio latency 320ms enables real-time conversation. GPT-4o-mini replaced GPT-3.5 Turbo at 82% MMLU.",
+      links: [
+        ["Release", "https://openai.com/index/hello-gpt-4o/"],
+        ["Mini release", "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/"],
+        ["API docs", "https://platform.openai.com/docs/models/gpt-4o"]
+      ],
+      methods: ["end-to-end multimodal", "RLHF", "audio tokenization"],
+      benchmarks: ["MMLU", "MUSR", "MGSM", "real-time voice"],
+      deepDive: "openai-gpt-family"
+    },
+    {
       id: "deepseek-v3-r1",
       name: "DeepSeek V3 / R1 baseline",
       org: "DeepSeek-AI",
@@ -2223,6 +2299,32 @@ permalink: /ai-tracker/
       links: [
         ["System card", "https://openai.com/index/gpt-5-5-instant-system-card/"],
         ["Release", "https://openai.com/index/gpt-5-5-instant/"]
+      ]
+    },
+    {
+      name: "GPT-4.1 / 4.1 mini / 4.1 nano",
+      org: "OpenAI",
+      date: "2025-04",
+      type: "official release + system card",
+      tags: ["instruction following", "1M context", "coding"],
+      note: "GPT-4.1 是 OpenAI 2025 年 4 月发布的 text-only 模型，专注 instruction following、1M long-context 和 coding。system card 评估了指令层级遵从和拒绝率。",
+      links: [
+        ["Release", "https://openai.com/index/gpt-4-1/"],
+        ["System card", "https://openai.com/index/gpt-4-1-system-card/"],
+        ["API docs", "https://platform.openai.com/docs/models/gpt-4-1"]
+      ]
+    },
+    {
+      name: "GPT-4o / 4o-mini",
+      org: "OpenAI",
+      date: "2024-05",
+      type: "official release",
+      tags: ["multimodal", "real-time voice", "efficient"],
+      note: "GPT-4o 是 OpenAI 原生多模态模型（text + audio + vision 端到端），比 GPT-4 Turbo 快 2x、便宜 50%。GPT-4o-mini 以 82% MMLU 替代 GPT-3.5 Turbo。",
+      links: [
+        ["Release", "https://openai.com/index/hello-gpt-4o/"],
+        ["Mini release", "https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/"],
+        ["API docs", "https://platform.openai.com/docs/models/gpt-4o"]
       ]
     },
     {
@@ -2446,6 +2548,8 @@ permalink: /ai-tracker/
     ["qwen-3-7-max", "Qwen3.7-Max", "Alibaba / Qwen", "2026-06", "official blog/docs", "Current Qwen API flagship watch item; kept separate from open Qwen3-Coder records.", "https://qwen.ai/blog?id=qwen3.7"],
     ["qwen3-coder-next", "Qwen3-Coder / Coder-Next", "Alibaba / Qwen", "2026 watch", "research/code source", "Open Qwen coding line; promoted to paper record when a standalone 2026 model-body paper is confirmed.", "https://github.com/QwenLM/Qwen3-Coder"],
     ["openai-gpt-5-5", "GPT-5.5", "OpenAI", "2026", "system card", "Closed model source is a system card, not a paper.", "https://openai.com/index/gpt-5-5-system-card/"],
+    ["openai-gpt-4-1", "GPT-4.1 / mini / nano", "OpenAI", "2025-04", "official release + system card", "Instruction-following model with 1M context, 54.6% SWE-bench Verified, and instruction hierarchy safety eval.", "https://openai.com/index/gpt-4-1/"],
+    ["openai-gpt-4o", "GPT-4o / 4o-mini", "OpenAI", "2024-05", "official release", "Natively multimodal model (text + audio + vision end-to-end); 4o-mini replaces GPT-3.5 Turbo.", "https://openai.com/index/hello-gpt-4o/"],
     ["anthropic-claude", "Claude 2026 System Cards", "Anthropic", "2026", "system card index", "Closed Claude model facts should be pulled from the system-card index and API docs.", "https://www.anthropic.com/system-cards"],
     ["gemini-3-1", "Gemini 3.1 Pro", "Google DeepMind", "2026", "model card", "Closed multimodal reasoning model facts from DeepMind model-card index.", "https://deepmind.google/models/model-cards/gemini-3-1-pro/"],
     ["gemini-2-5-pro", "Gemini 2.5 Pro", "Google DeepMind", "2025-03", "model card PDF", "Hybrid reasoning model with thinking on/off; leads GPQA, AIME 2025 math/science benchmarks.", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf"],
@@ -2531,7 +2635,7 @@ permalink: /ai-tracker/
         ["ChatGPT Agent system card", "https://openai.com/index/chatgpt-agent-system-card/"]
       ],
       people: ["OpenAI research", "Preparedness", "Model Behavior", "Safety Systems"],
-      reports: ["GPT-5.x", "ChatGPT Agent", "Operator-style agents"],
+      reports: ["GPT-5.x", "GPT-4.1", "GPT-4o", "ChatGPT Agent", "Operator-style agents"],
       methods: ["system card", "agent safety", "tool policy", "preparedness eval"],
       note: "Closed OpenAI model records are not personnel-attributed papers here. The tracker keeps them at org/team granularity unless the official page names authors."
     },
@@ -2810,6 +2914,8 @@ permalink: /ai-tracker/
     ["Qwen3.7-Max", "official blog + docs", "https://qwen.ai/blog?id=qwen3.7", "latest Qwen API flagship source"],
     ["Qwen3-Coder", "code/research", "https://github.com/QwenLM/Qwen3-Coder", "open Qwen coding model line"],
     ["OpenAI GPT-5.5", "system card", "https://openai.com/index/gpt-5-5-system-card/", "closed model system-card source"],
+    ["OpenAI GPT-4.1", "official release + system card", "https://openai.com/index/gpt-4-1/", "instruction following, 1M context, coding, and safety eval source"],
+    ["OpenAI GPT-4o", "official release", "https://openai.com/index/hello-gpt-4o/", "natively multimodal model source"],
     ["Claude models", "system card index", "https://www.anthropic.com/system-cards", "Anthropic closed model source ledger"],
     ["Gemini 3.1 Pro", "model card", "https://deepmind.google/models/model-cards/gemini-3-1-pro/", "Google DeepMind closed model card"],
     ["Gemini 2.5 Pro", "model card PDF", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf", "Google DeepMind hybrid reasoning model card"],
@@ -2915,6 +3021,7 @@ permalink: /ai-tracker/
       ["Qwen3.7-Max", "面向 agent 的 Qwen 旗舰线，阿里云列出 2026-06 快照", "agent"],
       ["GLM-5.2", "Z.ai long-horizon flagship，强调 1M 工程上下文", "long ctx"],
       ["DeepSeek V4", "Pro/Flash 支持 1M context，API 与 HF 同步出现", "weights"],
+      ["GPT-4.1", "OpenAI instruction-following model with 1M context and 54.6% SWE-bench", "coding"],
       ["GPT-5.5", "OpenAI system card 是闭源模型事实入口", "card"]
     ];
     document.querySelector("#ops-feed").innerHTML = feed.map((item, index) => `
@@ -3165,7 +3272,8 @@ permalink: /ai-tracker/
       ["figures", "Figure Atlas", "Original report images"],
       ["people", "People Network", "Authors, teams, disclosure level"],
       ["ecosystem", "Launch Ecosystem", "Partners, providers, gateways"],
-      ["glm", "GLM-5 Deep Dive", "Data, RL, eval and Pony Alpha"]
+      ["glm", "GLM-5 Deep Dive", "Data, RL, eval and Pony Alpha"],
+      ["openai", "OpenAI GPT Family", "GPT-4o, GPT-4.1, GPT-5.5 lineage"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
       <button class="ops-layer-button ${id === active ? "active" : ""}" type="button" data-layer="${id}">
@@ -3187,6 +3295,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>People & Author Network</h3><p>作者表、团队发布、system card 和 agent paper 被放在同一层比较，避免把没有署名的官方发布误当成论文作者贡献。</p><div class="ops-mini-grid">${peopleRecords.slice(0, 10).map((record) => `<div class="ops-mini-card"><strong>${record.lab}</strong><span>${record.disclosure} / ${record.count ? `${record.count} authors` : "team-level"}</span><button class="ops-mini-button" type="button" data-detail="people" data-id="${record.id}">Open</button></div>`).join("")}</div>`;
     } else if (active === "ecosystem") {
       detail.innerHTML = `<h3>Launch Ecosystem</h3><p>GLM-5 Acknowledgement 暴露了可结构化的 partner map：open-source communities、inference providers、applications、AI gateways。其他报告只在有同类伙伴表时才标成 listed。</p><div class="ops-mini-grid">${ecosystemCategories.map((category) => `<div class="ops-mini-card"><strong>${category.name}</strong><span>${category.partners.length} partners / ${category.role}</span><button class="ops-mini-button" type="button" data-detail="ecosystem" data-id="${category.id}">Open</button></div>`).join("")}</div>`;
+    } else if (active === "openai") {
+      detail.innerHTML = `<h3>OpenAI GPT Family Deep Dive</h3><p>OpenAI 从 GPT-4o（多模态端到端）到 GPT-4.1（instruction following + 1M context）到 GPT-5.5（agentic tool use）的演进路线。所有阶段卡片都挂回官方 release 或 system card。</p><div class="ops-stage-grid">${reportDeepDives["openai-gpt-family"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else {
       detail.innerHTML = `<h3>GLM-5 Report Deep Dive</h3><p>用户指定的 GLM-5 章节被结构化为阶段卡，所有阶段都挂回 arXiv PDF。</p><div class="ops-stage-grid">${reportDeepDives["glm-5"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     }
