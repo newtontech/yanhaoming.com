@@ -2336,6 +2336,38 @@ permalink: /ai-tracker/
         body: "Gemini models are available through Google AI Studio (free tier + API key), Vertex AI (enterprise with IAM, regional endpoints, CMEK), and Google Cloud ML. The DeepMind model-card index provides a single canonical page per model version. Unlike OpenAI (system cards) or Anthropic (system-card index), DeepMind's model cards follow a structured PDF format documenting capabilities, limitations, and safety evaluations. The card index at deepmind.google/models/model-cards/ is the recommended entry point for provenance tracking.",
         source: "https://deepmind.google/models/model-cards/"
       }
+    ],
+    "hunyuan": [
+      {
+        title: "Hunyuan-TurboS: First Ultra-Large Hybrid-Transformer-Mamba MoE",
+        stage: "architecture / release",
+        body: "Hunyuan-TurboS is the world's first ultra-large Hybrid-Transformer-Mamba MoE model. It integrates Transformer's strong contextual processing with Mamba2's high speed and memory efficiency. The hybrid architecture specifically optimizes long-sequence processing through efficient computing methods that reduce compute resource consumption while maintaining long-text information capture. Under the same deployment conditions, decoding speed is 2x faster than pure Transformer baselines.",
+        source: "https://arxiv.org/pdf/2505.15431"
+      },
+      {
+        title: "Hunyuan-T1: Reasoning Model on TurboS Base",
+        stage: "post-training / RL",
+        body: "Hunyuan-T1 is built on the TurboS base with 96.7% of post-training compute allocated to reinforcement learning. The training uses a curriculum learning approach to gradually increase data difficulty while expanding context length. Training strategy includes data replay and periodic policy resetting, improving long-term training stability by over 50%. Alignment uses a unified reward system: self-reward (from early T1-preview) + reward model, guiding the model to self-improve.",
+        source: "https://tencent.github.io/llm.hunyuan.T1/README_EN.html"
+      },
+      {
+        title: "Benchmark Results: Competitive with R1 and O1",
+        stage: "evaluation",
+        body: "Hunyuan-T1 achieves MMLU-PRO 87.2 (second only to O1), GPQA-diamond 69.3, LiveCodeBench 64.9, MATH-500 96.2 (closely following DeepSeek R1), and ArenaHard 91.9. On AIME and Zebra Logic, T1 shows comparable or slightly better results than R1. In cultural/creative instruction following, text summarization, and agent capabilities, T1 has a slight edge over R1.",
+        source: "https://tencent.github.io/llm.hunyuan.T1/README_EN.html"
+      },
+      {
+        title: "Hunyuan-A13B: Open-Source MoE at 13B Active Scale",
+        stage: "architecture / release",
+        body: "Hunyuan-A13B is Tencent's open-source MoE model with 80B total parameters and 13B active. Described as the first open-source MoE hybrid reasoning model at the 13B active level. Fine-grained Mixture-of-Experts architecture with strong reasoning capabilities and long-context understanding. Available on HuggingFace and ModelScope under open license.",
+        source: "https://huggingface.co/tencent/Hunyuan-A13B-Instruct"
+      },
+      {
+        title: "Hybrid Architecture Lineage: Transformer-Mamba Fusion",
+        stage: "methods",
+        body: "The Hunyuan family's key architectural innovation is the Hybrid-Transformer-Mamba fusion. Traditional pure Transformer models struggle with long-text training and inference due to quadratic attention complexity. Mamba's state-space model approach provides linear complexity for sequence processing. The hybrid combines both: Transformer layers for strong contextual understanding, Mamba layers for efficient long-sequence processing. This positions Hunyuan uniquely among frontier families — no other major lab has shipped a production Hybrid-Transformer-Mamba MoE at this scale.",
+        source: "https://arxiv.org/pdf/2505.15431"
+      }
     ]
   };
 
@@ -2665,18 +2697,62 @@ permalink: /ai-tracker/
       benchmarks: ["HLE", "SWE-bench Pro", "MCPAtlas"]
     },
     {
+      id: "hunyuan-t1",
+      name: "Hunyuan-T1",
+      org: "Tencent Hunyuan",
+      date: "2025-03-21",
+      openness: "API",
+      type: "official release + GitHub docs",
+      tags: ["reasoning", "Mamba", "hybrid", "MoE", "long-context"],
+      status: "active",
+      note: "Hunyuan-T1 is Tencent's flagship reasoning model, built on the TurboS base — the world's first ultra-large Hybrid-Transformer-Mamba MoE. 96.7% of post-training compute went to RL. Achieves MMLU-PRO 87.2, GPQA-diamond 69.3, LiveCodeBench 64.9, MATH-500 96.2, ArenaHard 91.9. Mamba architecture enables 2x faster decoding at long sequences vs pure Transformer baselines.",
+      links: [
+        ["GitHub docs", "https://tencent.github.io/llm.hunyuan.T1/README_EN.html"],
+        ["TurboS paper", "https://arxiv.org/pdf/2505.15431"],
+        ["TurboS GitHub", "https://github.com/Tencent-Hunyuan/Hunyuan-TurboS"],
+        ["Hunyuan research", "https://hy.tencent.com/"]
+      ],
+      methods: ["Hybrid-Transformer-Mamba MoE", "reinforcement learning (96.7% compute)", "curriculum learning", "self-reward + reward model alignment", "data replay", "periodic policy resetting"],
+      benchmarks: ["MMLU-PRO", "GPQA-diamond", "LiveCodeBench", "MATH-500", "ArenaHard", "AIME", "Zebra Logic", "CEval"],
+      deepDive: "hunyuan"
+    },
+    {
+      id: "hunyuan-turbos",
+      name: "Hunyuan-TurboS",
+      org: "Tencent Hunyuan",
+      date: "2025-03",
+      openness: "API",
+      type: "paper + official announcement",
+      tags: ["MoE", "Mamba", "hybrid", "fast-thinking", "long-context"],
+      status: "active",
+      note: "Hunyuan-TurboS is the first ultra-large Hybrid-Transformer-Mamba MoE model. It combines Transformer's strong contextual processing with Mamba's high speed and memory efficiency. Serves as the base for Hunyuan-T1 reasoning model. The hybrid architecture specifically optimizes long-sequence processing, reducing compute resource consumption while maintaining long-text information capture.",
+      links: [
+        ["arXiv", "https://arxiv.org/pdf/2505.15431"],
+        ["GitHub", "https://github.com/Tencent-Hunyuan/Hunyuan-TurboS"],
+        ["Announcement", "https://x.com/TencentHunyuan/status/1899105803073958010"]
+      ],
+      methods: ["Hybrid-Transformer-Mamba MoE", "Mamba2", "fine-grained expert routing", "long-sequence optimization"],
+      benchmarks: ["long-context processing", "inference speed"],
+      deepDive: "hunyuan"
+    },
+    {
       id: "hunyuan-a13b",
       name: "Hunyuan-A13B",
       org: "Tencent Hunyuan",
-      date: "2025 active",
+      date: "2025-06",
       openness: "open weights",
-      type: "model card",
-      tags: ["open", "efficient", "Chinese"],
+      type: "paper + code",
+      tags: ["open", "MoE", "80B total", "13B active", "reasoning"],
       status: "active",
-      note: "Tencent Hunyuan open models remain part of the Chinese open-weight baseline set; upgrade when 2026 model-body reports are confirmed.",
-      links: [["Hugging Face", "https://huggingface.co/tencent/Hunyuan-A13B-Instruct"]],
-      methods: ["efficient open model"],
-      benchmarks: ["Chinese eval"]
+      note: "Hunyuan-A13B is Tencent's open-source MoE model with 80B total parameters and 13B active. First open-source MoE hybrid reasoning model at the 13B active level. Fine-grained Mixture-of-Experts architecture with strong reasoning capabilities and long-context understanding. Available on HuggingFace and ModelScope.",
+      links: [
+        ["Hugging Face", "https://huggingface.co/tencent/Hunyuan-A13B-Instruct"],
+        ["GitHub", "https://github.com/Tencent-Hunyuan/Hunyuan-A13B"],
+        ["ModelScope", "https://modelscope.cn/models/Tencent-Hunyuan/Hunyuan-A13B-Instruct"]
+      ],
+      methods: ["fine-grained MoE", "hybrid reasoning", "open weights"],
+      benchmarks: ["general capabilities", "reasoning", "long-context"],
+      deepDive: "hunyuan"
     },
     {
       id: "ernie-4-5",
@@ -3174,7 +3250,10 @@ permalink: /ai-tracker/
     ["amazon-nova-2", "Amazon Nova 2", "Amazon / AWS", "2025-2026", "AI service card", "Enterprise model line tracked via AWS responsible AI service cards and model docs.", "https://aws.amazon.com/nova/models/"],
     ["mistral-devstral", "Mistral Devstral", "Mistral AI / All Hands AI", "2025-05", "official blog", "Agentic coding LLM scoring 46.8% on SWE-Bench Verified under OpenHands scaffold. Apache 2.0, runs on RTX 4090 / 32GB Mac. Built with All Hands AI for real GitHub issue resolution.", "https://mistral.ai/news/devstral"],
     ["mistral-magistral", "Mistral Magistral", "Mistral AI", "2026", "official blog", "First Mistral reasoning model: Small (24B, Apache 2.0) and Medium (enterprise). 73.6% AIME 2024, multilingual CoT, training/RL paper. Flash Answers 10x throughput.", "https://mistral.ai/news/magistral"],
-    ["ernie-4-5", "ERNIE 4.5 Technical Report", "Baidu / ERNIE Team", "2025-06", "technical report + official blog", "10 multimodal variants: MoE (424B/47B active, 21B/3B active) + 0.3B dense. Heterogeneous MoE with modality-isolated routing, 47% MFU, SFT/DPO/UPO post-training, ERNIEKit + FastDeploy. Apache 2.0.", "https://ernie.baidu.com/blog/posts/ernie4.5/"]
+    ["ernie-4-5", "ERNIE 4.5 Technical Report", "Baidu / ERNIE Team", "2025-06", "technical report + official blog", "10 multimodal variants: MoE (424B/47B active, 21B/3B active) + 0.3B dense. Heterogeneous MoE with modality-isolated routing, 47% MFU, SFT/DPO/UPO post-training, ERNIEKit + FastDeploy. Apache 2.0.", "https://ernie.baidu.com/blog/posts/ernie4.5/"],
+    ["hunyuan-t1", "Hunyuan-T1 Reasoning Model", "Tencent Hunyuan", "2025-03-21", "official release + GitHub docs", "Reasoning model built on TurboS base. Hybrid-Transformer-Mamba MoE architecture. 96.7% RL compute. MMLU-PRO 87.2, GPQA-diamond 69.3, LiveCodeBench 64.9, MATH-500 96.2, ArenaHard 91.9. 2x decoding speed on long sequences.", "https://tencent.github.io/llm.hunyuan.T1/README_EN.html"],
+    ["hunyuan-turbos", "Hunyuan-TurboS Technical Report", "Tencent Hunyuan", "2025-03", "paper + official announcement", "First ultra-large Hybrid-Transformer-Mamba MoE model. Integrates Transformer contextual processing with Mamba2 speed and memory efficiency. Long-sequence optimization with 2x decoding speed.", "https://arxiv.org/pdf/2505.15431"],
+    ["hunyuan-a13b", "Hunyuan-A13B Open-Source MoE", "Tencent Hunyuan", "2025-06", "paper + code", "80B total / 13B active open-source MoE. First open-source hybrid reasoning model at 13B active level. Fine-grained MoE with strong reasoning and long-context understanding.", "https://huggingface.co/tencent/Hunyuan-A13B-Instruct"]
   ];
 
   const peopleRecords = [
@@ -3401,6 +3480,23 @@ permalink: /ai-tracker/
       reports: ["ERNIE 4.5 family (10 variants)", "ERNIE X1"],
       methods: ["heterogeneous MoE", "modality-isolated routing", "UPO", "ERNIEKit", "FastDeploy"],
       note: "ERNIE 4.5 is credited to 'Baidu-ERNIE-Team' in the technical report citation. No individual author tables are exposed. The GitHub repo and HF hub provide team-level evidence for the open-source release."
+    },
+    {
+      id: "people-hunyuan",
+      lab: "Tencent Hunyuan",
+      cluster: "Chinese frontier + hybrid architecture",
+      disclosure: "team-level official release + GitHub docs",
+      count: null,
+      sources: [
+        ["Hunyuan-T1 GitHub docs", "https://tencent.github.io/llm.hunyuan.T1/README_EN.html"],
+        ["Hunyuan-TurboS paper", "https://arxiv.org/pdf/2505.15431"],
+        ["Hunyuan-A13B HuggingFace", "https://huggingface.co/tencent/Hunyuan-A13B-Instruct"],
+        ["Hunyuan research", "https://hy.tencent.com/"]
+      ],
+      people: ["Tencent Hunyuan Team"],
+      reports: ["Hunyuan-T1", "Hunyuan-TurboS", "Hunyuan-A13B"],
+      methods: ["Hybrid-Transformer-Mamba MoE", "reinforcement learning", "curriculum learning", "self-reward alignment", "fine-grained MoE"],
+      note: "Tencent Hunyuan is tracked as a team-level release. The Hybrid-Transformer-Mamba MoE architecture is a unique architectural contribution — no other major lab has shipped this architecture at production scale. The TurboS paper provides the architectural foundation; T1 GitHub docs provide benchmark results and training details."
     }
   ];
 
@@ -3606,7 +3702,11 @@ permalink: /ai-tracker/
     ["Mistral Magistral", "official blog", "https://mistral.ai/news/magistral", "First reasoning model: Small 24B open + Medium enterprise, 73.6% AIME 2024, multilingual CoT, training/RL paper"],
     ["ERNIE 4.5 blog", "official blog", "https://ernie.baidu.com/blog/posts/ernie4.5/", "10 multimodal variants, heterogeneous MoE, modality-isolated routing, 47% MFU, SFT/DPO/UPO, ERNIEKit + FastDeploy, Apache 2.0"],
     ["ERNIE 4.5 technical report", "technical report", "https://ernie.baidu.com/blog/publication/ERNIE_Technical_Report.pdf", "Full technical report with architecture details, benchmark tables, and training infrastructure"],
-    ["ERNIE 4.5 GitHub", "code", "https://github.com/paddlepaddle/ernie", "Official ERNIE repo with PaddlePaddle training/inference code and ERNIEKit"]
+    ["ERNIE 4.5 GitHub", "code", "https://github.com/paddlepaddle/ernie", "Official ERNIE repo with PaddlePaddle training/inference code and ERNIEKit"],
+    ["Hunyuan-T1 GitHub docs", "official docs", "https://tencent.github.io/llm.hunyuan.T1/README_EN.html", "Hunyuan-T1 reasoning model: Hybrid-Transformer-Mamba MoE, 96.7% RL compute, MMLU-PRO 87.2, MATH-500 96.2"],
+    ["Hunyuan-TurboS paper", "paper", "https://arxiv.org/pdf/2505.15431", "First ultra-large Hybrid-Transformer-Mamba MoE architecture, Mamba2 integration, 2x decoding speed"],
+    ["Hunyuan-TurboS GitHub", "code", "https://github.com/Tencent-Hunyuan/Hunyuan-TurboS", "Official TurboS repo with model weights and architecture details"],
+    ["Hunyuan-A13B HuggingFace", "open weights", "https://huggingface.co/tencent/Hunyuan-A13B-Instruct", "80B total / 13B active open-source MoE, first open-source hybrid reasoning model at 13B active level"]
   ];
 
   const pagerState = {};
@@ -3970,7 +4070,8 @@ permalink: /ai-tracker/
       ["minimax", "MiniMax M2/M3", "Forge RL, self-evolution, MSA sparse attention, 1M context"],
       ["llama", "Llama 4 Family", "Scout, Maverick, Behemoth, MoE, 10M context, open weights"],
       ["mistral", "Mistral Devstral / Magistral", "Agentic coding, reasoning model, open weights, multilingual CoT"],
-      ["ernie", "ERNIE 4.5 Family", "Heterogeneous MoE, multimodal, 10 variants, Apache 2.0, 47% MFU, ERNIEKit + FastDeploy"]
+      ["ernie", "ERNIE 4.5 Family", "Heterogeneous MoE, multimodal, 10 variants, Apache 2.0, 47% MFU, ERNIEKit + FastDeploy"],
+      ["hunyuan", "Hunyuan T1 / TurboS / A13B", "Hybrid-Transformer-Mamba MoE, reasoning RL, 2x decoding speed, open A13B"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
       <button class="ops-layer-button ${id === active ? "active" : ""}" type="button" data-layer="${id}">
@@ -4000,6 +4101,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>Mistral Devstral / Magistral Deep Dive</h3><p>Mistral 从 Devstral（agentic coding LLM, 46.8% SWE-Bench Verified, 与 All Hands AI 合作）到 Magistral（first reasoning model, Small 24B open + Medium enterprise, 73.6% AIME 2024, multilingual CoT）的演进。所有阶段卡片都挂回 Mistral 官方 blog。</p><div class="ops-stage-grid">${(reportDeepDives["mistral-devstral-magistral"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "ernie") {
       detail.innerHTML = `<h3>ERNIE 4.5 Family Deep Dive</h3><p>Baidu ERNIE 4.5 是一个包含 10 个变体的多模态模型家族：MoE 架构（424B total / 47B active 最大版本）、异构模态路由、47% MFU、22/28 benchmark 超越 DeepSeek-V3。VLM 支持 thinking + non-thinking 双模式。所有模型 Apache 2.0 开源，附带 ERNIEKit + FastDeploy 工具链。所有阶段卡片都挂回官方 blog 和技术报告。</p><div class="ops-stage-grid">${(reportDeepDives["ernie-4.5"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
+    } else if (active === "hunyuan") {
+      detail.innerHTML = `<h3>Hunyuan T1 / TurboS / A13B Deep Dive</h3><p>腾讯混元从 TurboS（世界首个超大规模 Hybrid-Transformer-Mamba MoE）到 T1（reasoning model, 96.7% compute on RL, MMLU-PRO 87.2, MATH-500 96.2）再到 A13B（80B total / 13B active open-source MoE）的架构和训练演进。Hybrid-Transformer-Mamba 架构在长序列处理上实现 2x 解码加速，是目前唯一在生产环境部署该架构的前沿模型家族。所有阶段卡片都挂回官方 GitHub docs 和 arXiv 论文。</p><div class="ops-stage-grid">${(reportDeepDives["hunyuan"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else {
       const allDives = [...(reportDeepDives["glm-5"] || []), ...(reportDeepDives["glm-5.2"] || [])];
       detail.innerHTML = `<h3>GLM-5 / GLM-5.2 Report Deep Dive</h3><p>GLM-5 从 vibe coding 到 agentic engineering 的过渡（arXiv 2602.15763），加上 GLM-5.2 的 1M 上下文、IndexCache、slime 和 long-horizon 工程演进。所有阶段卡片都挂回 arXiv 论文和官方博客。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
