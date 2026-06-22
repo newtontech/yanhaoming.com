@@ -1853,6 +1853,50 @@ permalink: /ai-tracker/
         source: "https://arxiv.org/pdf/2602.15763"
       }
     ],
+    "anthropic-claude": [
+      {
+        title: "Claude Model Lineage",
+        stage: "release / timeline",
+        body: "Anthropic maintains a continuous Claude release chain: Claude 2 (Jul 2023) → Claude 3 (Mar 2024) → Claude 3.5 Sonnet (Jun 2024) → Claude 4 / Opus 4 (May 2025) → Claude 4.5 Sonnet / Opus (Sep-Nov 2025) → Claude 4.6 Opus / Sonnet (Feb 2026) → Claude 4.7 / 4.8 Opus (Apr-May 2026) → Claude Fable 5 / Mythos 5 (Jun 2026). Every release has a corresponding system card on the Anthropic system-cards index.",
+        source: "https://www.anthropic.com/system-cards"
+      },
+      {
+        title: "Fable 5 & Mythos 5 Architecture",
+        stage: "architecture / release",
+        body: "Claude Fable 5 is Anthropic's most capable widely released model, priced at $10/$50 per MTok. Claude Mythos 5 is limited to Project Glasswing (invitation-only defensive cybersecurity). Both use a new tokenizer introduced with Opus 4.7 (~30% more tokens per text), support adaptive thinking (always on, not extended thinking), 1M context window, and 128K max output. Bedrock and Vertex AI IDs use dateless format but remain pinned snapshots.",
+        source: "https://docs.anthropic.com/en/docs/about-claude/models"
+      },
+      {
+        title: "Opus 4.8: Agentic Coding Frontier",
+        stage: "release / API",
+        body: "Claude Opus 4.8 ($5/$25 per MTok) is the current Opus-tier flagship for complex reasoning and long-horizon agentic coding. It defaults to effort=high across all surfaces including Claude Code, has 1M context (200K on Microsoft Foundry), 128K max output (300K via batch API beta). Training data cutoff Jan 2026, reliable knowledge cutoff Jan 2026.",
+        source: "https://docs.anthropic.com/en/docs/about-claude/models"
+      },
+      {
+        title: "Adaptive Thinking vs Extended Thinking",
+        stage: "inference / reasoning",
+        body: "Starting with Opus 4.7 and Fable/Mythos 5, Anthropic shifted from explicit extended thinking (toggle-based) to adaptive thinking (always on). Opus 4.8 and Fable 5 use adaptive thinking; Sonnet 4.6 and Haiku 4.5 still support extended thinking. This represents a move toward invisible reasoning budgets that adjust per-query rather than requiring developer configuration.",
+        source: "https://docs.anthropic.com/en/docs/about-claude/models"
+      },
+      {
+        title: "Safety & System Card Index",
+        stage: "safety / deployment",
+        body: "The Anthropic system-cards index is the authoritative source for Claude safety evaluations. Each model gets a dedicated system card documenting capabilities, safety evals, and responsible deployment decisions. The page tracks 16 system cards from Claude 2 through Fable 5 / Mythos 5. Claude Mythos Preview (Project Glasswing) has a separate research-preview card for defensive cybersecurity workflows.",
+        source: "https://www.anthropic.com/system-cards"
+      },
+      {
+        title: "Pricing & Provider Surface",
+        stage: "ecosystem / pricing",
+        body: "Claude models are available on Claude API, Claude Platform on AWS (same model IDs, not Bedrock-style), Amazon Bedrock (global + regional endpoints), Vertex AI (global + multi-region + regional), and Microsoft Foundry. Haiku 4.5 at $1/$5 per MTok is the cost-efficiency tier. Opus 4.1 is deprecated and retires Aug 5, 2026.",
+        source: "https://docs.anthropic.com/en/docs/about-claude/models"
+      },
+      {
+        title: "300K Output via Batch API",
+        stage: "inference / capacity",
+        body: "Opus 4.8, Opus 4.7, Opus 4.6, and Sonnet 4.6 support up to 300K output tokens through the Message Batches API using the output-300k-2026-03-24 beta header, triple the standard 128K synchronous limit. This enables very long-form generation tasks that previously required chunking.",
+        source: "https://docs.anthropic.com/en/docs/about-claude/models"
+      }
+    ],
     "minimax-m2": [
       {
         title: "Architecture",
@@ -2538,8 +2582,9 @@ permalink: /ai-tracker/
       note: "Anthropic system card index 是 Claude 系列事实源；Fable/Mythos 5 需要同时关注可用性公告和 API 文档。",
       links: [
         ["System cards", "https://www.anthropic.com/system-cards"],
-        ["API docs", "https://platform.claude.com/docs/en/about-claude/models/introducing-claude-fable-5-and-claude-mythos-5"]
-      ]
+        ["API docs", "https://docs.anthropic.com/en/docs/about-claude/models"]
+      ],
+      deepDive: "anthropic-claude"
     },
     {
       name: "Claude Opus 4.8",
@@ -2547,10 +2592,12 @@ permalink: /ai-tracker/
       date: "2026-05",
       type: "system card index",
       tags: ["coding", "agent", "closed"],
-      note: "Claude Opus 4.8 在 Anthropic system card index 中列为 2026 年 5 月条目。",
+      note: "Claude Opus 4.8 在 Anthropic system card index 中列为 2026 年 5 月条目。是当前 Opus-tier agentic coding 前沿，$5/$25 per MTok，1M context，effort=high 默认。",
       links: [
-        ["System cards", "https://www.anthropic.com/system-cards"]
-      ]
+        ["System cards", "https://www.anthropic.com/system-cards"],
+        ["Model docs", "https://docs.anthropic.com/en/docs/about-claude/models"]
+      ],
+      deepDive: "anthropic-claude"
     },
     {
       name: "Gemini 3.1 Pro",
@@ -2856,8 +2903,8 @@ permalink: /ai-tracker/
         ["Anthropic research", "https://www.anthropic.com/research"]
       ],
       people: ["Anthropic research", "Frontier Red Team", "Safety Science"],
-      reports: ["Claude Opus/Sonnet system cards", "Claude agentic evals"],
-      methods: ["constitutional AI", "frontier safety", "tool-use eval", "system card"],
+      reports: ["Claude Opus 4.8", "Claude Fable 5 / Mythos 5", "Claude system cards (16 total)"],
+      methods: ["constitutional AI", "frontier safety", "tool-use eval", "system card", "adaptive thinking"],
       note: "Claude facts are sourced through Anthropic system cards and research posts; the page avoids inventing per-person authorship for product cards."
     },
     {
@@ -3126,7 +3173,8 @@ permalink: /ai-tracker/
     ["OpenAI GPT-5.5", "system card", "https://openai.com/index/gpt-5-5-system-card/", "closed model system-card source"],
     ["OpenAI GPT-4.1", "official release + system card", "https://openai.com/index/gpt-4-1/", "instruction following, 1M context, coding, and safety eval source"],
     ["OpenAI GPT-4o", "official release", "https://openai.com/index/hello-gpt-4o/", "natively multimodal model source"],
-    ["Claude models", "system card index", "https://www.anthropic.com/system-cards", "Anthropic closed model source ledger"],
+    ["Claude models", "system card index", "https://www.anthropic.com/system-cards", "Anthropic closed model source ledger: 16 system cards from Claude 2 to Fable 5 / Mythos 5"],
+    ["Claude model docs", "API docs", "https://docs.anthropic.com/en/docs/about-claude/models", "Claude model comparison, pricing, adaptive thinking, provider surface, migration guides"],
     ["Gemini 3.1 Pro", "model card", "https://deepmind.google/models/model-cards/gemini-3-1-pro/", "Google DeepMind closed model card"],
     ["Gemini 2.5 Pro", "model card PDF", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Pro-Model-Card.pdf", "Google DeepMind hybrid reasoning model card"],
     ["Gemini 2.5 Flash", "model card PDF", "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf", "Google DeepMind efficient hybrid reasoning model card"],
@@ -3488,7 +3536,8 @@ permalink: /ai-tracker/
       ["deepseek", "DeepSeek V3/R1/V4", "MoE, GRPO, reasoning RL, CSA, HCA"],
       ["kimi", "Kimi K2.5/K2.6/K2.7", "Agent swarms, coding, MuonClip lineage"],
       ["qwen", "Qwen3 / Coder-Next", "Thinking mode, MoE, agentic coding, 119 langs"],
-      ["openai", "OpenAI GPT Family", "GPT-4o, GPT-4.1, GPT-5.5 lineage"]
+      ["openai", "OpenAI GPT Family", "GPT-4o, GPT-4.1, GPT-5.5 lineage"],
+      ["anthropic", "Anthropic Claude", "Opus 4.8, Fable/Mythos 5, system cards, adaptive thinking"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
       <button class="ops-layer-button ${id === active ? "active" : ""}" type="button" data-layer="${id}">
@@ -3512,6 +3561,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>Launch Ecosystem</h3><p>GLM-5 Acknowledgement 暴露了可结构化的 partner map：open-source communities、inference providers、applications、AI gateways。其他报告只在有同类伙伴表时才标成 listed。</p><div class="ops-mini-grid">${ecosystemCategories.map((category) => `<div class="ops-mini-card"><strong>${category.name}</strong><span>${category.partners.length} partners / ${category.role}</span><button class="ops-mini-button" type="button" data-detail="ecosystem" data-id="${category.id}">Open</button></div>`).join("")}</div>`;
     } else if (active === "openai") {
       detail.innerHTML = `<h3>OpenAI GPT Family Deep Dive</h3><p>OpenAI 从 GPT-4o（多模态端到端）到 GPT-4.1（instruction following + 1M context）到 GPT-5.5（agentic tool use）的演进路线。所有阶段卡片都挂回官方 release 或 system card。</p><div class="ops-stage-grid">${reportDeepDives["openai-gpt-family"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
+    } else if (active === "anthropic") {
+      detail.innerHTML = `<h3>Anthropic Claude Deep Dive</h3><p>Anthropic 从 Claude 2 到 Claude 3/3.5 到 Claude 4.x 再到 Fable 5 / Mythos 5 的演进。16 个 system card 覆盖完整能力、安全评估和部署决策。Opus 4.8 是当前 agentic coding 前沿；Fable 5 引入 adaptive thinking 和新 tokenizer。所有阶段卡片都挂回 Anthropic system card index 和 API docs。</p><div class="ops-stage-grid">${reportDeepDives["anthropic-claude"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "kimi") {
       detail.innerHTML = `<h3>Kimi K2.5 / K2.6 / K2.7 Code Deep Dive</h3><p>Kimi 从 K2.5 基线技术报告（326 作者 arXiv 表）到 K2.6 官方技术博客（agent swarms、proactive agents、Claw Groups、benchmark tables）再到 K2.7 Code API 模型文档的演进。所有阶段卡片都挂回 arXiv 或官方来源。</p><div class="ops-stage-grid">${reportDeepDives["kimi-k2-6"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "qwen") {
