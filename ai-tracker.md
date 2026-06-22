@@ -2089,6 +2089,44 @@ permalink: /ai-tracker/
         source: "https://arxiv.org/abs/2505.09388"
       }
     ],
+    "minimax-m2": [
+      {
+        title: "2.2 Pre-training Data & Agent-Driven Pipelines",
+        stage: "pre-training / data",
+        body: "MiniMax-M2 builds large-scale, verifiable trajectories across agentic coding and agentic cowork tasks. Each trajectory is grounded in an executable workspace with artifact-aligned reward, ensuring training signal comes from real agent execution rather than synthetic preference data. The pipeline is designed so that data quality improves with model capability — stronger models generate better trajectories for subsequent training rounds.",
+        source: "https://arxiv.org/abs/2605.26494"
+      },
+      {
+        title: "3 Forge: Agent-Native RL System",
+        stage: "post-training / RL",
+        body: "Forge is a scalable agent-native reinforcement learning system designed for long-horizon agent trajectories. It uses windowed-FIFO scheduling to manage rollout lifetimes, prefix-tree merging to deduplicate shared trajectory prefixes, and inference optimization for efficient training-inference-agent decoupling. Forge supports both white-box (gradient-accessible) and black-box (API-only) agent configurations, making it adaptable to closed-source model fine-tuning.",
+        source: "https://arxiv.org/abs/2605.26494"
+      },
+      {
+        title: "4 MoE Architecture: 229.9B Total / 9.8B Activated",
+        stage: "architecture",
+        body: "MiniMax-M2 is a Mixture-of-Experts model with 229.9B total parameters and only 9.8B activated per token. The design principle is 'mini activations can unleash maximum real-world intelligence' — achieving frontier-tier performance with a compact active footprint suitable for agentic deployment where latency and cost matter more than peak parameter count.",
+        source: "https://arxiv.org/abs/2605.26494"
+      },
+      {
+        title: "5 M2.7 Self-Evolution Checkpoint",
+        stage: "agentic training",
+        body: "The M2.7 checkpoint takes an early step toward self-evolution: it autonomously debugs training runs and modifies its own scaffold. This represents a shift from static post-training to adaptive agent systems that can improve their own infrastructure — a direction distinct from the RL-focused approaches of DeepSeek and GLM.",
+        source: "https://arxiv.org/abs/2605.26494"
+      },
+      {
+        title: "6 Benchmark Coverage & Cross-Report Comparison",
+        stage: "evaluation",
+        body: "Across M2 through M2.7, the series demonstrates frontier-tier performance on agentic coding, deep search, office-task, and reasoning benchmarks. GLM-5.2 explicitly compares against MiniMax M3/M-series on Terminal-Bench 2.1, SWE-bench Pro, HLE, and MCPAtlas. The paper provides author tables and reproducible evaluation setup.",
+        source: "https://arxiv.org/abs/2605.26494"
+      },
+      {
+        title: "M3: 1M Context via Mini Sparse Attention",
+        stage: "architecture / inference",
+        body: "MiniMax M3 extends the M2 lineage with 1M-token context support via MSA (Mini Sparse Attention), achieving 15.6x faster decoding at 1M tokens compared to dense attention baselines. M3 also adds native multimodality and is positioned as the open-weight frontier for coding and agentic work at $0.60/million tokens. The M3 blog is the official source; the M2 paper provides the architecture and training foundations.",
+        source: "https://www.minimax.io/blog/minimax-m3"
+      }
+    ],
     "qwen3-coder-next": [
       {
         title: "80B Total / 3B Activated MoE for Coding",
@@ -3655,7 +3693,8 @@ permalink: /ai-tracker/
       ["kimi", "Kimi K2.5/K2.6/K2.7", "Agent swarms, coding, MuonClip lineage"],
       ["qwen", "Qwen3 / Coder-Next", "Thinking mode, MoE, agentic coding, 119 langs"],
       ["openai", "OpenAI GPT Family", "GPT-4o, GPT-4.1, GPT-5.5 lineage"],
-      ["anthropic", "Anthropic Claude", "Opus 4.8, Fable/Mythos 5, system cards, adaptive thinking"]
+      ["anthropic", "Anthropic Claude", "Opus 4.8, Fable/Mythos 5, system cards, adaptive thinking"],
+      ["minimax", "MiniMax M2/M3", "Forge RL, self-evolution, MSA sparse attention, 1M context"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
       <button class="ops-layer-button ${id === active ? "active" : ""}" type="button" data-layer="${id}">
@@ -3677,6 +3716,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>People & Author Network</h3><p>作者表、团队发布、system card 和 agent paper 被放在同一层比较，避免把没有署名的官方发布误当成论文作者贡献。</p><div class="ops-mini-grid">${peopleRecords.slice(0, 10).map((record) => `<div class="ops-mini-card"><strong>${record.lab}</strong><span>${record.disclosure} / ${record.count ? `${record.count} authors` : "team-level"}</span><button class="ops-mini-button" type="button" data-detail="people" data-id="${record.id}">Open</button></div>`).join("")}</div>`;
     } else if (active === "ecosystem") {
       detail.innerHTML = `<h3>Launch Ecosystem</h3><p>GLM-5 Acknowledgement 暴露了可结构化的 partner map：open-source communities、inference providers、applications、AI gateways。其他报告只在有同类伙伴表时才标成 listed。</p><div class="ops-mini-grid">${ecosystemCategories.map((category) => `<div class="ops-mini-card"><strong>${category.name}</strong><span>${category.partners.length} partners / ${category.role}</span><button class="ops-mini-button" type="button" data-detail="ecosystem" data-id="${category.id}">Open</button></div>`).join("")}</div>`;
+    } else if (active === "minimax") {
+      detail.innerHTML = `<h3>MiniMax M2 / M3 Deep Dive</h3><p>MiniMax 从 M2（229.9B MoE / 9.8B activated + Forge agent-native RL + self-evolution scaffold）到 M3（1M context via MSA sparse attention + native multimodality + $0.60/MTok）的演进。所有阶段卡片都挂回 arXiv 论文和官方博客。</p><div class="ops-stage-grid">${(reportDeepDives["minimax-m2"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "openai") {
       detail.innerHTML = `<h3>OpenAI GPT Family Deep Dive</h3><p>OpenAI 从 GPT-4o（多模态端到端）到 GPT-4.1（instruction following + 1M context）到 GPT-5.5（agentic tool use）的演进路线。所有阶段卡片都挂回官方 release 或 system card。</p><div class="ops-stage-grid">${reportDeepDives["openai-gpt-family"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "anthropic") {
