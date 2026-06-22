@@ -1463,7 +1463,7 @@ permalink: /ai-tracker/
   <section class="ops-hero" id="top">
     <canvas id="ops-radar" aria-hidden="true"></canvas>
     <div>
-      <div class="ops-kicker">AI Research Intelligence Dashboard / 2026-06-21</div>
+      <div class="ops-kicker">AI Research Intelligence Dashboard / 2026-06-22</div>
       <h1 class="ops-title">AI Research <span>War Room</span></h1>
       <p class="ops-subtitle">
         一个面向大语言模型、智能体和公司研究动向的情报面板。这里把论文、技术报告、system card、model card、官方发布、代码和权重分开标注，避免把闭源模型的安全卡误写成论文。
@@ -1916,6 +1916,58 @@ permalink: /ai-tracker/
         body: "DeepSeek-V4-Pro and Flash expose Non-Think, High, and Max modes. The report evaluates with 8K, 128K, and 384K context windows respectively; Max uses longer contexts and reduced length penalties and tends to win on hard reasoning/agent tasks.",
         source: "https://arxiv.org/html/2606.19348"
       }
+    ],
+    "deepseek-v3": [
+      {
+        title: "DeepSeek-V3 Architecture",
+        stage: "architecture",
+        body: "DeepSeek-V3 is a Mixture-of-Experts model with 671B total parameters and 37B activated per token. It uses Multi-head Latent Attention (MLA) for KV cache compression, DeepSeekMoE for fine-grained expert routing, and auxiliary-loss-free load balancing. The architecture supports efficient training with FP8 mixed precision.",
+        source: "https://arxiv.org/abs/2412.19437"
+      },
+      {
+        title: "Multi-Token Prediction (MTP)",
+        stage: "pre-training",
+        body: "DeepSeek-V3 introduces Multi-Token Prediction as a training objective. Each position predicts multiple future tokens simultaneously, improving data efficiency and enabling speculative decoding at inference time. MTP adds minimal overhead during training while significantly boosting generation speed.",
+        source: "https://arxiv.org/abs/2412.19437"
+      },
+      {
+        title: "FP8 Mixed-Precision Training",
+        stage: "training",
+        body: "DeepSeek-V3 implements FP8 mixed-precision training with fine-grained quantization and high-precision accumulation. This reduces memory usage and training costs while maintaining model quality. The approach uses a custom FP8 GEMM kernel with online quantization and tile-wise scaling.",
+        source: "https://arxiv.org/abs/2412.19437"
+      },
+      {
+        title: "Post-training: RLHF with GRPO",
+        stage: "post-training",
+        body: "V3 uses Group Relative Policy Optimization (GRPO) for alignment. GRPO samples a group of outputs for each prompt and computes relative rewards within the group, eliminating the need for a separate critic model. This reduces training cost while maintaining alignment quality.",
+        source: "https://arxiv.org/abs/2412.19437"
+      }
+    ],
+    "deepseek-r1": [
+      {
+        title: "DeepSeek-R1 Reasoning Model",
+        stage: "architecture",
+        body: "DeepSeek-R1 is a reasoning-focused model that demonstrates how RL can produce emergent reasoning capabilities without explicit chain-of-thought supervision. The model is trained from DeepSeek-V3-Base using RL with GRPO, showing that reasoning patterns emerge naturally from reward signals.",
+        source: "https://arxiv.org/abs/2501.12948"
+      },
+      {
+        title: "Cold-Start with Long-CoT",
+        stage: "post-training",
+        body: "R1 uses a multi-stage pipeline: (1) cold-start with a small set of long-chain-of-thought examples, (2) RL training with reasoning-oriented rewards, (3) rejection sampling and SFT for non-reasoning tasks, (4) final RL with mixed rewards. The cold-start phase seeds the model with reasoning patterns before RL discovers additional strategies.",
+        source: "https://arxiv.org/abs/2501.12948"
+      },
+      {
+        title: "Emergent Behaviors",
+        stage: "evaluation",
+        body: "During RL training, R1 spontaneously develops chain-of-thought reasoning, self-verification, and reflection without explicit prompting. It achieves 71% pass@1 on AIME 2024 (matching OpenAI-o1) and 79.8% on MATH-500. The paper demonstrates that large-scale RL alone can elicit sophisticated reasoning behaviors.",
+        source: "https://arxiv.org/abs/2501.12948"
+      },
+      {
+        title: "Distillation to Smaller Models",
+        stage: "distillation",
+        body: "DeepSeek distills R1's reasoning capabilities into smaller models (1.5B to 70B parameters). The distilled DeepSeek-R1-Distill-Qwen-32B outperforms OpenAI-o1-mini on multiple benchmarks. This demonstrates that reasoning patterns from large RL-trained models can be effectively transferred to compact architectures.",
+        source: "https://arxiv.org/abs/2501.12948"
+      }
     ]
   };
 
@@ -2259,18 +2311,44 @@ permalink: /ai-tracker/
       deepDive: "openai-gpt-family"
     },
     {
-      id: "deepseek-v3-r1",
-      name: "DeepSeek V3 / R1 baseline",
+      id: "deepseek-v3",
+      name: "DeepSeek-V3",
       org: "DeepSeek-AI",
-      date: "2024-2025",
+      date: "2024-12",
       openness: "open weights",
       type: "paper",
-      tags: ["reasoning", "MoE", "baseline", "open"],
+      tags: ["MoE", "671B", "FP8 training", "MTP", "open"],
       status: "baseline",
-      note: "V3/R1 remains the required architecture and reasoning baseline for interpreting DeepSeek V4's MoE, GRPO, and post-training changes.",
-      links: [["V3 paper", "https://arxiv.org/abs/2412.19437"], ["R1 paper", "https://arxiv.org/abs/2501.12948"]],
-      methods: ["MoE", "GRPO", "reasoning RL"],
-      benchmarks: ["math", "coding", "reasoning"]
+      note: "DeepSeek-V3 is the 671B MoE predecessor to V4. Its paper covers MLA attention, DeepSeekMoE routing, FP8 mixed-precision training, Multi-Token Prediction, and GRPO alignment. V4 Pro/Flash explicitly build on V3's architecture.",
+      links: [
+        ["arXiv", "https://arxiv.org/abs/2412.19437"],
+        ["PDF", "https://arxiv.org/pdf/2412.19437"],
+        ["HF", "https://huggingface.co/deepseek-ai/DeepSeek-V3-Base"],
+        ["GitHub", "https://github.com/deepseek-ai/DeepSeek-V3"]
+      ],
+      methods: ["MLA", "DeepSeekMoE", "auxiliary-loss-free load balancing", "FP8 mixed precision", "Multi-Token Prediction", "GRPO"],
+      benchmarks: ["MMLU", "LiveCodeBench", "MATH-500", "AIME 2024"],
+      deepDive: "deepseek-v3"
+    },
+    {
+      id: "deepseek-r1",
+      name: "DeepSeek-R1",
+      org: "DeepSeek-AI",
+      date: "2025-01",
+      openness: "open weights",
+      type: "paper",
+      tags: ["reasoning", "RL", "chain-of-thought", "distillation", "open"],
+      status: "baseline",
+      note: "DeepSeek-R1 demonstrates emergent reasoning from RL (GRPO) without explicit CoT supervision. Cold-start + multi-stage RL pipeline; distilled into 1.5B–70B models that outperform o1-mini on multiple benchmarks.",
+      links: [
+        ["arXiv", "https://arxiv.org/abs/2501.12948"],
+        ["PDF", "https://arxiv.org/pdf/2501.12948"],
+        ["HF", "https://huggingface.co/deepseek-ai/DeepSeek-R1"],
+        ["GitHub", "https://github.com/deepseek-ai/DeepSeek-R1"]
+      ],
+      methods: ["GRPO", "cold-start Long-CoT", "reasoning RL", "self-verification", "distillation"],
+      benchmarks: ["AIME 2024", "MATH-500", "LiveCodeBench", "GPQA Diamond"],
+      deepDive: "deepseek-r1"
     }
   ];
 
@@ -2542,6 +2620,8 @@ permalink: /ai-tracker/
     ["glm-5", "GLM-5: from Vibe Coding to Agentic Engineering", "Z.ai", "2026-02-17", "paper", "Open-weight model-body report covering data, mid-training, post-training, asynchronous agentic RL, ARC and long-horizon evaluation.", "https://arxiv.org/abs/2602.15763"],
     ["glm-5-2", "GLM-5.2: Built for Long-Horizon Tasks", "Z.ai", "2026-06-16", "official blog", "Separate GLM-5.2 release with 1M context, IndexShare, GLM Coding Plan, slime, OPD, anti-hack, and long-horizon coding benchmark tables.", "https://z.ai/blog/glm-5.2"],
     ["glm-indexcache", "IndexCache: Accelerating Sparse Attention via Cross-Layer Index Reuse", "Z.ai", "2026-03-12", "paper", "Sparse-attention efficiency paper used by GLM-5.2 blog as IndexShare/IndexCache evidence.", "https://arxiv.org/abs/2603.12201"],
+    ["deepseek-v3", "DeepSeek-V3: A Strong Mixture-of-Experts Language Model", "DeepSeek-AI", "2024-12", "paper", "671B MoE architecture with MLA, DeepSeekMoE, FP8 training, Multi-Token Prediction, and GRPO alignment. V4 explicitly builds on V3.", "https://arxiv.org/abs/2412.19437"],
+    ["deepseek-r1", "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning", "DeepSeek-AI", "2025-01", "paper", "Reasoning model demonstrating emergent CoT from RL with GRPO. Cold-start + multi-stage pipeline; distilled into 1.5B–70B models.", "https://arxiv.org/abs/2501.12948"],
     ["deepseek-v4-pro", "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence", "DeepSeek-AI", "2026-04-24", "technical report", "Model-body report for Pro/Flash with CSA, HCA, mHC, Muon, OPD, GRPO, 1M context, and benchmark Tables 6/7.", "https://arxiv.org/html/2606.19348"],
     ["kimi-k2-6", "Kimi K2.6 Tech Blog: Advancing Open-Source Coding", "Moonshot AI", "2026", "official blog", "Official Kimi K2.6 source for coding, agent swarms, proactive agents, Claw Groups, benchmark tables, images, and evaluation footnotes.", "https://www.kimi.com/blog/kimi-k2-6"],
     ["kimi-k2-5", "Kimi K2.5 Technical Report", "Moonshot AI", "2026", "technical report", "Cited by K2.6 footnotes for prompts and benchmark setup; retained as Kimi baseline source.", "https://arxiv.org/pdf/2602.02276"],
@@ -2904,6 +2984,8 @@ permalink: /ai-tracker/
     ["GLM-5.2", "official blog", "https://z.ai/blog/glm-5.2", "1M context, IndexShare, benchmark tables, slime, OPD, anti-hack, images"],
     ["IndexCache / IndexShare", "paper", "https://arxiv.org/abs/2603.12201", "GLM-5.2 long-context sparse-attention method"],
     ["DeepSeek V4", "technical report", "https://arxiv.org/html/2606.19348", "CSA/HCA/mHC/Muon/OPD/GRPO, Tables 6/7, Figures 8-10"],
+    ["DeepSeek V3", "paper", "https://arxiv.org/abs/2412.19437", "671B MoE architecture, MLA, DeepSeekMoE, FP8 training, MTP, GRPO alignment"],
+    ["DeepSeek R1", "paper", "https://arxiv.org/abs/2501.12948", "Reasoning from RL, cold-start Long-CoT, GRPO, distillation into smaller models"],
     ["DeepSeek V4 release", "official release", "https://api-docs.deepseek.com/news/news260424", "DeepSeek V4 API and release context"],
     ["Kimi K2.6", "official blog", "https://www.kimi.com/blog/kimi-k2-6", "Kimi K2.6 benchmark tables, footnotes, original figures"],
     ["Kimi K2.5", "technical report", "https://arxiv.org/pdf/2602.02276", "Kimi baseline and evaluation setup referenced by K2.6"],
@@ -3273,6 +3355,7 @@ permalink: /ai-tracker/
       ["people", "People Network", "Authors, teams, disclosure level"],
       ["ecosystem", "Launch Ecosystem", "Partners, providers, gateways"],
       ["glm", "GLM-5 Deep Dive", "Data, RL, eval and Pony Alpha"],
+      ["deepseek", "DeepSeek V3/R1/V4", "MoE, GRPO, reasoning RL, CSA, HCA"],
       ["openai", "OpenAI GPT Family", "GPT-4o, GPT-4.1, GPT-5.5 lineage"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
@@ -3297,6 +3380,9 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>Launch Ecosystem</h3><p>GLM-5 Acknowledgement 暴露了可结构化的 partner map：open-source communities、inference providers、applications、AI gateways。其他报告只在有同类伙伴表时才标成 listed。</p><div class="ops-mini-grid">${ecosystemCategories.map((category) => `<div class="ops-mini-card"><strong>${category.name}</strong><span>${category.partners.length} partners / ${category.role}</span><button class="ops-mini-button" type="button" data-detail="ecosystem" data-id="${category.id}">Open</button></div>`).join("")}</div>`;
     } else if (active === "openai") {
       detail.innerHTML = `<h3>OpenAI GPT Family Deep Dive</h3><p>OpenAI 从 GPT-4o（多模态端到端）到 GPT-4.1（instruction following + 1M context）到 GPT-5.5（agentic tool use）的演进路线。所有阶段卡片都挂回官方 release 或 system card。</p><div class="ops-stage-grid">${reportDeepDives["openai-gpt-family"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
+    } else if (active === "deepseek") {
+      const allDives = [...(reportDeepDives["deepseek-v3"] || []), ...(reportDeepDives["deepseek-r1"] || []), ...(reportDeepDives["deepseek-v4-pro"] || [])];
+      detail.innerHTML = `<h3>DeepSeek V3 / R1 / V4 Deep Dive</h3><p>DeepSeek 从 V3（671B MoE + FP8 + MTP）到 R1（emergent reasoning via RL）再到 V4（CSA + HCA + 1M context）的架构和训练演进。所有阶段卡片都挂回 arXiv 报告。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else {
       detail.innerHTML = `<h3>GLM-5 Report Deep Dive</h3><p>用户指定的 GLM-5 章节被结构化为阶段卡，所有阶段都挂回 arXiv PDF。</p><div class="ops-stage-grid">${reportDeepDives["glm-5"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     }
