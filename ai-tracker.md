@@ -1943,6 +1943,44 @@ permalink: /ai-tracker/
         source: "https://arxiv.org/abs/2412.19437"
       }
     ],
+    "kimi-k2-6": [
+      {
+        title: "K2.5 Architecture & Baseline",
+        stage: "architecture / baseline",
+        body: "Kimi K2.5 is the baseline technical report (arXiv 2602.02276) for the Kimi model line. It provides the explicit 326-author table, test system prompts, and benchmark setup that K2.6 footnotes reference. K2.5 covers tool-augmented evaluation and context management methods.",
+        source: "https://arxiv.org/pdf/2602.02276"
+      },
+      {
+        title: "K2.6 Long-Horizon Coding",
+        stage: "coding / release",
+        body: "Kimi K2.6 tech blog (official Moonshot source) advances long-horizon coding and coding-driven design. The blog provides benchmark tables comparing HLE, BrowseComp, DeepSearchQA, APEX-Agents, Terminal Bench 2.0, SWE Verified, and CharXiv. Reproducibility footnotes reference K2.5 as the test-system-prompt baseline.",
+        source: "https://www.kimi.com/blog/kimi-k2-6"
+      },
+      {
+        title: "Agent Swarms & Proactive Agents",
+        stage: "agentic training",
+        body: "K2.6 introduces agent swarms and proactive agents as a direction beyond single-agent coding. The Claw Groups preview is mentioned as an upcoming multi-agent coordination surface. The K2.6 blog describes joint text-vision RL as part of the multimodal agent stack.",
+        source: "https://www.kimi.com/blog/kimi-k2-6"
+      },
+      {
+        title: "K2.7 Code: Coding-Specialized API",
+        stage: "release / API",
+        body: "Kimi K2.7 Code is the current coding-specialized API line, tracked separately because its source surface is model docs rather than the K2.6 tech blog. The quickstart docs define it as the latest Kimi coding model for SWE, Terminal Bench, and ProgramBench evaluations.",
+        source: "https://platform.kimi.ai/docs/guide/kimi-k2-7-code-quickstart"
+      },
+      {
+        title: "MuonClip Optimizer Lineage",
+        stage: "methods / watchlist",
+        body: "Kimi K2.6 footnotes reference the K2.5 report; the tracker keeps MuonClip as Kimi optimizer lineage until directly verified in the report text. The method registry tracks it as a watchlist item linked to both K2.5 and K2.6 sources.",
+        source: "https://arxiv.org/pdf/2602.02276"
+      },
+      {
+        title: "Benchmark Setup & Source Provenance",
+        stage: "evaluation",
+        body: "K2.6 provides benchmark tables for HLE (36.4 pass@1 without tools, 54.0 with tools), BrowseComp, DeepSearchQA, and agent benchmarks. The report explicitly footnotes which test prompts come from K2.5, establishing a clear source chain for benchmark reproducibility.",
+        source: "https://www.kimi.com/blog/kimi-k2-6"
+      }
+    ],
     "deepseek-r1": [
       {
         title: "DeepSeek-R1 Reasoning Model",
@@ -2106,7 +2144,8 @@ permalink: /ai-tracker/
       ],
       methods: ["MuonClip lineage", "agent swarm", "context management", "SWE-agent style harness"],
       benchmarks: ["HLE", "BrowseComp", "DeepSearchQA", "APEX-Agents", "Terminal Bench 2.0", "SWE Verified", "CharXiv"],
-      figures: ["kimi-k26-1", "kimi-k26-2", "kimi-k26-3"]
+      figures: ["kimi-k26-1", "kimi-k26-2", "kimi-k26-3"],
+      deepDive: "kimi-k2-6"
     },
     {
       id: "kimi-k2-5",
@@ -3356,6 +3395,7 @@ permalink: /ai-tracker/
       ["ecosystem", "Launch Ecosystem", "Partners, providers, gateways"],
       ["glm", "GLM-5 Deep Dive", "Data, RL, eval and Pony Alpha"],
       ["deepseek", "DeepSeek V3/R1/V4", "MoE, GRPO, reasoning RL, CSA, HCA"],
+      ["kimi", "Kimi K2.5/K2.6/K2.7", "Agent swarms, coding, MuonClip lineage"],
       ["openai", "OpenAI GPT Family", "GPT-4o, GPT-4.1, GPT-5.5 lineage"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
@@ -3380,6 +3420,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>Launch Ecosystem</h3><p>GLM-5 Acknowledgement 暴露了可结构化的 partner map：open-source communities、inference providers、applications、AI gateways。其他报告只在有同类伙伴表时才标成 listed。</p><div class="ops-mini-grid">${ecosystemCategories.map((category) => `<div class="ops-mini-card"><strong>${category.name}</strong><span>${category.partners.length} partners / ${category.role}</span><button class="ops-mini-button" type="button" data-detail="ecosystem" data-id="${category.id}">Open</button></div>`).join("")}</div>`;
     } else if (active === "openai") {
       detail.innerHTML = `<h3>OpenAI GPT Family Deep Dive</h3><p>OpenAI 从 GPT-4o（多模态端到端）到 GPT-4.1（instruction following + 1M context）到 GPT-5.5（agentic tool use）的演进路线。所有阶段卡片都挂回官方 release 或 system card。</p><div class="ops-stage-grid">${reportDeepDives["openai-gpt-family"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
+    } else if (active === "kimi") {
+      detail.innerHTML = `<h3>Kimi K2.5 / K2.6 / K2.7 Code Deep Dive</h3><p>Kimi 从 K2.5 基线技术报告（326 作者 arXiv 表）到 K2.6 官方技术博客（agent swarms、proactive agents、Claw Groups、benchmark tables）再到 K2.7 Code API 模型文档的演进。所有阶段卡片都挂回 arXiv 或官方来源。</p><div class="ops-stage-grid">${reportDeepDives["kimi-k2-6"].map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "deepseek") {
       const allDives = [...(reportDeepDives["deepseek-v3"] || []), ...(reportDeepDives["deepseek-r1"] || []), ...(reportDeepDives["deepseek-v4-pro"] || [])];
       detail.innerHTML = `<h3>DeepSeek V3 / R1 / V4 Deep Dive</h3><p>DeepSeek 从 V3（671B MoE + FP8 + MTP）到 R1（emergent reasoning via RL）再到 V4（CSA + HCA + 1M context）的架构和训练演进。所有阶段卡片都挂回 arXiv 报告。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
