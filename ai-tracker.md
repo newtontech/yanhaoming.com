@@ -2462,6 +2462,44 @@ permalink: /ai-tracker/
         body: "For AFM 3 Cloud Pro, Apple worked with Google and NVIDIA to extend Private Cloud Compute to NVIDIA GPUs in Google Cloud, maintaining the same privacy guarantees. This is a notable infrastructure expansion — AFM 3 Cloud Pro is the first Apple foundation model running outside Apple's own silicon, enabled by the PCC trust architecture.",
         source: "https://security.apple.com/blog/expanding-pcc/"
       }
+    ],
+    "amazon-nova-2": [
+      {
+        title: "Nova 2 Lite: Fast Reasoning with 1M Context",
+        stage: "architecture / release",
+        body: "Amazon Nova 2 Lite is a fast, cost-effective reasoning model for everyday tasks. It offers developer controls for thinking effort (off/low/medium/high), built-in tools including code interpreter and web grounding, remote MCP tool support, and a 1M-token context window. Designed for customer service chatbots, document processing, and business automation. Positioned as the best model for use with Nova Forge to build custom frontier intelligence.",
+        source: "https://aws.amazon.com/nova/models/"
+      },
+      {
+        title: "Nova 2 Pro: Most Intelligent Model for Complex Workloads",
+        stage: "architecture / preview",
+        body: "Amazon Nova 2 Pro is the most intelligent model in the Nova 2 family, targeting highly complex workloads including advanced multi-step reasoning, long-range planning, and sophisticated agentic workflows. It excels at multi-document analysis, video reasoning, and software migrations. Nova 2 Pro is positioned as the best teacher for model distillation to produce faster, more cost-effective models. Available in preview with early access via Nova Forge customers.",
+        source: "https://aws.amazon.com/nova/models/"
+      },
+      {
+        title: "Nova 2 Sonic: Unified Speech-to-Speech",
+        stage: "architecture / multimodal",
+        body: "Nova 2 Sonic unifies speech understanding and generation into a single model for natural, real-time conversational AI. It supports seven languages, polyglot voices, cross-modal interaction for seamless switching between voice and text within a session, asynchronous tool use, and an expanded context window of up to 1M tokens. Deployed in production for Alexa Greeting on Ring doorbell cameras and Webex AI Receptionist. Claims industry-leading conversational quality and pricing.",
+        source: "https://aws.amazon.com/nova/models/"
+      },
+      {
+        title: "Nova Multimodal Embedding: Unified RAG Across Modalities",
+        stage: "embedding / retrieval",
+        body: "Amazon Nova Multimodal Embeddings is a unified embedding model supporting text, documents, images, video, and audio through a single model. It maps diverse content types into a unified space, designed to power agentic RAG and semantic search. Positioned as a replacement for multiple specialized embedding models with a single unified solution for cross-modal retrieval.",
+        source: "https://aws.amazon.com/nova/models/"
+      },
+      {
+        title: "Customization: SFT, RFT, and Nova Forge",
+        stage: "ecosystem / customization",
+        body: "Nova 2 Lite offers the most comprehensive customization suite for any proprietary model family, available through Amazon Bedrock and Amazon SageMaker AI across the full training lifecycle: pre-training, supervised fine-tuning (SFT), and reinforcement fine-tuning (RFT). Custom Nova models built via SageMaker AI can be deployed with SageMaker Inference for optimal performance, with control over instance types, auto-scaling, and concurrency.",
+        source: "https://aws.amazon.com/nova/models/"
+      },
+      {
+        title: "Enterprise Deployment: Bedrock, SageMaker, and Partners",
+        stage: "ecosystem / deployment",
+        body: "Nova 2 models are available through Amazon Bedrock (standard API access) and SageMaker AI (custom model deployment). Enterprise partners include LangChain (agent observability), Cisco/Webex (AI Receptionist), Siemens (enterprise search), Securonix (cybersecurity), and AWS Transform (code modernization, claiming 60% tool-calling efficiency improvement). The AI Service Card for Nova 2 Lite provides responsible-AI documentation.",
+        source: "https://docs.aws.amazon.com/ai/responsible-ai/nova-2-lite/overview.html"
+      }
     ]
   };
 
@@ -3274,13 +3312,18 @@ permalink: /ai-tracker/
       name: "Amazon Nova 2",
       org: "Amazon / AWS",
       date: "2025-12",
-      type: "AI service card",
-      tags: ["multimodal", "enterprise", "safety"],
-      note: "AWS AI Service Cards 是 Nova 2 系列的可信来源，适合闭源模型的企业责任信息跟踪。",
+      type: "AI service card + official docs",
+      tags: ["multimodal", "enterprise", "speech-to-speech", "1M context", "customization"],
+      note: "Nova 2 family includes Lite (fast reasoning, 1M context, thinking controls, MCP tools), Pro (preview, most intelligent, multi-step reasoning, best for distillation), Sonic (speech-to-speech, 7 languages, cross-modal), and Multimodal Embedding (unified text/image/video/audio). The most comprehensive customization suite for any proprietary model: SFT, RFT, and Nova Forge via Bedrock + SageMaker.",
       links: [
         ["Nova models", "https://aws.amazon.com/nova/models/"],
-        ["Nova 2 Lite card", "https://docs.aws.amazon.com/ai/responsible-ai/nova-2-lite/overview.html"]
-      ]
+        ["Nova 2 Lite card", "https://docs.aws.amazon.com/ai/responsible-ai/nova-2-lite/overview.html"],
+        ["Getting started", "https://docs.aws.amazon.com/nova/latest/nova2-userguide/getting-started-console.html"],
+        ["Customization", "https://docs.aws.amazon.com/nova/latest/userguide/customization.html"],
+        ["Agents", "https://docs.aws.amazon.com/nova/latest/userguide/agents.html"],
+        ["Speech", "https://docs.aws.amazon.com/nova/latest/userguide/speech.html"]
+      ],
+      deepDive: "amazon-nova-2"
     }
   ];
 
