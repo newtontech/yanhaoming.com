@@ -2368,6 +2368,50 @@ permalink: /ai-tracker/
         body: "The Hunyuan family's key architectural innovation is the Hybrid-Transformer-Mamba fusion. Traditional pure Transformer models struggle with long-text training and inference due to quadratic attention complexity. Mamba's state-space model approach provides linear complexity for sequence processing. The hybrid combines both: Transformer layers for strong contextual understanding, Mamba layers for efficient long-sequence processing. This positions Hunyuan uniquely among frontier families — no other major lab has shipped a production Hybrid-Transformer-Mamba MoE at this scale.",
         source: "https://arxiv.org/pdf/2505.15431"
       }
+    ],
+    "xai-grok": [
+      {
+        title: "Grok 4.3: Always-On Configurable Reasoning",
+        stage: "architecture / release",
+        body: "Grok 4.3 (June 15, 2026) is xAI's flagship model with always-on configurable reasoning at four levels: none, low, medium, high. Unlike OpenAI's o-series (separate reasoning models) or Anthropic's adaptive thinking (invisible budget), xAI exposes the reasoning-effort knob directly to developers. The model supports text+image input, function calling, structured outputs, and encrypted reasoning content. Knowledge cutoff November 2024. Priced at $1.25 input / $2.50 output per 1M tokens.",
+        source: "https://docs.x.ai/developers/models/grok-4.3"
+      },
+      {
+        title: "Mantle: Custom Inference Engine on Bedrock",
+        stage: "inference / infrastructure",
+        body: "Grok 4.3 runs on Mantle, a new xAI-built inference engine deployed on Amazon Bedrock. The AWS model card documents Bedrock-specific endpoints, reasoning effort configuration, and enterprise use cases. Mantle is positioned as a performance and cost optimization layer — xAI claims the lowest hallucination rate and strongest agentic tool calling among comparable models.",
+        source: "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-xai-grok-4-3.html"
+      },
+      {
+        title: "Encrypted Reasoning Content",
+        stage: "safety / privacy",
+        body: "Grok 4.3 supports encrypted reasoning content, a feature unique among frontier models. When enabled, the model's chain-of-thought reasoning is encrypted and not visible to API consumers, addressing enterprise concerns about sensitive reasoning traces leaking through logs or middleware. This is documented in the xAI model docs as a configurable option.",
+        source: "https://docs.x.ai/developers/models/grok-4.3"
+      },
+      {
+        title: "Grok 4.20: Speed-Tier with Low Hallucination",
+        stage: "release / speed",
+        body: "Grok 4.20 is xAI's speed-focused model, available in reasoning and non-reasoning variants. Both share the same 1M-token context and $1.25/$2.50 pricing as Grok 4.3. xAI claims industry-leading speed and lowest hallucination rate for this tier. The strict prompt-adherence design is targeted at applications requiring precise, truthful responses without deep reasoning overhead.",
+        source: "https://docs.x.ai/developers/models/grok-4.20-0309-reasoning"
+      },
+      {
+        title: "Grok Build 0.1: Fast Coding for Agentic Tasks",
+        stage: "release / coding",
+        body: "Grok Build 0.1 (early access) is xAI's fast coding model trained for agentic coding tasks. It has a 256K-token context (vs 1M for the flagship), priced at $1.00/$2.00 per 1M tokens — the cheapest Grok tier. The alias grok-code-fast is used in API calls. Positioned as a direct competitor to Mistral Devstral and Qwen3-Coder for local/enterprise coding agent workflows.",
+        source: "https://docs.x.ai/developers/models/grok-build-0.1"
+      },
+      {
+        title: "Grok 4.1: Previous-Generation Baseline",
+        stage: "baseline / model card",
+        body: "Grok 4.1 (November 2025) is the previous-generation model with a formal PDF model card — the only Grok generation with a downloadable model card document. Knowledge cutoff November 2024. The xAI docs API page tracks it as a prior release behind Grok 4.3. AWS Bedrock also provides a model card for the 4.1 generation.",
+        source: "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf"
+      },
+      {
+        title: "Source Provenance: Model Docs vs Model Card vs Paper",
+        stage: "methodology",
+        body: "The xAI model lineup is source-tracked across three tiers: (1) Grok 4.1 has a formal PDF model card — closest to the Anthropic system card format. (2) Grok 4.3 and 4.20 have xAI developer docs + AWS Bedrock model cards — equivalent to API documentation with safety info. (3) Grok Build 0.1 is early-access model docs only. None of the current Grok models have a peer-reviewed paper or arXiv preprint. The tracker labels each source type accurately to avoid misclassifying docs as papers.",
+        source: "https://docs.x.ai/developers/models"
+      }
     ]
   };
 
@@ -2870,7 +2914,8 @@ permalink: /ai-tracker/
         ["xAI models page", "https://docs.x.ai/developers/models"]
       ],
       methods: ["always-on reasoning", "configurable reasoning effort", "Mantle inference engine", "encrypted reasoning content", "agentic tool calling"],
-      benchmarks: ["non-hallucination rate", "tool calling", "instruction following", "contract review", "financial doc Q&A"]
+      benchmarks: ["non-hallucination rate", "tool calling", "instruction following", "contract review", "financial doc Q&A"],
+      deepDive: "xai-grok"
     },
     {
       id: "grok-4-20",
@@ -2887,7 +2932,8 @@ permalink: /ai-tracker/
         ["xAI models page", "https://docs.x.ai/developers/models"]
       ],
       methods: ["fast inference", "low hallucination", "prompt adherence", "reasoning/non-reasoning variants"],
-      benchmarks: ["speed benchmarks", "hallucination rate"]
+      benchmarks: ["speed benchmarks", "hallucination rate"],
+      deepDive: "xai-grok"
     },
     {
       id: "grok-build-01",
@@ -2904,7 +2950,8 @@ permalink: /ai-tracker/
         ["xAI models page", "https://docs.x.ai/developers/models"]
       ],
       methods: ["agentic coding training", "fast inference optimization"],
-      benchmarks: ["agentic coding tasks"]
+      benchmarks: ["agentic coding tasks"],
+      deepDive: "xai-grok"
     },
     {
       id: "grok-4-1",
@@ -4071,7 +4118,8 @@ permalink: /ai-tracker/
       ["llama", "Llama 4 Family", "Scout, Maverick, Behemoth, MoE, 10M context, open weights"],
       ["mistral", "Mistral Devstral / Magistral", "Agentic coding, reasoning model, open weights, multilingual CoT"],
       ["ernie", "ERNIE 4.5 Family", "Heterogeneous MoE, multimodal, 10 variants, Apache 2.0, 47% MFU, ERNIEKit + FastDeploy"],
-      ["hunyuan", "Hunyuan T1 / TurboS / A13B", "Hybrid-Transformer-Mamba MoE, reasoning RL, 2x decoding speed, open A13B"]
+      ["hunyuan", "Hunyuan T1 / TurboS / A13B", "Hybrid-Transformer-Mamba MoE, reasoning RL, 2x decoding speed, open A13B"],
+      ["grok", "xAI Grok Family", "Grok 4.3 / 4.20 / Build 0.1, configurable reasoning, Mantle engine, encrypted CoT"]
     ];
     document.querySelector("#ops-layer-rail").innerHTML = layers.map(([id, title, text]) => `
       <button class="ops-layer-button ${id === active ? "active" : ""}" type="button" data-layer="${id}">
@@ -4103,6 +4151,8 @@ permalink: /ai-tracker/
       detail.innerHTML = `<h3>ERNIE 4.5 Family Deep Dive</h3><p>Baidu ERNIE 4.5 是一个包含 10 个变体的多模态模型家族：MoE 架构（424B total / 47B active 最大版本）、异构模态路由、47% MFU、22/28 benchmark 超越 DeepSeek-V3。VLM 支持 thinking + non-thinking 双模式。所有模型 Apache 2.0 开源，附带 ERNIEKit + FastDeploy 工具链。所有阶段卡片都挂回官方 blog 和技术报告。</p><div class="ops-stage-grid">${(reportDeepDives["ernie-4.5"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else if (active === "hunyuan") {
       detail.innerHTML = `<h3>Hunyuan T1 / TurboS / A13B Deep Dive</h3><p>腾讯混元从 TurboS（世界首个超大规模 Hybrid-Transformer-Mamba MoE）到 T1（reasoning model, 96.7% compute on RL, MMLU-PRO 87.2, MATH-500 96.2）再到 A13B（80B total / 13B active open-source MoE）的架构和训练演进。Hybrid-Transformer-Mamba 架构在长序列处理上实现 2x 解码加速，是目前唯一在生产环境部署该架构的前沿模型家族。所有阶段卡片都挂回官方 GitHub docs 和 arXiv 论文。</p><div class="ops-stage-grid">${(reportDeepDives["hunyuan"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
+    } else if (active === "grok") {
+      detail.innerHTML = `<h3>xAI Grok Deep Dive</h3><p>xAI Grok 家族从 Grok 4.1（previous-gen model card PDF）到 Grok 4.3（flagship, always-on configurable reasoning, 4 levels, Mantle engine on Bedrock, encrypted CoT）到 Grok 4.20（speed tier, low hallucination, reasoning + non-reasoning variants）再到 Grok Build 0.1（fast coding model, 256K context, $1.00/$2.00, early access）的演进。所有阶段卡片都挂回 xAI 开发者文档和 AWS Bedrock model card。当前 Grok 家族没有 arXiv 论文——source type 精确标注为 model docs / model card / official release。</p><div class="ops-stage-grid">${(reportDeepDives["xai-grok"] || []).map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
     } else {
       const allDives = [...(reportDeepDives["glm-5"] || []), ...(reportDeepDives["glm-5.2"] || [])];
       detail.innerHTML = `<h3>GLM-5 / GLM-5.2 Report Deep Dive</h3><p>GLM-5 从 vibe coding 到 agentic engineering 的过渡（arXiv 2602.15763），加上 GLM-5.2 的 1M 上下文、IndexCache、slime 和 long-horizon 工程演进。所有阶段卡片都挂回 arXiv 论文和官方博客。</p><div class="ops-stage-grid">${allDives.map((item) => `<div class="ops-stage-card"><div class="ops-stage">${item.stage}</div><strong>${item.title}</strong><span>${item.body}</span><div class="ops-link-row"><a class="ops-source-link" href="${item.source}" target="_blank" rel="noopener">Source</a></div></div>`).join("")}</div>`;
